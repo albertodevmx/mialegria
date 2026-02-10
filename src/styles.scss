@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('./../node_modules/bootstrap/dist/css/bootstrap.min.css');
+// @import './styles/bootstrap-custom.scss';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+
+// .cdk-overlay-pane {
+//     background-color: #FFF;
+// }
+
+
+
+.mdc-dialog__surface {
+    background-color: rgba($color: #ff0000, $alpha: 0.0)!important;
+}
+
+.mat-mdc-dialog-container {
+  background: rgba(0,0,0,0.0) !important;
+  box-shadow: none !important;
+  /* padding: 0 !important;  // si lo necesitas */
+}
+
+
+// mdc-menu-surface  mat-mdc-autocomplete-visible mat-autocomplete-panel-animations-enabled mat-primary
+.mdc-menu-surface--open {
+    background-color: #FFF!important;
+}
+
+/* Capa de fondo que cubre toda la pantalla */
+// .cdk-overlay-dark-backdrop {
+//   background: transparent !important;
+// }
+
+
+.mat-mdc-form-field-flex {
+    border: 0px;
+}
+
+.mat-mdc-text-field-wrapper {
+    border: #21bb69 0px solid !important;
+    border-radius: 5px;
+}
+
+.mdc-notched-outline__leading {
+    border: 0px!important
+}
+.mdc-notched-outline__trailing {
+    border: #034EA2 2px solid!important;
+    border-radius: 3px!important;
+}
+
+.mat-mdc-form-field-icon-prefix {
+    color: #034EA2!important;
+    padding-left: 15px!important;
+}
+
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background: rgba(0, 0, 0, 0.75) !important;
+}
+
+.mat-mdc-dialog-surface {
+    // Sin sombra
+    box-shadow: none!important;
+}

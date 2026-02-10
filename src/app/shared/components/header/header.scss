@@ -1,0 +1,64 @@
+.header-sidenav-container {
+  width: 100%;
+}
+
+.header-sidenav {
+  width: 280px;
+}
+
+.top-bar {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 20px;
+  background: #144193;
+  background: linear-gradient(
+    90deg,
+    rgba(76, 157, 102, 1) 15%,
+    rgba(34, 80, 155, 1) 85%,
+    rgba(69, 154, 218, 1) 95%
+  );
+
+  & .icon {
+    color: #fff;
+  }
+}
+
+
+.top-bar-inner {
+  padding: 0px 40px;
+}
+
+
+.menu-btn {
+  display: none; 
+  margin-right: 10px;
+
+  mat-icon {
+    color: #fff;
+  }
+}
+
+.login-btn {
+  color: #fff !important;
+
+  & mat-icon {
+    font-size: 30px;
+    width: 30px;
+  }
+}
+
+
+@media (max-width: 760px) {
+  .menu-btn {
+    display: inline-flex;
+  }
+
+
+  .top-bar-inner {
+    padding: 0px 12px;
+  }
+}
+
+.header-sidenav {
+    background: #FFF;
+    height: 100vh;
+}

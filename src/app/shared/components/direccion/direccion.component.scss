@@ -1,0 +1,19 @@
+.tile {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    & .title {
+        font-weight: bold;
+        line-height: 1em;
+        font-size: 1.2em;
+    }
+
+    & .subtitle {
+        line-height: 1.2em;
+    }
+}

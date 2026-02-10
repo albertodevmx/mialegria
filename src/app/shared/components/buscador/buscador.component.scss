@@ -1,0 +1,136 @@
+.search-wrapper {
+    background-color: #FFF;
+    border-radius: 40px;
+}
+
+.search-wrapper-active {
+    border-radius: 40px 40px 0px 40px;
+}
+
+.select-custom {
+    width: auto;
+    border-radius: 20px;
+    color: #034EA2;
+    font-weight: 300;
+    background: #f5f4f4;
+    height: 44px;
+}
+
+.select-custom:focus {
+    box-shadow: none;
+}
+
+.input-custom {
+    flex-grow: 1;
+    border-radius: 40px;
+    background: white;
+    padding-left: 15px;
+    font-size: 15px;
+}
+
+.input-custom:focus {
+    box-shadow: none;
+}
+
+.select-with-arrow {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 40px;
+    background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px 20px;
+    font-size: 11px;
+    padding-left: 16px;
+    padding-right: 40px;
+}
+
+.search-btn {
+    width: 60px!important;
+    height: 45px!important;
+    border-radius: 50%;
+    background: #e63961;
+    color: white;
+    position: relative;
+    
+    & mat-icon {
+        position: absolute;
+        right: 10px;
+        position: absolute;
+    }
+}
+
+.search-btn:hover {
+    background: #cc2e55;
+}
+
+
+.select-with-arrow:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+
+.search-wrapper {
+    position: relative;
+}
+
+.autocomplete-panel {
+        position: absolute;
+        /* left: 0; */
+        right: 0;
+        top: calc(100% + 0px);
+        z-index: 9999;
+        overflow: scroll;
+        width: 72%;
+        height: 300px;
+        overflow: scroll;
+        border-radius: 0 0 15px 15px;
+}
+
+
+
+.search-wrapper {
+    position: relative;
+}
+
+.autocomplete-panel {
+    overflow: scroll;
+    width: 72%;
+    position: absolute;
+    /* left: 0; */
+    right: 0;
+    top: calc(100% + 0px);
+    z-index: 9999;
+}
+
+.autocomplete-inner {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .08);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 10px 3px #0000001f;
+    overflow: scroll;
+    border-top: 0;
+}
+
+.autocomplete-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    padding: 7px 14px;
+    cursor: pointer;
+    color: #034EA2;
+    font-size: 12px;
+    border-bottom: 1px solid #AFAFAF;
+}
+
+.autocomplete-item.no-border {
+    border-bottom: 0;
+}
+
+.autocomplete-item:hover {
+    background: #EBEBEB;
+}

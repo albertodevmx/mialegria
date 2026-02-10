@@ -1,0 +1,95 @@
+.imagen-simi {
+    text-align: center;
+
+    & img {
+        width: 250px;
+        z-index: 1;
+        position: relative;
+    }
+}
+
+.card-container {
+    border-radius: 16px;
+    background-color: #FFF;
+    overflow: hidden;
+}
+
+.ventana-titulo {
+    height: 160px;
+    background-color: #034EA2;
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFF;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 30px 25px 30px;
+}
+
+.card-container {
+    margin-top: -15px;
+}
+
+h2 {
+    background: #034EA2;
+    color: #FFF !important;
+    padding: 5px 0 5px 0px;
+    margin: 0;
+    line-height: 1em;
+    /* height: 1em; */
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 0 !important;
+    padding: 0px 0 16px 0;
+}
+
+.mat-mdc-dialog-surface {
+    border-radius: 150px !important;
+    background-color: #444;
+}
+
+
+
+button {
+    position: absolute;
+    border: 0px;
+    color: #034EA2;
+    background: #FFF;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    right: 8px;
+    top: 112px;
+    right: 4px;
+    padding: 1px;
+}
+
+.mat-autocomplete {
+    z-index: 9;
+    background-color: #b95858 !important;
+}
+
+mat-form-field {
+    width: 100%;
+    // border-radius: 5px;
+    // border: #034EA2 1px solid;
+}
+
+.sucursales {
+    z-index: -1;
+    overflow-y: none!important;
+    overflow-x: none!important;
+    background: #444!important;
+}
+
+.sucursales-container {
+    background-color: #FEFEFE;
+    height: 300px;
+}
+
+.my-input-search {
+    border-radius: 5px;
+    border: #034EA2 1px solid;
+}

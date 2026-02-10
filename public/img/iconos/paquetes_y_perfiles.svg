@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="99" height="99" viewBox="0 0 99 99">
+  <g id="icoPaquetes" transform="translate(-457 -870)">
+    <circle id="Elipse_5" data-name="Elipse 5" cx="49.5" cy="49.5" r="49.5" transform="translate(457 870)" fill="#e4ebf2"/>
+    <g id="Grupo_9" data-name="Grupo 9" transform="translate(-1077.755 943.237)">
+      <rect id="Rectángulo_14" data-name="Rectángulo 14" width="48.554" height="48.554" transform="translate(1560.223 -58.237)" fill="#004995"/>
+      <path id="Trazado_36" data-name="Trazado 36" d="M1556.755,11.271V66.762h55.491V11.271Z" transform="translate(0 -59.103)" fill="#00afe9"/>
+      <path id="Trazado_37" data-name="Trazado 37" d="M1563.691-35.067l-6.936,6.936h6.936Z" transform="translate(0 -19.702)" fill="#004995"/>
+      <path id="Trazado_38" data-name="Trazado 38" d="M1579.925-58.237V-51.3l3.468-3.468Z" transform="translate(-19.702)" fill="#00afe9"/>
+      <path id="Trazado_39" data-name="Trazado 39" d="M1881.126-35.067l6.937,6.936h-6.937Z" transform="translate(-275.816 -19.702)" fill="#004995"/>
+      <path id="Trazado_40" data-name="Trazado 40" d="M1884.594-58.237V-51.3l-3.468-3.468Z" transform="translate(-275.816)" fill="#00afe9"/>
+      <path id="Trazado_41" data-name="Trazado 41" d="M1643.6,108.524a17.479,17.479,0,0,1-17.341-17.341v-10.4h3.468v10.4a13.873,13.873,0,1,0,27.745,0v-10.4h3.468v10.4A17.48,17.48,0,0,1,1643.6,108.524Z" transform="translate(-59.103 -118.207)" fill="#ecf0f1"/>
+      <path id="Trazado_42" data-name="Trazado 42" d="M1556.755,381.981l3.468,3.468h48.555l3.468-3.468Z" transform="translate(0 -374.323)" fill="#004995"/>
+    </g>
+  </g>
+</svg>

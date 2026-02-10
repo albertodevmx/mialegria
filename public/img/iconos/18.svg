@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <g id="Grupo_171" data-name="Grupo 171" transform="translate(-1083.708 -2189.628)">
+    <circle id="Elipse_5" data-name="Elipse 5" cx="50" cy="50" r="50" transform="translate(1083.708 2189.628)" fill="#e4ebf2"/>
+    <g id="Grupo_170" data-name="Grupo 170" transform="translate(1103.967 2199.784)">
+      <path id="Trazado_353" data-name="Trazado 353" d="M1150.046,2406.969l2.249-.618a63.362,63.362,0,0,0,3.056,11.046l-2.254.619A65.88,65.88,0,0,1,1150.046,2406.969Z" transform="translate(-1148.926 -2346.457)" fill="#00afe9"/>
+      <path id="Trazado_354" data-name="Trazado 354" d="M1147.028,2302.094a66.056,66.056,0,0,1,5.632-19.3l2.252.684a63.649,63.649,0,0,0-6.02,23.748l-2.294-.7Q1146.737,2304.309,1147.028,2302.094Z" transform="translate(-1146.598 -2262.815)" fill="#00afe9"/>
+      <circle id="Elipse_55" data-name="Elipse 55" cx="13.362" cy="13.362" r="13.362" transform="translate(32.122 20.418)" fill="#004995"/>
+      <circle id="Elipse_55-2" data-name="Elipse 55" cx="7.767" cy="7.767" r="7.767" transform="translate(37.717 26.007)" fill="#00afe9"/>
+      <path id="Trazado_355" data-name="Trazado 355" d="M1234.56,2257.494a2.694,2.694,0,0,0,1.866-.749l8.192-7.83a12.364,12.364,0,0,0,.583-17.454l-6.545-6.847a12.364,12.364,0,0,0-17.462-.2l-10.9,10.421a2.7,2.7,0,1,0,3.733,3.906l10.9-10.421a6.957,6.957,0,0,1,9.823.032l6.545,6.847a6.957,6.957,0,0,1-.411,9.815l-8.192,7.831a2.7,2.7,0,0,0,1.867,4.654Z" transform="translate(-1189.044 -2220.902)" fill="#fff"/>
+      <rect id="Rectángulo_228" data-name="Rectángulo 228" width="14.646" height="4.334" transform="matrix(-0.791, -0.612, 0.612, -0.791, 29.719, 20.845)" fill="#00afe9"/>
+      <g id="Grupo_169" data-name="Grupo 169" transform="translate(2.118 9.593)">
+        <path id="Trazado_356" data-name="Trazado 356" d="M1166.263,2250.443l16.881,13a41.7,41.7,0,0,0-5.154,42.222,10.662,10.662,0,0,1-19.558,8.5A62.857,62.857,0,0,1,1166.263,2250.443Z" transform="translate(-1153.12 -2250.443)" fill="#004995"/>
+      </g>
+      <circle id="Elipse_55-3" data-name="Elipse 55" cx="5.401" cy="5.401" r="5.401" transform="translate(7.572 41.669)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

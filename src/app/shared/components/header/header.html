@@ -1,0 +1,46 @@
+<div class="container-fluid top-bar">
+	<div class="d-row d-md-flex align-items-center top-bar-inner">
+
+		<button mat-icon-button class="menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
+			<mat-icon>menu</mat-icon>
+		</button>
+
+		<div class="col-12 col-md-2 text-center logotipo">
+			<a href="/">
+				<img src="img/logotipo.png" alt="" class="w-80" />
+			</a>
+		</div>
+
+		<div class="col-12 col-md-2 direccion">
+			<app-direccion></app-direccion>
+		</div>
+
+		<div class="col-12 col-md-5 buscador">
+			<app-buscador></app-buscador>
+		</div>
+
+		<div class="col-12 col-md-3 menu-iconos">
+			<div class="d-flex align-items-center justify-content-end">
+				<div>
+					<button mat-button class="login-btn" (click)="onLoginClick()">
+						<mat-icon class="icon">account_circle</mat-icon>
+						<span class="label">Iniciar sesión</span>
+					</button>
+				</div>
+
+				<!-- aqui val el carrito decompras -->
+				<div style="margin-left: 20px;">
+					<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
+						[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
+						aria-label="Carrito">
+						<mat-icon class="icon">shopping_cart</mat-icon>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="d-none d-md-block">
+	<app-nav-bar></app-nav-bar>
+</div>

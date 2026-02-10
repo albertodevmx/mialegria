@@ -1,0 +1,34 @@
+.columna-izquierda {
+	width: 17%;
+}
+
+.columna-central {
+	width: 55%;
+}
+
+.columna-derecha {
+	width: 27%;
+}
+
+h5 {
+	color: #034EA2;
+	font-weight: bold;
+	font-size: 22px;
+	display: block;
+}
+
+.card {
+	height: 230px !important;
+	border-radius: 10px !important;
+	border: #DDD 1px solid !important;
+}
+
+.button-container {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+
+	& button {
+		border-radius: 10px !important;
+	}
+}

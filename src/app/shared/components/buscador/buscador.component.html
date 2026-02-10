@@ -1,0 +1,29 @@
+
+<div class="search-bar d-flex align-items-center search-wrapper position-relative"
+  [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
+>
+
+	<select class="form-select border-0 select-custom select-with-arrow">
+		<option selected>Todos los estudios</option>
+		<option value="1">Sangre</option>
+		<option value="2">Orina</option>
+		<option value="3">Rayos X</option>
+	</select>
+
+	<input type="text" class="form-control border-0 input-custom"
+		placeholder="Encuentra el estudio que deseas realizar..." (input)="onSearch($any($event.target).value)"
+		autocomplete="off" />
+
+	<button class="btn search-btn d-flex align-items-center justify-content-center" type="button">
+		<mat-icon>search</mat-icon>
+	</button>
+
+	<div class="autocomplete-panel" *ngIf="showAutocomplete && items.length > 0">
+		<div class="autocomplete-inner">
+			<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
+				[class.no-border]="last" (click)="selectItem(item)">
+				{{ item.producto }}
+			</button>
+		</div>
+	</div>
+</div>

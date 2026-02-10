@@ -1,0 +1,34 @@
+<nav class="main-menu" aria-label="Menú principal">
+    <ul>
+        <li>
+            <a [routerLink]="['/estudios']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                aria-current="page">
+                Estudios
+            </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/sucursales']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Sucursales
+            </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/facturacion']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Facturación
+            </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/resultados']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Resultados
+            </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/medicos']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Médicos
+            </a>
+        </li>
+    </ul>
+</nav>

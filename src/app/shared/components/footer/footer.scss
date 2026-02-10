@@ -1,0 +1,45 @@
+.footer {
+    background-color: #0a315b;
+    font-size: 14px;
+    color: #FFF;
+
+    & li {
+        list-style: none;
+    }
+
+    & a {
+        color: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    & .redes {
+       font-size: 20px; 
+    }
+}
+
+.footer-bar {
+    background-color: #283b52;
+    color: #a49ea2;
+
+    & a {
+        color: #a49ea2;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            color: #FFF;
+            text-decoration: underline;
+        }
+    }
+}
+
+.container-footer {
+    width: 80%;
+    margin: 0px auto;
+    padding: 20px;
+}

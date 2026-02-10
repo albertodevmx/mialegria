@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/similab/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
