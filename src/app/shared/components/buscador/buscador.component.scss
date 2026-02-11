@@ -66,44 +66,24 @@
     background: #cc2e55;
 }
 
-
 .select-with-arrow:focus {
     box-shadow: none;
     outline: none;
 }
 
-
 .search-wrapper {
     position: relative;
 }
 
 .autocomplete-panel {
-        position: absolute;
-        /* left: 0; */
-        right: 0;
-        top: calc(100% + 0px);
-        z-index: 9999;
-        overflow: scroll;
-        width: 72%;
-        height: 300px;
-        overflow: scroll;
-        border-radius: 0 0 15px 15px;
-}
-
-
-
-.search-wrapper {
-    position: relative;
-}
-
-.autocomplete-panel {
-    overflow: scroll;
-    width: 72%;
     position: absolute;
-    /* left: 0; */
     right: 0;
     top: calc(100% + 0px);
     z-index: 9999;
+    width: 72%;
+    height: 300px;
+    overflow: auto;
+    border-radius: 0 0 15px 15px;
 }
 
 .autocomplete-inner {
@@ -111,7 +91,7 @@
     border: 1px solid rgba(0, 0, 0, .08);
     border-radius: 0 0 12px 12px;
     box-shadow: 0 10px 3px #0000001f;
-    overflow: scroll;
+    overflow: auto;
     border-top: 0;
 }
 
