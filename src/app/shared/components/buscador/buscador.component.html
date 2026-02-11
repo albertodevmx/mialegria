@@ -1,6 +1,6 @@
 
 <div class="search-bar d-flex align-items-center search-wrapper position-relative"
-  [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
+  [ngClass]="{ 'search-wrapper-active': items().length != 0 }"
 >
 
 	<select class="form-select border-0 select-custom select-with-arrow">
@@ -18,13 +18,13 @@
 		<mat-icon>search</mat-icon>
 	</button>
 
-	<div class="autocomplete-panel" *ngIf="showAutocomplete">
+	<div class="autocomplete-panel" *ngIf="showAutocomplete()">
 		<div class="autocomplete-inner">
-			<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
+			<button type="button" class="autocomplete-item" *ngFor="let item of items(); let last = last"
 				[class.no-border]="last" (click)="selectItem(item)">
 				{{ item.producto }}
 			</button>
-			<div class="no-results" *ngIf="items.length === 0">
+			<div class="no-results" *ngIf="items().length === 0">
 				No encontraron coincidencias
 			</div>
 		</div>

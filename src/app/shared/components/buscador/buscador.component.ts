@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -15,25 +15,23 @@ import { BranchesService } from './../../../services/branches.service';
 export class BuscadorComponent {
 	private branchesService = inject(BranchesService);
 
-
-	items: Array<{ idProducto: number; producto: string }> = [];
-	showAutocomplete = false;
-
+	items = signal<Array<{ idProducto: number; producto: string }>>([]);
+	showAutocomplete = signal(false);
 
 	onSearch(query: string) {
 		query = (query || '').trim();
 
 		// Resetear si el query está vacío
 		if (!query) {
-			this.items = [];
-			this.showAutocomplete = false;
+			this.items.set([]);
+			this.showAutocomplete.set(false);
 			return;
 		}
 
 		// Solo llamar al servicio si hay 3 o más caracteres
 		if (query.length < 3) {
-			this.items = [];
-			this.showAutocomplete = false;
+			this.items.set([]);
+			this.showAutocomplete.set(false);
 			return;
 		}
 
@@ -42,24 +40,23 @@ export class BuscadorComponent {
 				const statusOk = String(res?.status) === '200';
 
 				if (statusOk && Array.isArray(res?.data)) {
-					this.items = res.data;
-					this.showAutocomplete = true;
+					this.items.set(res.data);
+					this.showAutocomplete.set(true);
 				} else {
-					this.items = [];
-					this.showAutocomplete = true; // Mostrar panel para el mensaje "No encontraron coincidencias"
+					this.items.set([]);
+					this.showAutocomplete.set(true); // Mostrar panel para el mensaje "No encontraron coincidencias"
 				}
 			},
 			error: (err) => {
 				console.error('Error en buscador:', err);
-				this.items = [];
-				this.showAutocomplete = true; // Mostrar panel para el mensaje de error
+				this.items.set([]);
+				this.showAutocomplete.set(true); // Mostrar panel para el mensaje de error
 			}
 		});
 	}
 
-
 	selectItem(item: any) {
 		console.log('Elemento clickeado:', item);
-		this.showAutocomplete = false;
+		this.showAutocomplete.set(false);
 	}
 }
