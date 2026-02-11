@@ -23,31 +23,36 @@ export class BuscadorComponent {
 	onSearch(query: string) {
 		query = (query || '').trim();
 
-
+		// Resetear si el query está vacío
 		if (!query) {
 			this.items = [];
 			this.showAutocomplete = false;
 			return;
 		}
 
+		// Solo llamar al servicio si hay 3 o más caracteres
+		if (query.length < 3) {
+			this.items = [];
+			this.showAutocomplete = false;
+			return;
+		}
 
 		this.branchesService.getServicesInSearcher(query).subscribe({
 			next: (res: any) => {
 				const statusOk = String(res?.status) === '200';
-
 
 				if (statusOk && Array.isArray(res?.data)) {
 					this.items = res.data;
 					this.showAutocomplete = true;
 				} else {
 					this.items = [];
-					this.showAutocomplete = false;
+					this.showAutocomplete = true; // Mostrar panel para el mensaje "No encontraron coincidencias"
 				}
 			},
 			error: (err) => {
 				console.error('Error en buscador:', err);
 				this.items = [];
-				this.showAutocomplete = false;
+				this.showAutocomplete = true; // Mostrar panel para el mensaje de error
 			}
 		});
 	}

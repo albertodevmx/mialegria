@@ -18,12 +18,15 @@
 		<mat-icon>search</mat-icon>
 	</button>
 
-	<div class="autocomplete-panel" *ngIf="showAutocomplete && items.length > 0">
+	<div class="autocomplete-panel" *ngIf="showAutocomplete">
 		<div class="autocomplete-inner">
 			<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
 				[class.no-border]="last" (click)="selectItem(item)">
 				{{ item.producto }}
 			</button>
+			<div class="no-results" *ngIf="items.length === 0">
+				No encontraron coincidencias
+			</div>
 		</div>
 	</div>
 </div>
