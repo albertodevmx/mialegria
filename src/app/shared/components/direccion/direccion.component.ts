@@ -66,6 +66,8 @@ export class DireccionComponent implements OnInit {
 		// Si necesitas reaccionar tras cerrar, por ejemplo navegar con la sucursal seleccionada:
 		ref.afterClosed().subscribe(() => {
 			const suc = this.store.selectedSucursal();
+
+			this.store.resetUi();
 			if (suc) {
 				// Aquí podrías:
 				// - Guardar en sessionStorage
