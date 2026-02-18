@@ -1,0 +1,573 @@
+// ─── Variables ───
+$primary-blue: #034EA2;
+$accent-blue: #0D7BBF;
+$light-blue-bg: #F7FCFF;
+$green-promo: #00875A;
+$green-promo-bg: #E3FCEF;
+$danger-pink: #e63961;
+$gray-light: #F0F0F0;
+$gray-border: #E0E0E0;
+$text-dark: #333;
+$text-muted: #666;
+
+// ─── Hero Section ───
+.estudio-hero {
+	background-color: $light-blue-bg;
+	padding: 20px 10px 30px;
+}
+
+// ─── Breadcrumb ───
+.estudio-breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding-left: 160px;
+	margin-bottom: 6px;
+}
+
+.breadcrumb-icon {
+	width: 24px;
+	height: 24px;
+}
+
+.breadcrumb-text {
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	color: $accent-blue;
+}
+
+// ─── Header ───
+.estudio-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.btn-volver {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	background: none;
+	border: none;
+	color: $accent-blue;
+	font-weight: 500;
+	font-size: 14px;
+	cursor: pointer;
+	padding: 0;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.estudio-title {
+	flex: 1;
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 22px;
+	color: $primary-blue;
+	margin: 0;
+}
+
+.estudio-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.btn-action {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background: none;
+	border: none;
+	color: $accent-blue;
+	cursor: pointer;
+	padding: 4px;
+
+	mat-icon {
+		font-size: 22px;
+		width: 22px;
+		height: 22px;
+	}
+
+	span {
+		font-size: 13px;
+		font-weight: 500;
+	}
+}
+
+// ─── Content Layout (3 columnas) ───
+.estudio-content {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+// ─── Columna izquierda: Imagen ───
+.estudio-imagen {
+	flex: 0 0 320px;
+
+	img {
+		width: 100%;
+		height: 380px;
+		object-fit: cover;
+		border-radius: 12px;
+	}
+}
+
+// ─── Columna central: Info ───
+.estudio-info {
+	flex: 0 1 420px;
+}
+
+.info-heading {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	color: $text-dark;
+	margin: 0 0 6px;
+}
+
+.info-text {
+	font-size: 13px;
+	color: $text-muted;
+	line-height: 1.5;
+	margin-bottom: 14px;
+}
+
+.info-subtext {
+	font-size: 12px;
+	color: $text-muted;
+	margin-bottom: 4px;
+}
+
+.info-list {
+	padding-left: 18px;
+	margin-bottom: 18px;
+
+	li {
+		font-size: 12px;
+		color: $text-muted;
+		line-height: 1.6;
+	}
+}
+
+// ─── Paquetes sugeridos box ───
+.paquetes-box {
+	border: 1px solid $gray-border;
+	border-radius: 10px;
+	padding: 14px 16px;
+}
+
+.paquetes-title {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	color: $text-dark;
+	margin: 0 0 8px;
+}
+
+.paquete-link {
+	display: block;
+	font-size: 13px;
+	color: $accent-blue;
+	font-weight: 600;
+	text-decoration: none;
+	padding: 3px 0;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+// ─── Columna derecha: Tarjeta de compra ───
+.estudio-compra {
+	flex: 0 0 260px;
+}
+
+.compra-card {
+	background: #fff;
+	border: 1px solid $gray-border;
+	border-radius: 12px;
+	padding: 18px;
+}
+
+// ─── Promo badge ───
+.promo-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: $green-promo-bg;
+	border: 1px solid $green-promo;
+	border-radius: 20px;
+	padding: 4px 12px;
+	margin-bottom: 10px;
+
+	mat-icon {
+		font-size: 16px;
+		width: 16px;
+		height: 16px;
+		color: $green-promo;
+	}
+
+	span {
+		font-size: 11px;
+		font-weight: 600;
+		color: $green-promo;
+	}
+}
+
+// ─── Precio ───
+.precio-section {
+	margin-bottom: 14px;
+}
+
+.precio-label {
+	font-size: 11px;
+	color: $text-muted;
+	display: block;
+}
+
+.precio-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.precio-sublabel {
+	font-size: 12px;
+	color: $text-dark;
+}
+
+.precio-original {
+	font-size: 12px;
+	color: #999;
+	text-decoration: line-through;
+}
+
+.precio-actual {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 28px;
+	color: $green-promo;
+	display: block;
+}
+
+// ─── Botones compra ───
+.btn-comprar {
+	width: 100%;
+	padding: 12px;
+	border: none;
+	border-radius: 8px;
+	background: $accent-blue;
+	color: #fff;
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+	margin-bottom: 8px;
+
+	&:hover {
+		background: #0a6aa3;
+	}
+}
+
+.btn-agregar {
+	width: 100%;
+	padding: 12px;
+	border: 2px solid $accent-blue;
+	border-radius: 8px;
+	background: #fff;
+	color: $accent-blue;
+	font-weight: 600;
+	font-size: 15px;
+	cursor: pointer;
+
+	&:hover {
+		background: #f0f7ff;
+	}
+}
+
+// ─── Divider ───
+.compra-divider {
+	height: 1px;
+	background: $gray-border;
+	margin: 16px 0;
+}
+
+// ─── Unidad seleccionada ───
+.unidad-section {
+	font-size: 12px;
+}
+
+.unidad-header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	color: $accent-blue;
+	font-weight: 600;
+	font-size: 13px;
+	margin-bottom: 8px;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.unidad-nombre {
+	font-weight: 700;
+	font-size: 14px;
+	color: $text-dark;
+	margin: 0 0 4px;
+}
+
+.unidad-direccion {
+	font-size: 11px;
+	color: $text-muted;
+	line-height: 1.4;
+	margin-bottom: 10px;
+}
+
+.unidad-label {
+	font-weight: 700;
+	font-size: 12px;
+	color: $text-dark;
+	margin: 0 0 2px;
+}
+
+.unidad-detalle {
+	font-size: 11px;
+	color: $text-muted;
+	margin: 0 0 2px;
+	line-height: 1.4;
+}
+
+.unidad-link {
+	display: inline-block;
+	margin-top: 8px;
+	color: $accent-blue;
+	font-weight: 600;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+// ─── Sección Recomendados ───
+.recomendados-section {
+	padding: 40px 0 50px;
+}
+
+.recomendados-title {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 22px;
+	color: $primary-blue;
+	margin-bottom: 20px;
+}
+
+.recomendados-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+}
+
+// ─── Tarjeta recomendado ───
+.recomendado-card {
+	background: #fff;
+	border: 1px solid $gray-border;
+	border-radius: 12px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.recomendado-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 10px;
+}
+
+.recomendado-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	border: 1px solid $accent-blue;
+	border-radius: 20px;
+	padding: 3px 10px;
+	font-size: 10px;
+	font-weight: 600;
+	color: $accent-blue;
+}
+
+.badge-icon {
+	width: 14px;
+	height: 14px;
+}
+
+.btn-fav {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+
+	mat-icon {
+		font-size: 22px;
+		width: 22px;
+		height: 22px;
+		color: $accent-blue;
+	}
+}
+
+.recomendado-nombre {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+	color: $text-dark;
+	margin: 0 0 10px;
+	line-height: 1.3;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.recomendado-body {
+	flex: 1;
+}
+
+.promo-badge-sm {
+	padding: 3px 8px;
+	margin-bottom: 6px;
+
+	mat-icon {
+		font-size: 14px;
+		width: 14px;
+		height: 14px;
+	}
+
+	span {
+		font-size: 10px;
+	}
+}
+
+.recomendado-precio {
+	margin-bottom: 8px;
+}
+
+.precio-original-sm {
+	font-size: 11px;
+	color: #999;
+	text-decoration: line-through;
+}
+
+.precio-actual-sm {
+	font-family: 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: 20px;
+	color: $text-dark;
+}
+
+// ─── Warning box ───
+.warning-box {
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	background: #FFF0F0;
+	border: 1px solid $danger-pink;
+	border-radius: 8px;
+	padding: 10px 12px;
+	margin-bottom: 8px;
+
+	mat-icon {
+		font-size: 18px;
+		width: 18px;
+		height: 18px;
+		color: $danger-pink;
+		flex-shrink: 0;
+		margin-top: 1px;
+	}
+
+	span {
+		font-size: 11px;
+		color: $danger-pink;
+		line-height: 1.4;
+	}
+}
+
+// ─── Footer de tarjeta ───
+.recomendado-footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+
+.btn-comprar-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 8px;
+	background: $accent-blue;
+	color: #fff;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+
+	&:hover {
+		background: #0a6aa3;
+	}
+}
+
+.btn-sucursal-card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 8px;
+	background: $danger-pink;
+	color: #fff;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+
+	&:hover {
+		background: #cc2e55;
+	}
+}
+
+.ver-detalles {
+	font-size: 13px;
+	color: $accent-blue;
+	font-weight: 600;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

@@ -1,0 +1,179 @@
+<!-- Sección principal: fondo azul claro -->
+<div class="estudio-hero">
+	<div class="container">
+		<!-- Breadcrumb -->
+		<div class="estudio-breadcrumb">
+			<img src="img/iconos/estudios_clinicos.svg" alt="" class="breadcrumb-icon" />
+			<span class="breadcrumb-text">{{ estudio.familiaWeb }}</span>
+		</div>
+
+		<!-- Encabezado: Volver + Título + Compartir -->
+		<div class="estudio-header">
+			<button class="btn-volver" (click)="goBack()">
+				<mat-icon>chevron_left</mat-icon>
+				<span>Volver</span>
+			</button>
+
+			<h1 class="estudio-title">{{ estudio.producto }}</h1>
+
+			<div class="estudio-actions">
+				<button class="btn-action" title="Favorito">
+					<mat-icon>favorite_border</mat-icon>
+				</button>
+				<button class="btn-action btn-compartir">
+					<mat-icon>share</mat-icon>
+					<span>Compartir</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Contenido principal: 3 columnas -->
+		<div class="estudio-content">
+			<!-- Columna izquierda: Imagen -->
+			<div class="estudio-imagen">
+				<img [src]="estudio.imagen" [alt]="estudio.producto"
+					onerror="this.src='img/banners/banner-central.png'" />
+			</div>
+
+			<!-- Columna central: Información -->
+			<div class="estudio-info">
+				<h3 class="info-heading">Información del estudio</h3>
+				<p class="info-text">{{ estudio.informacion }}</p>
+
+				<h3 class="info-heading">Indicaciones</h3>
+				<p class="info-subtext">Para obtener resultados confiables, te recomendamos:</p>
+				<ul class="info-list">
+					<li *ngFor="let ind of estudio.indicaciones">{{ ind }}</li>
+				</ul>
+
+				<!-- Paquetes y perfiles sugeridos -->
+				<div class="paquetes-box">
+					<h4 class="paquetes-title">Paquetes y perfiles sugeridos</h4>
+					<a href="javascript:void(0)" class="paquete-link" *ngFor="let paq of estudio.paquetesSugeridos">
+						{{ paq }}
+					</a>
+				</div>
+			</div>
+
+			<!-- Columna derecha: Tarjeta de compra -->
+			<div class="estudio-compra">
+				<div class="compra-card">
+					<!-- Promoción badge -->
+					<div class="promo-badge" *ngIf="estudio.promocion">
+						<mat-icon>verified</mat-icon>
+						<span>{{ estudio.promocion }}</span>
+					</div>
+
+					<!-- Precio -->
+					<div class="precio-section">
+						<span class="precio-label">Precio en línea</span>
+						<div class="precio-row">
+							<span class="precio-sublabel">A solo</span>
+							<span class="precio-original" *ngIf="estudio.precioOriginal">
+								${{ estudio.precioOriginal | number:'1.2-2' }}
+							</span>
+						</div>
+						<span class="precio-actual">${{ estudio.precio | number:'1.2-2' }}</span>
+					</div>
+
+					<!-- Botones -->
+					<button class="btn-comprar">
+						<span>Comprar</span>
+					</button>
+					<button class="btn-agregar">
+						<span>Agregar</span>
+					</button>
+
+					<!-- Separador -->
+					<div class="compra-divider"></div>
+
+					<!-- Unidad seleccionada -->
+					<div class="unidad-section">
+						<div class="unidad-header">
+							<mat-icon>apartment</mat-icon>
+							<span>Unidad seleccionada</span>
+						</div>
+
+						<h4 class="unidad-nombre">{{ unidad.nombre }}</h4>
+						<p class="unidad-direccion">{{ unidad.direccion }}</p>
+
+						<p class="unidad-label">Horarios</p>
+						<p class="unidad-detalle">{{ unidad.horarios.semana }}</p>
+						<p class="unidad-detalle">{{ unidad.horarios.sabado }}</p>
+						<p class="unidad-detalle">{{ unidad.horarios.domingo }}</p>
+
+						<p class="unidad-label">Teléfono</p>
+						<p class="unidad-detalle">{{ unidad.telefono }}</p>
+
+						<a href="javascript:void(0)" class="unidad-link">¿Cómo llegar?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Sección Recomendados -->
+<div class="recomendados-section">
+	<div class="container">
+		<h2 class="recomendados-title">Recomendados</h2>
+
+		<div class="recomendados-grid">
+			<div class="recomendado-card" *ngFor="let item of recomendados">
+				<!-- Header: badge + favorito -->
+				<div class="recomendado-header">
+					<span class="recomendado-badge">
+						<img src="img/iconos/estudios_clinicos.svg" alt="" class="badge-icon" />
+						{{ item.familiaWeb }}
+					</span>
+					<button class="btn-fav">
+						<mat-icon>favorite_border</mat-icon>
+					</button>
+				</div>
+
+				<!-- Nombre -->
+				<h4 class="recomendado-nombre">{{ item.producto }}</h4>
+
+				<!-- Promo + precio -->
+				<div class="recomendado-body">
+					<div class="promo-badge promo-badge-sm" *ngIf="item.promocion">
+						<mat-icon>verified</mat-icon>
+						<span>{{ item.promocion }}</span>
+					</div>
+
+					<div class="recomendado-precio" *ngIf="item.precio">
+						<span class="precio-label">Precio en línea</span>
+						<div class="precio-row">
+							<span class="precio-sublabel">A solo</span>
+						</div>
+						<div class="precio-row">
+							<span class="precio-original-sm" *ngIf="item.precioOriginal">
+								${{ item.precioOriginal | number:'1.2-2' }}
+							</span>
+							<span class="precio-actual-sm">${{ item.precio | number:'1.2-2' }}</span>
+						</div>
+					</div>
+
+					<!-- Warning si no tiene unidad -->
+					<div class="warning-box" *ngIf="!item.tieneUnidad">
+						<mat-icon>warning</mat-icon>
+						<span>Para poder cotizar tu estudio es necesario que selecciones una unidad.</span>
+					</div>
+				</div>
+
+				<!-- Botón -->
+				<div class="recomendado-footer">
+					<button class="btn-comprar-card" *ngIf="item.tieneUnidad">
+						<span>Comprar</span>
+						<mat-icon>paid</mat-icon>
+					</button>
+					<button class="btn-sucursal-card" *ngIf="!item.tieneUnidad">
+						<span>Selecionar sucursal</span>
+						<mat-icon>local_hospital</mat-icon>
+					</button>
+					<a href="javascript:void(0)" class="ver-detalles">Ver detalles</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

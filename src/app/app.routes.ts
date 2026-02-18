@@ -43,6 +43,12 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./pages/medicos/medicos.component').then(c => c.MedicosComponent),
             },
+            // Estudio Individual
+            {
+                path: 'estudio/:id',
+                loadComponent: () =>
+                    import('./pages/estudio-individual/estudio-individual.component').then(c => c.EstudioIndividualComponent),
+            },
         ],
     },
     // Wildcard a Home (opcional)
