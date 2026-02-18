@@ -1,24 +1,133 @@
 .search-wrapper {
     background-color: #FFF;
     border-radius: 40px;
+    position: relative;
 }
 
 .search-wrapper-active {
     border-radius: 40px 40px 0px 40px;
 }
 
-.select-custom {
-    width: auto;
-    border-radius: 20px;
-    color: #034EA2;
-    font-weight: 300;
-    background: #f5f4f4;
-    height: 44px;
+// ─── Dropdown de Categorías ───
+
+.category-dropdown-wrapper {
+    position: relative;
+    flex-shrink: 0;
 }
 
-.select-custom:focus {
-    box-shadow: none;
+.category-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 44px;
+    padding: 10px 10px 10px 16px;
+    border: none;
+    border-radius: 100px;
+    background: #F0F0F0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background: #e5e5e5;
+    }
+
+    &.active {
+        background: #e5e5e5;
+    }
 }
+
+.category-trigger-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0D7BBF;
+    line-height: 17px;
+}
+
+.category-trigger-arrow {
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    color: #0D7BBF;
+    transition: transform 0.2s;
+
+    &.rotated {
+        transform: rotate(180deg);
+    }
+}
+
+.category-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 310px;
+    background: #FFFFFF;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    overflow: hidden;
+    padding-top: 4px;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 32px;
+    padding: 0 16px 0 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.15s;
+
+    &:hover {
+        background: #F5F5F5;
+    }
+
+    &.selected {
+        background: #F0F0F0;
+        border-left: 2px solid #0D7BBF;
+        padding-left: 18px;
+    }
+}
+
+.category-check {
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    color: #D0D0D0;
+    flex-shrink: 0;
+
+    .selected & {
+        color: #0D7BBF;
+    }
+}
+
+.category-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0D7BBF;
+    line-height: 17px;
+}
+
+.category-item-all {
+    background: #0D7BBF;
+    padding: 0 16px 0 26px;
+
+    &:hover {
+        background: #0a6aa3;
+    }
+
+    .category-name {
+        color: #FFFFFF;
+        font-weight: 500;
+    }
+}
+
+// ─── Input y búsqueda ───
 
 .input-custom {
     flex-grow: 1;
@@ -32,33 +141,17 @@
     box-shadow: none;
 }
 
-.select-with-arrow {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border-radius: 40px;
-    background-image: url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 20px 20px;
-    font-size: 11px;
-    padding-left: 16px;
-    padding-right: 40px;
-}
-
 .search-btn {
-    width: 60px!important;
-    height: 45px!important;
+    width: 60px !important;
+    height: 45px !important;
     border-radius: 50%;
     background: #e63961;
     color: white;
     position: relative;
-    
+
     & mat-icon {
         position: absolute;
         right: 10px;
-        position: absolute;
     }
 }
 
@@ -66,41 +159,12 @@
     background: #cc2e55;
 }
 
-
-.select-with-arrow:focus {
-    box-shadow: none;
-    outline: none;
-}
-
-
-.search-wrapper {
-    position: relative;
-}
-
-.autocomplete-panel {
-        position: absolute;
-        /* left: 0; */
-        right: 0;
-        top: calc(100% + 0px);
-        z-index: 9999;
-        overflow: scroll;
-        width: 72%;
-        height: 300px;
-        overflow: scroll;
-        border-radius: 0 0 15px 15px;
-}
-
-
-
-.search-wrapper {
-    position: relative;
-}
+// ─── Autocomplete ───
 
 .autocomplete-panel {
     overflow: scroll;
     width: 72%;
     position: absolute;
-    /* left: 0; */
     right: 0;
     top: calc(100% + 0px);
     z-index: 9999;

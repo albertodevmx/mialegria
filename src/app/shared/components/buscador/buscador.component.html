@@ -3,12 +3,41 @@
   [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
 >
 
-	<select class="form-select border-0 select-custom select-with-arrow">
-		<option selected>Todos los estudios</option>
-		<option value="1">Sangre</option>
-		<option value="2">Orina</option>
-		<option value="3">Rayos X</option>
-	</select>
+	<!-- Dropdown de Categorías -->
+	<div class="category-dropdown-wrapper">
+		<button
+			type="button"
+			class="category-trigger"
+			(click)="toggleDropdown()"
+			[class.active]="dropdownOpen"
+		>
+			<span class="category-trigger-text">{{ displayLabel }}</span>
+			<mat-icon class="category-trigger-arrow" [class.rotated]="dropdownOpen">keyboard_arrow_down</mat-icon>
+		</button>
+
+		<div class="category-panel" *ngIf="dropdownOpen">
+			<button
+				type="button"
+				class="category-item"
+				*ngFor="let cat of categories"
+				[class.selected]="selectedCategory === cat.id"
+				(click)="selectCategory(cat)"
+			>
+				<mat-icon class="category-check">
+					{{ selectedCategory === cat.id ? 'check_circle' : 'radio_button_unchecked' }}
+				</mat-icon>
+				<span class="category-name">{{ cat.name }}</span>
+			</button>
+
+			<button
+				type="button"
+				class="category-item category-item-all"
+				(click)="selectAll()"
+			>
+				<span class="category-name">Todos los estudios</span>
+			</button>
+		</div>
+	</div>
 
 	<input type="text" class="form-control border-0 input-custom"
 		placeholder="Encuentra el estudio que deseas realizar..." (input)="onSearch($any($event.target).value)"
