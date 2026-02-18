@@ -38,6 +38,9 @@ testem.log
 /typings
 __screenshots__/
 
+# MCP config (contains API keys)
+.mcp.json
+
 # System files
 .DS_Store
 Thumbs.db
