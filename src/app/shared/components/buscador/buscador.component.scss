@@ -162,7 +162,6 @@
 // ─── Autocomplete ───
 
 .autocomplete-panel {
-    overflow: scroll;
     width: 72%;
     position: absolute;
     right: 0;
@@ -175,7 +174,8 @@
     border: 1px solid rgba(0, 0, 0, .08);
     border-radius: 0 0 12px 12px;
     box-shadow: 0 10px 3px #0000001f;
-    overflow: scroll;
+    overflow-y: auto;
+    max-height: 320px;
     border-top: 0;
 }
 

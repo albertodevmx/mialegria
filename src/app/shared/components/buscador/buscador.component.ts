@@ -82,7 +82,7 @@ export class BuscadorComponent {
 				const statusOk = String(res?.status) === '200';
 
 				if (statusOk && Array.isArray(res?.data)) {
-					this.items = res.data;
+					this.items = res.data.slice(0, 8);
 					this.showAutocomplete = true;
 				} else {
 					this.items = [];
