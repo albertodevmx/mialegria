@@ -71,7 +71,7 @@ export class BuscadorComponent {
 	onSearch(query: string) {
 		query = (query || '').trim();
 
-		if (!query) {
+		if (query.length < 3) {
 			this.items = [];
 			this.showAutocomplete = false;
 			return;
