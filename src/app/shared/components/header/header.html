@@ -1,5 +1,39 @@
 <div class="container-fluid top-bar">
-	<div class="d-row d-md-flex align-items-center top-bar-inner">
+	<!-- ===== Mobile header (sm / md) ===== -->
+	<div class="d-lg-none">
+		<!-- Row 1: hamburguesa, logo, buscar, usuario, carrito -->
+		<div class="d-flex align-items-center justify-content-between top-bar-mobile">
+			<button mat-icon-button aria-label="Abrir menú" (click)="toggleSidebar()">
+				<mat-icon>menu</mat-icon>
+			</button>
+
+			<a href="/">
+				<img src="img/logotipo.png" alt="logotipo" class="mobile-logo-img" />
+			</a>
+
+			<button mat-icon-button aria-label="Buscar" (click)="onSearchClick()">
+				<mat-icon class="icon">search</mat-icon>
+			</button>
+
+			<button mat-icon-button class="login-btn" (click)="onLoginClick()">
+				<mat-icon class="icon">account_circle</mat-icon>
+			</button>
+
+			<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
+				[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
+				aria-label="Carrito">
+				<mat-icon class="icon">shopping_cart</mat-icon>
+			</button>
+		</div>
+
+		<!-- Row 2: dirección / ubicación -->
+		<div class="top-bar-mobile-row2">
+			<app-direccion></app-direccion>
+		</div>
+	</div>
+
+	<!-- ===== Desktop header (lg+) — sin cambios ===== -->
+	<div class="d-none d-lg-flex align-items-center top-bar-inner">
 
 		<button mat-icon-button class="menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
 			<mat-icon>menu</mat-icon>
@@ -41,6 +75,6 @@
 	</div>
 </div>
 
-<div class="d-none d-md-block">
+<div class="d-none d-lg-block">
 	<app-nav-bar></app-nav-bar>
 </div>

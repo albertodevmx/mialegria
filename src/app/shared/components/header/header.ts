@@ -39,6 +39,10 @@ export class Header implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  onSearchClick(): void {
+    console.log('presionando buscador');
+  }
+
   onLoginClick() {
     throw new Error('Method not implemented.');
   }
