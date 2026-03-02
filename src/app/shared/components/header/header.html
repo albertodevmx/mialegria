@@ -1,9 +1,9 @@
 <div class="container-fluid top-bar">
-	<!-- ===== Mobile header (sm / md) ===== -->
-	<div class="d-lg-none">
+	<!-- ===== Mobile header (< md) ===== -->
+	<div class="d-md-none">
 		<!-- Row 1: hamburguesa, logo, buscar, usuario, carrito -->
 		<div class="d-flex align-items-center justify-content-between top-bar-mobile">
-			<button mat-icon-button aria-label="Abrir menú" (click)="toggleSidebar()">
+			<button mat-icon-button class="mobile-menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
 				<mat-icon>menu</mat-icon>
 			</button>
 
@@ -27,13 +27,13 @@
 		</div>
 
 		<!-- Row 2: dirección / ubicación -->
-		<div class="top-bar-mobile-row2">
+		<div class="top-bar-mobile-row2 text-center">
 			<app-direccion></app-direccion>
 		</div>
 	</div>
 
-	<!-- ===== Desktop header (lg+) — sin cambios ===== -->
-	<div class="d-none d-lg-flex align-items-center top-bar-inner">
+	<!-- ===== Desktop header (md+) — sin cambios ===== -->
+	<div class="d-none d-md-flex align-items-center top-bar-inner">
 
 		<button mat-icon-button class="menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
 			<mat-icon>menu</mat-icon>
@@ -75,6 +75,6 @@
 	</div>
 </div>
 
-<div class="d-none d-lg-block">
+<div class="d-none d-md-block">
 	<app-nav-bar></app-nav-bar>
 </div>

@@ -63,7 +63,13 @@
     height: 100vh;
 }
 
-/* ===== Mobile header (sm / md) ===== */
+/* ===== Mobile header (< md) ===== */
+.mobile-menu-btn {
+  mat-icon {
+    color: #fff;
+  }
+}
+
 .top-bar-mobile {
   padding: 4px 12px;
 }
