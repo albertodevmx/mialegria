@@ -1,39 +1,43 @@
 <div class="container-fluid top-bar">
-	<!-- ===== Mobile header (< md) ===== -->
-	<div class="d-md-none">
-		<!-- Row 1: hamburguesa, logo, buscar, usuario, carrito -->
-		<div class="d-flex align-items-center justify-content-between top-bar-mobile">
-			<button mat-icon-button class="mobile-menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
-				<mat-icon>menu</mat-icon>
-			</button>
+	<!-- ===== Mobile header (< lg) ===== -->
+	<div class="d-lg-none">
+		<!-- Row 1: hamburguesa + logo (izquierda) | buscar, usuario, carrito (derecha) -->
+		<div class="d-flex align-items-center top-bar-mobile">
+			<div class="d-flex align-items-center">
+				<button mat-icon-button class="mobile-menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
+					<mat-icon>menu</mat-icon>
+				</button>
 
-			<a href="/">
-				<img src="img/logotipo.png" alt="logotipo" class="mobile-logo-img" />
-			</a>
+				<a href="/" class="ms-1">
+					<img src="img/logotipo.png" alt="logotipo" class="mobile-logo-img" />
+				</a>
+			</div>
 
-			<button mat-icon-button aria-label="Buscar" (click)="onSearchClick()">
-				<mat-icon class="icon">search</mat-icon>
-			</button>
+			<div class="d-flex align-items-center ms-auto">
+				<button mat-icon-button aria-label="Buscar" (click)="onSearchClick()">
+					<mat-icon class="icon">search</mat-icon>
+				</button>
 
-			<button mat-icon-button class="login-btn" (click)="onLoginClick()">
-				<mat-icon class="icon">account_circle</mat-icon>
-			</button>
+				<button mat-icon-button class="login-btn" (click)="onLoginClick()">
+					<mat-icon class="icon">account_circle</mat-icon>
+				</button>
 
-			<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
-				[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
-				aria-label="Carrito">
-				<mat-icon class="icon">shopping_cart</mat-icon>
-			</button>
+				<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
+					[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
+					aria-label="Carrito">
+					<mat-icon class="icon">shopping_cart</mat-icon>
+				</button>
+			</div>
 		</div>
 
-		<!-- Row 2: dirección / ubicación -->
-		<div class="top-bar-mobile-row2 text-center">
+		<!-- Row 2: dirección / ubicación centrada -->
+		<div class="top-bar-mobile-row2 d-flex justify-content-center">
 			<app-direccion></app-direccion>
 		</div>
 	</div>
 
-	<!-- ===== Desktop header (md+) — sin cambios ===== -->
-	<div class="d-none d-md-flex align-items-center top-bar-inner">
+	<!-- ===== Desktop header (lg+) — sin cambios ===== -->
+	<div class="d-none d-lg-flex align-items-center top-bar-inner">
 
 		<button mat-icon-button class="menu-btn" aria-label="Abrir menú" (click)="toggleSidebar()">
 			<mat-icon>menu</mat-icon>
@@ -75,6 +79,6 @@
 	</div>
 </div>
 
-<div class="d-none d-md-block">
+<div class="d-none d-lg-block">
 	<app-nav-bar></app-nav-bar>
 </div>
