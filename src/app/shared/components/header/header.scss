@@ -99,11 +99,14 @@
 :host ::ng-deep .cart-btn .mat-badge-content {
   background-color: #e53935 !important;
   color: #fff !important;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
-  min-width: 32px;
-  height: 32px;
-  line-height: 32px;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
   border-radius: 50%;
-  padding: 0 7px;
+  padding: 0 5px;
+  left: 70% !important;
+  bottom: 70% !important;
+  z-index: 1;
 }
