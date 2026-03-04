@@ -94,3 +94,16 @@
 .top-bar-mobile-row2 {
   padding: 2px 0 4px;
 }
+
+/* Badge rojo del carrito */
+.cart-btn .mat-badge-content {
+  background-color: #e53935;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+  padding: 0 4px;
+}

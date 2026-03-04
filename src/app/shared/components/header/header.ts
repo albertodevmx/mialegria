@@ -33,7 +33,7 @@ import { BranchesStore } from '../../../stores/branches.store';
 export class Header implements OnInit {
   private store = inject(BranchesStore);
 
-  cartCount: any;
+  cartCount = 0;
 
   onCartClick() {
     throw new Error('Method not implemented.');

@@ -23,7 +23,7 @@
 				</button>
 
 				<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
-					[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
+					matBadgeOverlap="true" matBadgeSize="small"
 					aria-label="Carrito">
 					<mat-icon class="icon">shopping_cart</mat-icon>
 				</button>
@@ -69,7 +69,7 @@
 				<!-- aqui val el carrito decompras -->
 				<div style="margin-left: 20px;">
 					<button mat-icon-button class="cart-btn" (click)="onCartClick()" [matBadge]="cartCount"
-						[matBadgeHidden]="cartCount === 0" matBadgeOverlap="false" matBadgeColor="warn"
+						matBadgeOverlap="true" matBadgeSize="small"
 						aria-label="Carrito">
 						<mat-icon class="icon">shopping_cart</mat-icon>
 					</button>
