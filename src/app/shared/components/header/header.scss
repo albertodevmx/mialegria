@@ -65,7 +65,10 @@
 
 /* ===== Mobile header (< lg) ===== */
 .mobile-menu-btn {
-  padding-left: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  line-height: 36px !important;
 
   mat-icon {
     color: #fff;
@@ -74,13 +77,20 @@
 
 .top-bar-mobile {
   padding: 4px 0;
+
+  /* tighten right-side icon buttons */
+  .mat-mdc-icon-button {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
 }
 
 .mobile-logo-img {
-  height: 36px;
   max-width: 116px;
+  height: auto;
 }
 
 .top-bar-mobile-row2 {
-  padding: 2px 12px 4px;
+  padding: 2px 0 4px;
 }
