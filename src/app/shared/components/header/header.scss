@@ -96,7 +96,7 @@
 }
 
 /* Badge rojo del carrito */
-.cart-btn .mat-badge-content {
+:host ::ng-deep .cart-btn .mat-badge-content {
   background-color: #e53935 !important;
   color: #fff !important;
   font-size: 18px;
