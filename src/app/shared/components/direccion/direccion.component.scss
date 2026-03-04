@@ -1,19 +1,16 @@
 .tile {
     color: #FFF;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
+    white-space: nowrap;
 
     &:hover {
         text-decoration: underline;
     }
+}
 
-    & .title {
-        font-weight: bold;
-        line-height: 1em;
-        font-size: 1.2em;
-    }
-
-    & .subtitle {
-        line-height: 1.2em;
+@media (min-width: 992px) {
+    .tile {
+        font-size: 14px;
     }
 }
