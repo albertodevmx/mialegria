@@ -4,6 +4,13 @@
     font-size: 12px;
     font-weight: bold;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+        display: flex;
+        align-items: center;
+    }
 
     &:hover {
         text-decoration: underline;
