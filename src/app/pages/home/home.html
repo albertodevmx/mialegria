@@ -175,8 +175,36 @@
                 }
             </div>
 
-            <!-- ===== Mobile products carousel (< lg) ===== -->
-            <div class="d-lg-none mt-2">
+            <!-- ===== Tablet products carousel (md to lg) — 3 per slide ===== -->
+            <div class="d-none d-md-block d-lg-none mt-2">
+                <div id="productsCarouselMd" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner">
+                        @for (page of productPagesArrayMd(); track page) {
+                        <div class="carousel-item" [class.active]="page === 0">
+                            <div class="row g-3 px-4">
+                                @for (p of getProductPageMd(page); track p.idProducto) {
+                                <div class="col-4">
+                                    <ng-container *ngTemplateOutlet="productCard; context: { $implicit: p }"></ng-container>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <button class="carousel-control-prev mobile-cat-arrow-btn" type="button"
+                        data-bs-target="#productsCarouselMd" data-bs-slide="prev">
+                        <mat-icon class="mobile-cat-arrow-icon">chevron_left</mat-icon>
+                    </button>
+                    <button class="carousel-control-next mobile-cat-arrow-btn" type="button"
+                        data-bs-target="#productsCarouselMd" data-bs-slide="next">
+                        <mat-icon class="mobile-cat-arrow-icon">chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== Mobile products carousel (< md) — 2 per slide ===== -->
+            <div class="d-md-none mt-2">
                 <div id="productsCarousel" class="carousel slide" data-bs-ride="false">
                     <div class="carousel-inner">
                         @for (page of productPagesArray(); track page) {

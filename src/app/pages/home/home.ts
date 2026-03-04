@@ -38,6 +38,11 @@ export class Home implements OnInit {
 		Array.from({ length: this.productTotalPages() }, (_, i) => i)
 	);
 
+	productTotalPagesMd = computed(() => Math.ceil(this.topProducts().length / 3));
+	productPagesArrayMd = computed(() =>
+		Array.from({ length: this.productTotalPagesMd() }, (_, i) => i)
+	);
+
 	ngOnInit(): void {
 		this.loadWebFamilies();
 		this.loadTopProducts();
@@ -106,6 +111,11 @@ export class Home implements OnInit {
 	getProductPage(page: number): any[] {
 		const all = this.topProducts();
 		return all.slice(page * 2, page * 2 + 2);
+	}
+
+	getProductPageMd(page: number): any[] {
+		const all = this.topProducts();
+		return all.slice(page * 3, page * 3 + 3);
 	}
 
 	onFamiliaClick(fam: { idFamiliaWeb: number; familiaWeb: string }) {
