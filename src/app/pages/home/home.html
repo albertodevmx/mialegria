@@ -119,39 +119,37 @@
             }
         </div>
 
-        <!-- ===== Mobile categories slider (< md) ===== -->
+        <!-- ===== Mobile categories carousel (< md) ===== -->
         <div class="d-md-none">
-            <div class="mobile-categories-slider d-flex align-items-center">
-                <button class="btn mobile-cat-arrow" (click)="prevCategory()" [disabled]="categoryPage() === 0">
-                    <mat-icon>chevron_left</mat-icon>
-                </button>
-
-                <div class="flex-grow-1 overflow-hidden">
-                    <div class="row g-2">
-                        @for (fam of categoryPageItems(); track fam.idFamiliaWeb) {
-                        <div class="col-6 text-center" (click)="onFamiliaClick(fam)" style="cursor: pointer;">
-                            <div class="d-flex justify-content-center mb-1">
-                                <img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'" [alt]="fam.familiaWeb"
-                                    style="width: 48px; height: 48px; object-fit: contain;" />
+            <div id="categoriesCarousel" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner">
+                    @for (page of categoryPagesArray(); track page) {
+                    <div class="carousel-item" [class.active]="page === 0">
+                        <div class="row g-2 px-4">
+                            @for (fam of getCategoryPage(page); track fam.idFamiliaWeb) {
+                            <div class="col-6 text-center py-2" (click)="onFamiliaClick(fam)" style="cursor: pointer;">
+                                <div class="d-flex justify-content-center mb-1">
+                                    <img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'" [alt]="fam.familiaWeb"
+                                        style="width: 48px; height: 48px; object-fit: contain;" />
+                                </div>
+                                <div style="font-size: 11px;">
+                                    {{ fam.familiaWeb }}
+                                </div>
                             </div>
-                            <div style="font-size: 11px;">
-                                {{ fam.familiaWeb }}
-                            </div>
+                            }
                         </div>
-                        }
                     </div>
+                    }
                 </div>
 
-                <button class="btn mobile-cat-arrow" (click)="nextCategory()"
-                    [disabled]="categoryPage() >= categoryTotalPages() - 1">
-                    <mat-icon>chevron_right</mat-icon>
+                <button class="carousel-control-prev mobile-cat-arrow-btn" type="button"
+                    data-bs-target="#categoriesCarousel" data-bs-slide="prev">
+                    <mat-icon class="mobile-cat-arrow-icon">chevron_left</mat-icon>
                 </button>
-            </div>
-
-            <div class="text-center mt-2">
-                @for (page of categoryPagesArray(); track page) {
-                <span class="mobile-cat-dot" [class.active]="page === categoryPage()"></span>
-                }
+                <button class="carousel-control-next mobile-cat-arrow-btn" type="button"
+                    data-bs-target="#categoriesCarousel" data-bs-slide="next">
+                    <mat-icon class="mobile-cat-arrow-icon">chevron_right</mat-icon>
+                </button>
             </div>
         </div>
     </div>

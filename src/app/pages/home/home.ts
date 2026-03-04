@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchesService } from './../../services/branches.service';
 import { BranchesStore } from './../../stores/branches.store';
@@ -28,13 +28,7 @@ export class Home implements OnInit {
 	familias = this.branchesStore.webFamilies;
 	topProducts = this.branchesStore.topProducts;
 
-	categoryPage = signal(0);
 	categoryTotalPages = computed(() => Math.ceil(this.familias().length / 4));
-	categoryPageItems = computed(() => {
-		const all = this.familias();
-		const start = this.categoryPage() * 4;
-		return all.slice(start, start + 4);
-	});
 	categoryPagesArray = computed(() =>
 		Array.from({ length: this.categoryTotalPages() }, (_, i) => i)
 	);
@@ -99,16 +93,9 @@ export class Home implements OnInit {
 			.replace(/\s+/g, '_');
 	}
 
-	prevCategory(): void {
-		if (this.categoryPage() > 0) {
-			this.categoryPage.update(p => p - 1);
-		}
-	}
-
-	nextCategory(): void {
-		if (this.categoryPage() < this.categoryTotalPages() - 1) {
-			this.categoryPage.update(p => p + 1);
-		}
+	getCategoryPage(page: number): { idFamiliaWeb: number; familiaWeb: string }[] {
+		const all = this.familias();
+		return all.slice(page * 4, page * 4 + 4);
 	}
 
 	onFamiliaClick(fam: { idFamiliaWeb: number; familiaWeb: string }) {

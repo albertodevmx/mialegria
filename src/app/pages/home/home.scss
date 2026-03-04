@@ -33,36 +33,25 @@ h5 {
 	}
 }
 
-/* ===== Mobile categories slider ===== */
-.mobile-categories-slider {
-	min-height: 140px;
+/* ===== Mobile categories carousel ===== */
+#categoriesCarousel {
+	.carousel-item {
+		min-height: 140px;
+	}
 }
 
-.mobile-cat-arrow {
-	padding: 4px;
-	min-width: 36px;
+.mobile-cat-arrow-btn {
+	width: 32px;
+	opacity: 1;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.mobile-cat-arrow-icon {
 	color: #034EA2;
-
-	&:disabled {
-		color: #ccc;
-	}
-
-	mat-icon {
-		font-size: 28px;
-		width: 28px;
-		height: 28px;
-	}
-}
-
-.mobile-cat-dot {
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: #ccc;
-	margin: 0 3px;
-
-	&.active {
-		background: #034EA2;
-	}
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
 }
