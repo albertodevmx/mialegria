@@ -65,6 +65,8 @@
 
 /* ===== Mobile header (< lg) ===== */
 .mobile-menu-btn {
+  padding-left: 0 !important;
+
   mat-icon {
     color: #fff;
   }
