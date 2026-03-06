@@ -167,7 +167,7 @@
         <div class="row g-3 mt-1 d-none d-lg-flex">
             @for (p of topProducts(); track p.idProducto) {
             <div class="col-lg-2">
-                <ng-container *ngTemplateOutlet="productCard; context: { $implicit: p }"></ng-container>
+                <app-product-card [product]="p"></app-product-card>
             </div>
             }
         </div>
@@ -181,7 +181,7 @@
                         <div class="row g-3 px-4">
                             @for (p of getProductPageMd(page); track p.idProducto) {
                             <div class="col-4">
-                                <ng-container *ngTemplateOutlet="productCard; context: { $implicit: p }"></ng-container>
+                                <app-product-card [product]="p"></app-product-card>
                             </div>
                             }
                         </div>
@@ -209,7 +209,7 @@
                         <div class="row g-3 px-4">
                             @for (p of getProductPage(page); track p.idProducto) {
                             <div class="col-6">
-                                <ng-container *ngTemplateOutlet="productCard; context: { $implicit: p }"></ng-container>
+                                <app-product-card [product]="p"></app-product-card>
                             </div>
                             }
                         </div>
@@ -229,48 +229,3 @@
         </div>
     </div>
 </div>
-
-<!-- ===== Shared product card template ===== -->
-<ng-template #productCard let-p>
-    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-        <div class="d-flex justify-content-between align-items-start p-2">
-            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 52px; height: 52px; background: #e9f3ff;">
-                <img [src]="'img/iconos/' + iconName(p.familiaWeb) + '.svg'" [alt]="p.familiaWeb"
-                    style="width: 32px; height: 32px; object-fit: contain;" />
-            </div>
-            <div class="d-flex gap-1">
-                <mat-icon style="font-size: 20px; width: 20px; height: 20px; color: #e11d48;">sell</mat-icon>
-                <mat-icon style="font-size: 20px; width: 20px; height: 20px; color: #e11d48;">favorite</mat-icon>
-            </div>
-        </div>
-
-        <div class="px-3">
-            <div class="fw-semibold p-1 text-center" style="font-size: 13px; line-height: 1.2;">
-                {{ p.producto }}
-            </div>
-            <div class="text-muted mt-1 text-center" style="font-size: 11px; line-height: 1.2;">
-                de {{ p.idProducto }} elementos
-            </div>
-
-            @if (p.precio) {
-            <div class="mt-2" style="font-size: 12px;">
-                A solo
-            </div>
-            <div class="fw-bold" style="font-size: 18px;">
-                ${{ p.precio }}
-            </div>
-            }
-        </div>
-
-        <div class="d-flex button-container">
-            <button type="button"
-                class="btn w-100 rounded-0 text-white py-2 d-flex justify-content-center align-items-center"
-                style="background-color: #1f5fbf;">
-                <span style="font-size: 12px;">Agregar</span>
-                <mat-icon class="ms-2"
-                    style="font-size: 18px; width: 18px; height: 18px;">shopping_cart</mat-icon>
-            </button>
-        </div>
-    </div>
-</ng-template>

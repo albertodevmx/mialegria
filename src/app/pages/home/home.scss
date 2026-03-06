@@ -22,22 +22,6 @@ h5 {
 	font-size: 14px !important;
 }
 
-.card {
-	height: 230px !important;
-	border-radius: 10px !important;
-	border: #DDD 1px solid !important;
-}
-
-.button-container {
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-
-	& button {
-		border-radius: 10px !important;
-	}
-}
-
 /* ===== Mobile categories carousel ===== */
 #categoriesCarousel {
 	.carousel-item {

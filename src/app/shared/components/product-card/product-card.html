@@ -1,0 +1,44 @@
+<div class="product-card">
+  <!-- Header: category badge + favorite -->
+  <div class="card-header-row">
+    <span class="category-badge">
+      <img [src]="iconSrc" [alt]="product.familiaWeb" class="badge-icon" />
+      {{ product.familiaWeb }}
+    </span>
+    <button class="fav-btn" aria-label="Favorito">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+  </div>
+
+  <!-- Product name -->
+  <p class="product-name">{{ product.producto }}</p>
+
+  <!-- Promo badge -->
+  <span class="promo-badge">
+    <mat-icon class="promo-icon">sell</mat-icon>
+    Miércoles de perfiles
+  </span>
+
+  <!-- Pricing -->
+  <div class="pricing">
+    <span class="price-label">Precio en línea</span>
+    <div class="price-row">
+      <span class="price-prefix">A solo</span>
+    </div>
+    <div class="price-row">
+      @if (product.precioLista && product.precioLista !== product.precio) {
+        <span class="price-old">${{ product.precioLista | number:'1.2-2' }}</span>
+      }
+      <span class="price-current">${{ product.precio | number:'1.2-2' }}</span>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="card-actions">
+    <button class="buy-btn">
+      <span>Comprar</span>
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>
+    </button>
+    <button class="detail-link">Ver detalle</button>
+  </div>
+</div>

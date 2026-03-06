@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BranchesService } from './../../services/branches.service';
 import { BranchesStore } from './../../stores/branches.store';
 import { MatIconModule } from '@angular/material/icon';
+import { ProductCard } from './../../shared/components/product-card/product-card';
 
 type FamiliaWebItem = {
 	idFamiliaWeb: number;
@@ -16,7 +17,8 @@ type FamiliaWebItem = {
 	standalone: true,
 	imports: [
 		CommonModule,
-		MatIconModule
+		MatIconModule,
+		ProductCard
 	],
 	templateUrl: './home.html',
 	styleUrls: ['./home.scss'],
