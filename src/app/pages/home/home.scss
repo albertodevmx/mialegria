@@ -29,6 +29,21 @@ h5 {
 	}
 }
 
+/* ===== Mobile products carousel spacing ===== */
+.products-carousel-mobile {
+	.carousel-inner {
+		padding: 0 36px;
+	}
+}
+
+.products-slide-row {
+	gap: 0;
+}
+
+.product-col {
+	padding: 0 18px; // 18px each side = 36px gap between cards
+}
+
 .mobile-cat-arrow-btn {
 	width: 32px;
 	opacity: 1;

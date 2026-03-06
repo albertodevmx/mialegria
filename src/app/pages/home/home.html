@@ -202,13 +202,13 @@
 
         <!-- ===== Mobile products carousel (< md) — 2 per slide ===== -->
         <div class="d-md-none mt-2">
-            <div id="productsCarousel" class="carousel slide" data-bs-ride="false">
+            <div id="productsCarousel" class="carousel slide products-carousel-mobile" data-bs-ride="false">
                 <div class="carousel-inner">
                     @for (page of productPagesArray(); track page) {
                     <div class="carousel-item" [class.active]="page === 0">
-                        <div class="row g-3 px-4">
+                        <div class="row g-0 products-slide-row">
                             @for (p of getProductPage(page); track p.idProducto) {
-                            <div class="col-6">
+                            <div class="col-6 product-col">
                                 <app-product-card [product]="p"></app-product-card>
                             </div>
                             }
