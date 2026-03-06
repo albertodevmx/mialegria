@@ -8,6 +8,14 @@
 
 mat-sidenav {
   width: auto;
-  background-color: #FFF;
+  background-color: transparent !important;
   border: none !important;
+  overflow: visible !important;
+}
+
+// Angular Material inner drawer wrapper
+:host ::ng-deep .mat-drawer-inner-container {
+  overflow: visible !important;
+  border-radius: 0 0 20px 0;
+  background: #fff;
 }

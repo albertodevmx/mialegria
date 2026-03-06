@@ -13,14 +13,15 @@ $sidebar-width: 320px;
   height: 100vh;
   width: $sidebar-width;
   max-width: 85vw;
-  background: #fff;
-  border-radius: 0 0 20px 0;
-  overflow: hidden;
+  background: transparent;
 }
 
-// ─── TOP BAR (gradient, 100% device width, only mobile) ───
+// ─── TOP BAR (gradient, 100vw, fixed so it escapes sidebar width) ───
 .sidebar-topbar {
-  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,8 +29,13 @@ $sidebar-width: 320px;
   background: $gradient;
   border-radius: 0 0 20px 20px;
   min-height: 48px;
-  width: 100vw;
-  z-index: 2;
+  z-index: 1100;
+}
+
+// Spacer to push content below fixed topbar
+.sidebar-topbar-spacer {
+  flex-shrink: 0;
+  height: 48px;
 }
 
 .close-btn {
@@ -95,6 +101,7 @@ $sidebar-width: 320px;
   flex: 1;
   overflow-y: hidden;
   padding: 6px 0;
+  background: #fff;
 
   &.scrollable {
     overflow-y: auto;
