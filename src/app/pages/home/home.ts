@@ -136,15 +136,13 @@ export class Home implements OnInit {
 	}
 
 	private equalizeCategoryCarouselHeight(): void {
-		const carousel = this.el.nativeElement.querySelector('#categoriesCarousel .carousel-inner');
-		if (!carousel) return;
-		const firstItem = carousel.querySelector('.carousel-item.active') as HTMLElement;
+		const carouselInner = this.el.nativeElement.querySelector('#categoriesCarousel .carousel-inner') as HTMLElement;
+		if (!carouselInner) return;
+		const firstItem = carouselInner.querySelector('.carousel-item.active') as HTMLElement;
 		if (!firstItem) return;
 		const height = firstItem.offsetHeight;
 		if (height > 0) {
-			carousel.querySelectorAll('.carousel-item').forEach((item: Element) => {
-				(item as HTMLElement).style.minHeight = height + 'px';
-			});
+			carouselInner.style.minHeight = height + 'px';
 		}
 	}
 }
