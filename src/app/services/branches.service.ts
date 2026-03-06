@@ -42,7 +42,7 @@ export class BranchesService {
 
 	getTopProducts(max: number = 6): Observable<any> {
 		return this.http.get(
-			`${this.baseUrl}/api/Branches/topProducts?Max=${max}`
+			`${this.baseUrl}/api/Products/topProducts?Max=${max}`
 		);
 	}
 
