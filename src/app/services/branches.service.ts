@@ -35,7 +35,7 @@ export class BranchesService {
 	// Familias
 	getAllWebFamily(): Observable<any> {
 		return this.http.get(
-			`${this.baseUrl}/api/Branches/AllWebFamily`
+			`${this.baseUrl}/api/Products/AllWebFamily`
 		);
 	}
 
