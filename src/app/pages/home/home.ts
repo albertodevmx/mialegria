@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, computed } from '@angular/core';
+import { Component, OnInit, inject, computed, effect, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchesService } from './../../services/branches.service';
 import { BranchesStore } from './../../stores/branches.store';
@@ -24,9 +24,19 @@ type FamiliaWebItem = {
 export class Home implements OnInit {
 	private branchesService = inject(BranchesService);
 	private branchesStore = inject(BranchesStore);
+	private el = inject(ElementRef);
 
 	familias = this.branchesStore.webFamilies;
 	topProducts = this.branchesStore.topProducts;
+
+	constructor() {
+		effect(() => {
+			const fams = this.familias();
+			if (fams.length > 0) {
+				setTimeout(() => this.equalizeCategoryCarouselHeight(), 150);
+			}
+		});
+	}
 
 	categoryTotalPages = computed(() => Math.ceil(this.familias().length / 4));
 	categoryPagesArray = computed(() =>
@@ -120,5 +130,18 @@ export class Home implements OnInit {
 
 	onFamiliaClick(fam: { idFamiliaWeb: number; familiaWeb: string }) {
 		console.log('Familia clickeada:', fam);
+	}
+
+	private equalizeCategoryCarouselHeight(): void {
+		const carousel = this.el.nativeElement.querySelector('#categoriesCarousel .carousel-inner');
+		if (!carousel) return;
+		const firstItem = carousel.querySelector('.carousel-item.active') as HTMLElement;
+		if (!firstItem) return;
+		const height = firstItem.offsetHeight;
+		if (height > 0) {
+			carousel.querySelectorAll('.carousel-item').forEach((item: Element) => {
+				(item as HTMLElement).style.minHeight = height + 'px';
+			});
+		}
 	}
 }
