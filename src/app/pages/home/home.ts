@@ -33,7 +33,8 @@ export class Home implements OnInit {
 		effect(() => {
 			const fams = this.familias();
 			if (fams.length > 0) {
-				setTimeout(() => this.equalizeCategoryCarouselHeight(), 150);
+				setTimeout(() => this.equalizeCategoryCarouselHeight(), 200);
+				setTimeout(() => this.equalizeCategoryCarouselHeight(), 600);
 			}
 		});
 	}
