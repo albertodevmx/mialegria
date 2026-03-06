@@ -51,7 +51,20 @@ h5 {
 
 .mobile-cat-arrow-icon {
 	color: #034EA2;
-	font-size: 32px;
-	width: 32px;
-	height: 32px;
+	font-size: 24px;
+	width: 36px;
+	height: 36px;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== Mobile-only overrides ===== */
+@media (max-width: 767.98px) {
+	.studies-title {
+		font-size: 14px !important;
+	}
 }
