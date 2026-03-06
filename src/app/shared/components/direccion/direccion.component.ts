@@ -22,7 +22,9 @@ export class DireccionComponent implements OnInit {
 	public store = inject(BranchesStore);
 
 	ngOnInit(): void {
-		this.abrirSelector();
+		if (!this.dialog.openDialogs.length) {
+			this.abrirSelector();
+		}
 	}
 
 	// === Getters para la plantilla ===
