@@ -1,17 +1,18 @@
 <div class="sidebar-container">
-  <!-- ═══ TOP BAR: gradient header ═══ -->
+  <!-- ═══ TOP BAR: gradient header (100vw, mobile only) ═══ -->
   <div class="sidebar-topbar">
     <button class="close-btn" (click)="closeSidebar()" aria-label="Cerrar menú">
       <mat-icon>close</mat-icon>
     </button>
 
-    <button class="login-btn">
-      Iniciar sesión
-    </button>
-
-    <button class="avatar-btn" aria-label="Cuenta">
-      <mat-icon>account_circle</mat-icon>
-    </button>
+    <div class="topbar-right">
+      <button class="login-btn">
+        Iniciar sesión
+      </button>
+      <button class="avatar-btn" aria-label="Cuenta">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
   </div>
 
   <!-- ═══ SCROLLABLE CONTENT ═══ -->
