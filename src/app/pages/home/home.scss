@@ -11,10 +11,15 @@
 }
 
 h5 {
-	color: #034EA2;
 	font-weight: bold;
 	font-size: 22px;
 	display: block;
+}
+
+.studies-title,
+.most-searched-title {
+	color: #000;
+	font-size: 14px !important;
 }
 
 .card {
@@ -63,9 +68,3 @@ h5 {
 	padding: 14px;
 }
 
-/* ===== Mobile-only overrides ===== */
-@media (max-width: 767.98px) {
-	.studies-title {
-		font-size: 14px !important;
-	}
-}
