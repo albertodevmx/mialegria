@@ -13,6 +13,7 @@ export class BranchesStore {
   sucursalesCargadas = signal<any[] | null>(null);
   selectedState = signal<StateItem | null>(null);
   // Signals NUEVAS
+  webFamiliesAll = signal<Array<{ idFamiliaWeb: number; familiaWeb: string; idSubFamiliaWeb: number; subFamiliaWeb: string }>>([]);
   webFamilies = signal<Array<{ idFamiliaWeb: number; familiaWeb: string }>>([]);
   topProducts = signal<any[]>([]);
   isSidebarOpen = signal<boolean>(false);
@@ -30,6 +31,7 @@ export class BranchesStore {
   setSucursales(v: any[] | null) { this.sucursalesCargadas.set(v); }
   setSelectedState(v: StateItem | null) { this.selectedState.set(v); }
   // Setters NUEVOS
+  setWebFamiliesAll(v: Array<{ idFamiliaWeb: number; familiaWeb: string; idSubFamiliaWeb: number; subFamiliaWeb: string }>) { this.webFamiliesAll.set(v); }
   setWebFamilies(v: Array<{ idFamiliaWeb: number; familiaWeb: string }>) { this.webFamilies.set(v); }
   setTopProducts(v: any[]) { this.topProducts.set(v); }
   // helpers

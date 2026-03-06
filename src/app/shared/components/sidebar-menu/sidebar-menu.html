@@ -30,19 +30,12 @@
       <mat-icon class="chevron" [class.rotated]="estudiosOpen()">expand_more</mat-icon>
     </button>
 
-    <!-- Estudios sub-items (loaded from JSON) -->
-    @if (estudiosOpen() && estudios().length) {
+    <!-- Estudios sub-items (from API) -->
+    @if (estudiosOpen() && familiasGrouped().length) {
       <div class="estudios-submenu">
-        @for (item of estudios(); track item.slug) {
-          <button
-            class="submenu-item"
-            [class.destacado]="item.destacado"
-            (click)="onEstudioClick(item)"
-          >
-            @if (item.destacado) {
-              <mat-icon class="check-icon">check_circle</mat-icon>
-            }
-            <span>{{ item.nombre }}</span>
+        @for (familia of familiasGrouped(); track familia.idFamiliaWeb) {
+          <button class="submenu-item" (click)="onFamiliaClick(familia)">
+            <span>{{ familia.familiaWeb }}</span>
           </button>
         }
       </div>

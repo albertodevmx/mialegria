@@ -72,6 +72,10 @@ export class Home implements OnInit {
 
 				const data = res.data as FamiliaWebItem[];
 
+				// Guardar data completa (familias + subfamilias) para el sidebar
+				this.branchesStore.setWebFamiliesAll(data);
+
+				// Guardar familias únicas para la sección de Estudios del home
 				const map = new Map<string, { idFamiliaWeb: number; familiaWeb: string }>();
 				for (const item of data) {
 					if (!map.has(item.familiaWeb)) {

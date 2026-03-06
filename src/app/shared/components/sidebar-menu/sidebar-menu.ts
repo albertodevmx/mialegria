@@ -1,14 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BranchesStore } from '../../../stores/branches.store';
+import { BranchesService } from '../../../services/branches.service';
 
-interface EstudioItem {
-  nombre: string;
-  slug: string;
-  destacado?: boolean;
+interface FamiliaGroup {
+  idFamiliaWeb: number;
+  familiaWeb: string;
+  subFamilias: { idSubFamiliaWeb: number; subFamiliaWeb: string }[];
 }
 
 @Component({
@@ -19,22 +19,44 @@ interface EstudioItem {
   styleUrl: './sidebar-menu.scss',
 })
 export class SidebarMenu {
-  private http = inject(HttpClient);
+  private branchesService = inject(BranchesService);
   store = inject(BranchesStore);
 
   estudiosOpen = signal(false);
-  estudios = signal<EstudioItem[]>([]);
-  estudiosLoaded = false;
+
+  familiasGrouped = computed<FamiliaGroup[]>(() => {
+    const all = this.store.webFamiliesAll();
+    const map = new Map<number, FamiliaGroup>();
+
+    for (const item of all) {
+      if (!map.has(item.idFamiliaWeb)) {
+        map.set(item.idFamiliaWeb, {
+          idFamiliaWeb: item.idFamiliaWeb,
+          familiaWeb: item.familiaWeb,
+          subFamilias: [],
+        });
+      }
+      map.get(item.idFamiliaWeb)!.subFamilias.push({
+        idSubFamiliaWeb: item.idSubFamiliaWeb,
+        subFamiliaWeb: item.subFamiliaWeb,
+      });
+    }
+
+    return Array.from(map.values());
+  });
 
   toggleEstudios(): void {
     const willOpen = !this.estudiosOpen();
     this.estudiosOpen.set(willOpen);
 
-    if (willOpen && !this.estudiosLoaded) {
-      this.http.get<EstudioItem[]>('data/sidebar-estudios.json').subscribe({
-        next: (data) => {
-          this.estudios.set(data);
-          this.estudiosLoaded = true;
+    // Si aún no hay data cargada, la pedimos al servicio
+    if (willOpen && this.store.webFamiliesAll().length === 0) {
+      this.branchesService.getAllWebFamily().subscribe({
+        next: (res: any) => {
+          const statusOk = String(res?.status) === '200';
+          if (statusOk && Array.isArray(res?.data)) {
+            this.store.setWebFamiliesAll(res.data);
+          }
         },
       });
     }
@@ -42,8 +64,6 @@ export class SidebarMenu {
 
   resetState(): void {
     this.estudiosOpen.set(false);
-    this.estudios.set([]);
-    this.estudiosLoaded = false;
   }
 
   closeSidebar(): void {
@@ -51,7 +71,13 @@ export class SidebarMenu {
     this.store.closeSidebar();
   }
 
-  onEstudioClick(item: EstudioItem): void {
+  onSubFamiliaClick(subFamilia: { idSubFamiliaWeb: number; subFamiliaWeb: string }, familia: FamiliaGroup): void {
+    console.log('SubFamilia clickeada:', subFamilia, 'de familia:', familia.familiaWeb);
+    this.closeSidebar();
+  }
+
+  onFamiliaClick(familia: FamiliaGroup): void {
+    console.log('Familia clickeada:', familia.familiaWeb);
     this.closeSidebar();
   }
 
