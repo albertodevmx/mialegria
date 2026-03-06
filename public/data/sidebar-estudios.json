@@ -1,0 +1,16 @@
+[
+  { "nombre": "Estudios clínicos", "slug": "estudios-clinicos", "destacado": true },
+  { "nombre": "Rayos X", "slug": "rayos-x" },
+  { "nombre": "Ultrasonidos", "slug": "ultrasonidos" },
+  { "nombre": "Tomografía", "slug": "tomografia" },
+  { "nombre": "Resonancia", "slug": "resonancia" },
+  { "nombre": "Neurología", "slug": "neurologia" },
+  { "nombre": "Cardiología", "slug": "cardiologia" },
+  { "nombre": "Neumología", "slug": "neumologia" },
+  { "nombre": "Ginecología", "slug": "ginecologia" },
+  { "nombre": "Gastroenterología", "slug": "gastroenterologia" },
+  { "nombre": "Dental", "slug": "dental" },
+  { "nombre": "Densitometría", "slug": "densitometria" },
+  { "nombre": "Salud Femenina", "slug": "salud-femenina" },
+  { "nombre": "Salud Masculina", "slug": "salud-masculina" }
+]

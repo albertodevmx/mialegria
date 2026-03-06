@@ -10,54 +10,7 @@
     [disableClose]="false"
     (closedStart)="onSidenavClosed()"
   >
-   
-<div class="sidebar-wrap p-3">
-
-  <div class="text-center mb-2">
-  
-    <div class="img-circle mx-auto mb-2"></div>
-
-    
-  </div>
-
-
-  <div class="mt-3">
-    <button mat-stroked-button class="menu-item w-100 mb-2">
-      <span>Estudios</span>
-      <mat-icon class="chev">chevron_right</mat-icon>
-    </button>
-
-    <button mat-stroked-button class="menu-item w-100 mb-2">
-      <span>Sucursales</span>
-      <mat-icon class="chev">chevron_right</mat-icon>
-    </button>
-
-    <button mat-stroked-button class="menu-item w-100 mb-2">
-      <span>Facturación</span>
-      <mat-icon class="chev">chevron_right</mat-icon>
-    </button>
-
-    <button mat-stroked-button class="menu-item w-100 mb-2">
-      <span>Resultados</span>
-      <mat-icon class="chev">chevron_right</mat-icon>
-    </button>
-
-    <button mat-stroked-button class="menu-item w-100 mb-2">
-      <span>Médicos</span>
-      <mat-icon class="chev">chevron_right</mat-icon>
-    </button>
-
-  </div>
-
-
-  <div class="text-center mt-2">
-    <div class="terms-title mb-1">Términos y condiciones</div>
-
-    <div class="small-links">
-      <a href="#" class="d-block">Aviso de privacidad</a>
-    </div>
-  </div>
-</div>
+    <app-sidebar-menu></app-sidebar-menu>
   </mat-sidenav>
 
   <mat-sidenav-content>
