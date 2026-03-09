@@ -133,6 +133,12 @@ export class Categorias implements OnInit {
 		});
 	}
 
+	onMobileSelectChange(event: Event): void {
+		const id = Number((event.target as HTMLSelectElement).value);
+		const fam = this.familias().find(f => f.idFamiliaWeb === id);
+		if (fam) this.selectFamilia(fam);
+	}
+
 	selectFamilia(fam: { idFamiliaWeb: number; familiaWeb: string }): void {
 		this.selectedFamiliaId.set(fam.idFamiliaWeb);
 		this.router.navigate([], {

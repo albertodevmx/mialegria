@@ -5,10 +5,23 @@
 	<!-- Título + Categorías van ENCIMA del banner -->
 	<div class="categorias-overlay">
 		<div class="container">
-			<h2 class="categorias-title">Estudios</h2>
+			<!-- Desktop: título "Estudios" -->
+			<h2 class="categorias-title d-none d-md-block">Estudios</h2>
 
-			<!-- ===== Categorías slider (carousel) ===== -->
-			<div class="categorias-box">
+			<!-- Mobile: título + select -->
+			<div class="mobile-select-section d-md-none">
+				<h2 class="mobile-select-title">Selecciona tu estudio</h2>
+				<select class="mobile-category-select"
+					[value]="selectedFamiliaId()"
+					(change)="onMobileSelectChange($event)">
+					@for (fam of familias(); track fam.idFamiliaWeb) {
+					<option [value]="fam.idFamiliaWeb">{{ fam.familiaWeb }}</option>
+					}
+				</select>
+			</div>
+
+			<!-- ===== Categorías slider (carousel) — solo desktop ===== -->
+			<div class="categorias-box d-none d-md-flex">
 				<div id="categoriasCarousel" class="carousel slide" data-bs-ride="false">
 					<div class="carousel-inner">
 						@for (page of categoryPagesArray(); track page) {
@@ -111,6 +124,11 @@
 			</button>
 		</div>
 		}
+
+		<!-- Mobile: label "Resultados" -->
+		<div class="mobile-results-label d-md-none">
+			<span>Resultados</span>
+		</div>
 
 		<!-- ===== Grid de tarjetas ===== -->
 		@if (loadingProducts()) {
