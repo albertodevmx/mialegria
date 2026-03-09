@@ -39,7 +39,7 @@ export class Categorias implements OnInit {
 	});
 
 	// Carousel pagination: 6 items per page (2 rows x 3 cols)
-	private readonly ITEMS_PER_PAGE = 6;
+	private readonly ITEMS_PER_PAGE = 12;
 
 	categoryTotalPages = computed(() => Math.ceil(this.familias().length / this.ITEMS_PER_PAGE));
 	categoryPagesArray = computed(() =>
