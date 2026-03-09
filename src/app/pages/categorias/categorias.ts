@@ -38,6 +38,19 @@ export class Categorias implements OnInit {
 		return fam?.familiaWeb ?? 'Todos';
 	});
 
+	// Carousel pagination: 6 items per page (2 rows x 3 cols)
+	private readonly ITEMS_PER_PAGE = 6;
+
+	categoryTotalPages = computed(() => Math.ceil(this.familias().length / this.ITEMS_PER_PAGE));
+	categoryPagesArray = computed(() =>
+		Array.from({ length: this.categoryTotalPages() }, (_, i) => i)
+	);
+
+	getCategoryPage(page: number): { idFamiliaWeb: number; familiaWeb: string }[] {
+		const all = this.familias();
+		return all.slice(page * this.ITEMS_PER_PAGE, page * this.ITEMS_PER_PAGE + this.ITEMS_PER_PAGE);
+	}
+
 	filtersWithBranch = ['Ofertas', 'Menor a mayor precio', 'Salud femenina', 'Salud masculina'];
 	filtersWithoutBranch = ['Ofertas', 'Salud femenina', 'Salud masculina'];
 

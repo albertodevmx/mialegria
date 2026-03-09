@@ -1,32 +1,55 @@
 <!-- ===== Banner superior ===== -->
 <div class="categorias-banner">
 	<div class="banner-overlay"></div>
+
+	<!-- Título + Categorías van ENCIMA del banner -->
+	<div class="categorias-overlay">
+		<div class="container">
+			<h2 class="categorias-title">Estudios</h2>
+
+			<!-- ===== Categorías slider (carousel) ===== -->
+			<div class="categorias-box">
+				<div id="categoriasCarousel" class="carousel slide" data-bs-ride="false">
+					<div class="carousel-inner">
+						@for (page of categoryPagesArray(); track page) {
+						<div class="carousel-item" [class.active]="page === 0">
+							<div class="categorias-grid">
+								@for (fam of getCategoryPage(page); track fam.idFamiliaWeb) {
+								<div class="categoria-item"
+									[class.selected]="fam.idFamiliaWeb === selectedFamiliaId()"
+									(click)="selectFamilia(fam)">
+									<div class="categoria-icon-wrapper" [class.selected]="fam.idFamiliaWeb === selectedFamiliaId()">
+										<img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'"
+											[alt]="fam.familiaWeb"
+											class="categoria-icon" />
+									</div>
+									<span class="categoria-label">{{ fam.familiaWeb }}</span>
+								</div>
+								}
+							</div>
+						</div>
+						}
+					</div>
+
+					@if (categoryPagesArray().length > 1) {
+					<button class="carousel-control-prev cat-arrow-btn" type="button"
+						data-bs-target="#categoriasCarousel" data-bs-slide="prev">
+						<mat-icon class="cat-arrow-icon">chevron_left</mat-icon>
+					</button>
+					<button class="carousel-control-next cat-arrow-btn" type="button"
+						data-bs-target="#categoriasCarousel" data-bs-slide="next">
+						<mat-icon class="cat-arrow-icon">chevron_right</mat-icon>
+					</button>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- ===== Contenido principal ===== -->
 <div class="categorias-content">
 	<div class="container">
-
-		<!-- Título -->
-		<h2 class="categorias-title">Estudios</h2>
-
-		<!-- ===== Categorías en recuadro blanco ===== -->
-		<div class="categorias-box">
-			<div class="categorias-grid">
-				@for (fam of familias(); track fam.idFamiliaWeb) {
-				<div class="categoria-item"
-					[class.selected]="fam.idFamiliaWeb === selectedFamiliaId()"
-					(click)="selectFamilia(fam)">
-					<div class="categoria-icon-wrapper" [class.selected]="fam.idFamiliaWeb === selectedFamiliaId()">
-						<img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'"
-							[alt]="fam.familiaWeb"
-							class="categoria-icon" />
-					</div>
-					<span class="categoria-label">{{ fam.familiaWeb }}</span>
-				</div>
-				}
-			</div>
-		</div>
 
 		<!-- ===== Barra de filtros y vista ===== -->
 		<div class="toolbar-row">

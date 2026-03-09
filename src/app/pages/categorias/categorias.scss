@@ -7,9 +7,9 @@ $orange: #E68A00;
 .categorias-banner {
 	position: relative;
 	width: 100%;
-	height: 160px;
+	height: 220px;
 	background: url('/img/banners/banner-central.png') center/cover no-repeat;
-	overflow: hidden;
+	overflow: visible;
 
 	.banner-overlay {
 		position: absolute;
@@ -18,20 +18,23 @@ $orange: #E68A00;
 	}
 }
 
-// ─── Contenido principal ───
-.categorias-content {
-	background: #F0F0F0;
-	padding-bottom: 40px;
-	min-height: 60vh;
+// ─── Overlay: título + categorías encima del banner ───
+.categorias-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transform: translateY(50%);
+	z-index: 2;
 }
 
 // ─── Título ───
 .categorias-title {
 	font-size: 18px;
 	font-weight: 700;
-	color: #000;
+	color: #fff;
 	text-align: center;
-	padding: 16px 0 12px;
+	padding: 0 0 12px;
 	margin: 0;
 }
 
@@ -39,13 +42,15 @@ $orange: #E68A00;
 .categorias-box {
 	background: #fff;
 	border-radius: 12px;
-	padding: 20px 16px;
-	margin-bottom: 20px;
+	padding: 20px 40px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	position: relative;
 }
 
 .categorias-grid {
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, auto);
 	gap: 16px 8px;
 	justify-items: center;
 }
@@ -94,6 +99,48 @@ $orange: #E68A00;
 	color: #333;
 	text-align: center;
 	line-height: 1.2;
+}
+
+// ─── Carousel arrows ───
+.cat-arrow-btn {
+	width: 32px;
+	opacity: 1;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&.carousel-control-prev {
+		left: 4px;
+	}
+
+	&.carousel-control-next {
+		right: 4px;
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.cat-arrow-icon {
+	color: $blue;
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+	padding: 14px;
+}
+
+// ─── Contenido principal ───
+.categorias-content {
+	background: #F0F0F0;
+	padding-top: 80px; // space for the overlay box
+	padding-bottom: 40px;
+	min-height: 60vh;
 }
 
 // ─── Toolbar row ───
@@ -333,10 +380,10 @@ $orange: #E68A00;
 	animation: spin 1s linear infinite;
 }
 
-// ─── Responsive (adelanto mobile) ───
+// ─── Responsive ───
 @media (max-width: 991px) {
 	.categorias-grid {
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
 
 	.products-grid {
@@ -346,11 +393,19 @@ $orange: #E68A00;
 
 @media (max-width: 767px) {
 	.categorias-banner {
-		height: 100px;
+		height: 140px;
 	}
 
 	.categorias-grid {
 		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.categorias-box {
+		padding: 16px 36px;
+	}
+
+	.categorias-content {
+		padding-top: 60px;
 	}
 
 	.products-grid {
