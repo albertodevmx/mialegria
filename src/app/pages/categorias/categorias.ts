@@ -145,7 +145,6 @@ export class Categorias implements OnInit {
 			queryParams: { idFamilia: fam.idFamiliaWeb },
 			queryParamsHandling: 'merge',
 		});
-		this.loadProducts();
 	}
 
 	iconName(familiaWeb: string): string {
