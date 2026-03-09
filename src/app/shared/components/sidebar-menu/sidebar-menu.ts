@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BranchesStore } from '../../../stores/branches.store';
 import { BranchesService } from '../../../services/branches.service';
@@ -20,6 +20,7 @@ interface FamiliaGroup {
 })
 export class SidebarMenu {
   private branchesService = inject(BranchesService);
+  private router = inject(Router);
   store = inject(BranchesStore);
 
   estudiosOpen = signal(false);
@@ -77,8 +78,10 @@ export class SidebarMenu {
   }
 
   onFamiliaClick(familia: FamiliaGroup): void {
-    console.log('Familia clickeada:', familia.familiaWeb);
     this.closeSidebar();
+    this.router.navigate(['/categorias'], {
+      queryParams: { idFamilia: familia.idFamiliaWeb },
+    });
   }
 
   onMenuItemClick(): void {
