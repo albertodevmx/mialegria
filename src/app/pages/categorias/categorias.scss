@@ -1,0 +1,372 @@
+$blue: #034EA2;
+$light-blue: #0091DA;
+$green: #1FA060;
+$orange: #E68A00;
+
+// ─── Banner superior ───
+.categorias-banner {
+	position: relative;
+	width: 100%;
+	height: 160px;
+	background: url('/img/banners/banner-central.png') center/cover no-repeat;
+	overflow: hidden;
+
+	.banner-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(3, 78, 162, 0.3) 0%, rgba(3, 78, 162, 0.1) 100%);
+	}
+}
+
+// ─── Contenido principal ───
+.categorias-content {
+	background: #F0F0F0;
+	padding-bottom: 40px;
+	min-height: 60vh;
+}
+
+// ─── Título ───
+.categorias-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #000;
+	text-align: center;
+	padding: 16px 0 12px;
+	margin: 0;
+}
+
+// ─── Categorías box blanco ───
+.categorias-box {
+	background: #fff;
+	border-radius: 12px;
+	padding: 20px 16px;
+	margin-bottom: 20px;
+}
+
+.categorias-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 16px 8px;
+	justify-items: center;
+}
+
+.categoria-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	min-width: 80px;
+
+	&:hover .categoria-icon-wrapper {
+		background: #E0F2FF;
+	}
+}
+
+.categoria-icon-wrapper {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #F5F5F5;
+	transition: background-color 0.2s;
+
+	&.selected {
+		background: $blue;
+
+		.categoria-icon {
+			filter: brightness(0) invert(1);
+		}
+	}
+}
+
+.categoria-icon {
+	width: 32px;
+	height: 32px;
+	object-fit: contain;
+}
+
+.categoria-label {
+	font-size: 11px;
+	font-weight: 500;
+	color: #333;
+	text-align: center;
+	line-height: 1.2;
+}
+
+// ─── Toolbar row ───
+.toolbar-row {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 16px;
+	gap: 16px;
+}
+
+// ─── Filter dropdown ───
+.filter-section {
+	flex-shrink: 0;
+}
+
+.filter-dropdown {
+	position: relative;
+}
+
+.filter-btn {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background: #fff;
+	border: 1px solid #E0E0E0;
+	border-radius: 8px;
+	padding: 8px 12px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #333;
+	cursor: pointer;
+
+	&:hover {
+		border-color: $blue;
+	}
+}
+
+.filter-chevron {
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	transition: transform 0.2s;
+
+	&.rotated {
+		transform: rotate(180deg);
+	}
+}
+
+.filter-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	margin-top: 4px;
+	background: #fff;
+	border: 1px solid #E0E0E0;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+	min-width: 180px;
+	overflow: hidden;
+}
+
+.filter-option {
+	display: block;
+	width: 100%;
+	padding: 10px 14px;
+	border: none;
+	background: none;
+	text-align: left;
+	font-size: 13px;
+	color: #333;
+	cursor: pointer;
+
+	&:hover {
+		background: #F5F5F5;
+	}
+
+	&.active {
+		color: $blue;
+		font-weight: 600;
+	}
+}
+
+// ─── Toolbar center ───
+.toolbar-center {
+	flex: 1;
+	text-align: center;
+}
+
+.category-label-title {
+	font-size: 14px;
+	font-weight: 700;
+	color: #333;
+}
+
+// ─── View toggle ───
+.view-toggle {
+	display: flex;
+	gap: 4px;
+	flex-shrink: 0;
+}
+
+.view-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	background: none;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	color: #999;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+
+	&.active {
+		color: $blue;
+		border-color: $blue;
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+	}
+}
+
+.view-label {
+	font-size: 10px;
+	font-weight: 600;
+}
+
+// ─── No branch row ───
+.no-branch-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.warning-banner {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	background: #FFF3E0;
+	border: 2px solid $orange;
+	border-radius: 12px;
+	padding: 12px 16px;
+	flex: 1;
+}
+
+.warning-icon {
+	flex-shrink: 0;
+
+	mat-icon {
+		color: $orange;
+		font-size: 28px;
+		width: 28px;
+		height: 28px;
+	}
+}
+
+.warning-text {
+	color: $orange;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.select-branch-btn {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: $blue;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: background-color 0.15s;
+
+	mat-icon {
+		font-size: 20px;
+		width: 20px;
+		height: 20px;
+	}
+
+	&:hover {
+		background: #023d82;
+	}
+}
+
+// ─── Products grid ───
+.products-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 16px;
+}
+
+.product-col {
+	min-width: 0;
+}
+
+// ─── Loading / empty ───
+.loading-container,
+.empty-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 40px;
+	color: #999;
+	font-size: 14px;
+
+	mat-icon {
+		font-size: 24px;
+		width: 24px;
+		height: 24px;
+	}
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.spin {
+	animation: spin 1s linear infinite;
+}
+
+// ─── Responsive (adelanto mobile) ───
+@media (max-width: 991px) {
+	.categorias-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.products-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 767px) {
+	.categorias-banner {
+		height: 100px;
+	}
+
+	.categorias-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.products-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.toolbar-row {
+		flex-wrap: wrap;
+	}
+
+	.no-branch-row {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.select-branch-btn {
+		align-self: flex-end;
+	}
+}

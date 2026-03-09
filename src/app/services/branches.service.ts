@@ -46,4 +46,10 @@ export class BranchesService {
 		);
 	}
 
+	getProductsByFamily(idFamiliaWeb: number): Observable<any> {
+		return this.http.get(
+			`${this.baseUrl}/api/Products/ProductsByFamily?IdFamiliaWeb=${idFamiliaWeb}`
+		);
+	}
+
 }

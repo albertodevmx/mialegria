@@ -1,0 +1,114 @@
+<!-- ===== Banner superior ===== -->
+<div class="categorias-banner">
+	<div class="banner-overlay"></div>
+</div>
+
+<!-- ===== Contenido principal ===== -->
+<div class="categorias-content">
+	<div class="container">
+
+		<!-- Título -->
+		<h2 class="categorias-title">Estudios</h2>
+
+		<!-- ===== Categorías en recuadro blanco ===== -->
+		<div class="categorias-box">
+			<div class="categorias-grid">
+				@for (fam of familias(); track fam.idFamiliaWeb) {
+				<div class="categoria-item"
+					[class.selected]="fam.idFamiliaWeb === selectedFamiliaId()"
+					(click)="selectFamilia(fam)">
+					<div class="categoria-icon-wrapper" [class.selected]="fam.idFamiliaWeb === selectedFamiliaId()">
+						<img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'"
+							[alt]="fam.familiaWeb"
+							class="categoria-icon" />
+					</div>
+					<span class="categoria-label">{{ fam.familiaWeb }}</span>
+				</div>
+				}
+			</div>
+		</div>
+
+		<!-- ===== Barra de filtros y vista ===== -->
+		<div class="toolbar-row">
+			<!-- Filtro izquierda -->
+			<div class="filter-section">
+				<div class="filter-dropdown">
+					<button class="filter-btn" (click)="toggleFilter()">
+						<span>Ordenar por</span>
+						<mat-icon class="filter-chevron" [class.rotated]="filterOpen()">expand_more</mat-icon>
+					</button>
+					@if (filterOpen()) {
+					<div class="filter-menu">
+						@for (f of availableFilters(); track f) {
+						<button class="filter-option"
+							[class.active]="selectedFilter() === f"
+							(click)="applyFilter(f)">
+							{{ f }}
+						</button>
+						}
+					</div>
+					}
+				</div>
+			</div>
+
+			<!-- Título categoría centro -->
+			<div class="toolbar-center">
+				<span class="category-label-title">{{ selectedFamiliaName() }}</span>
+			</div>
+
+			<!-- Vista tarjetas/listado derecha -->
+			<div class="view-toggle">
+				<button class="view-btn" [class.active]="viewMode() === 'tarjetas'" (click)="setViewMode('tarjetas')"
+					title="Tarjetas">
+					<mat-icon>grid_view</mat-icon>
+					<span class="view-label">Tarjetas</span>
+				</button>
+				<button class="view-btn" [class.active]="viewMode() === 'listado'" (click)="setViewMode('listado')"
+					title="Listado" disabled>
+					<mat-icon>view_list</mat-icon>
+					<span class="view-label">Listado</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- ===== Banner naranja (sin sucursal) + botón seleccionar ===== -->
+		@if (!selectedSucursal()) {
+		<div class="no-branch-row">
+			<div class="warning-banner" (click)="abrirSelectorSucursal()" style="cursor: pointer;">
+				<div class="warning-icon">
+					<mat-icon>warning</mat-icon>
+				</div>
+				<span class="warning-text">Para poder cotizar tu estudio es necesario que selecciones una sucursal.</span>
+			</div>
+			<button class="select-branch-btn" (click)="abrirSelectorSucursal()">
+				<span>Seleccionar sucursal</span>
+				<mat-icon>storefront</mat-icon>
+			</button>
+		</div>
+		}
+
+		<!-- ===== Grid de tarjetas ===== -->
+		@if (loadingProducts()) {
+		<div class="loading-container">
+			<mat-icon class="spin">sync</mat-icon>
+			<span>Cargando estudios...</span>
+		</div>
+		}
+
+		@if (!loadingProducts() && products().length === 0 && selectedFamiliaId()) {
+		<div class="empty-container">
+			<mat-icon>science</mat-icon>
+			<span>No se encontraron estudios en esta categoría.</span>
+		</div>
+		}
+
+		<div class="products-grid">
+			@for (p of products(); track p.idProducto) {
+			<div class="product-col">
+				<app-product-card [product]="p"></app-product-card>
+			</div>
+			}
+		</div>
+
+	</div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, inject, computed, effect, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { BranchesService } from './../../services/branches.service';
 import { BranchesStore } from './../../stores/branches.store';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,6 +31,7 @@ export class Home implements OnInit {
 	private branchesStore = inject(BranchesStore);
 	private el = inject(ElementRef);
 	private dialog = inject(MatDialog);
+	private router = inject(Router);
 
 	familias = this.branchesStore.webFamilies;
 	topProducts = this.branchesStore.topProducts;
@@ -140,7 +142,9 @@ export class Home implements OnInit {
 	}
 
 	onFamiliaClick(fam: { idFamiliaWeb: number; familiaWeb: string }) {
-		console.log('Familia clickeada:', fam);
+		this.router.navigate(['/categorias'], {
+			queryParams: { idFamilia: fam.idFamiliaWeb },
+		});
 	}
 
 	abrirSelectorSucursal(): void {
