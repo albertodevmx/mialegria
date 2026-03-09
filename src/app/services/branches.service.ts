@@ -46,10 +46,23 @@ export class BranchesService {
 		);
 	}
 
-	getProductsByFamily(idFamiliaWeb: number): Observable<any> {
-		return this.http.get(
-			`${this.baseUrl}/api/Products/ProductsByFamily?IdFamiliaWeb=${idFamiliaWeb}`
-		);
+	getProductsByFamily(params: {
+		IDFamiliaWeb: number;
+		IDSucursal?: number;
+		IDSubFamiliaWeb?: number;
+		Ofertas?: boolean;
+		SaludFem?: boolean;
+		SaludMas?: boolean;
+		PrecioMenor?: boolean;
+	}): Observable<any> {
+		const query: any = { IDFamiliaWeb: params.IDFamiliaWeb };
+		if (params.IDSucursal != null) query.IDSucursal = params.IDSucursal;
+		if (params.IDSubFamiliaWeb != null) query.IDSubFamiliaWeb = params.IDSubFamiliaWeb;
+		if (params.Ofertas != null) query.Ofertas = params.Ofertas;
+		if (params.SaludFem != null) query.SaludFem = params.SaludFem;
+		if (params.SaludMas != null) query.SaludMas = params.SaludMas;
+		if (params.PrecioMenor != null) query.PrecioMenor = params.PrecioMenor;
+		return this.http.get(`${this.baseUrl}/api/Products/ProductByWebFamily`, { params: query });
 	}
 
 }

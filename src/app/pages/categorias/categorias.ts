@@ -103,7 +103,23 @@ export class Categorias implements OnInit {
 		if (!id) return;
 
 		this.loadingProducts.set(true);
-		this.branchesService.getProductsByFamily(id).subscribe({
+
+		const params: any = { IDFamiliaWeb: id };
+
+		// Add sucursal if selected
+		const suc = this.selectedSucursal();
+		if (suc?.idSucursal) {
+			params.IDSucursal = suc.idSucursal;
+		}
+
+		// Apply active filter
+		const filter = this.selectedFilter();
+		if (filter === 'Ofertas') params.Ofertas = true;
+		if (filter === 'Salud femenina') params.SaludFem = true;
+		if (filter === 'Salud masculina') params.SaludMas = true;
+		if (filter === 'Menor a mayor precio') params.PrecioMenor = true;
+
+		this.branchesService.getProductsByFamily(params).subscribe({
 			next: (res: any) => {
 				const statusOk = String(res?.status) === '200';
 				const list = statusOk && Array.isArray(res?.data) ? res.data : [];
@@ -142,8 +158,10 @@ export class Categorias implements OnInit {
 	}
 
 	applyFilter(filter: string): void {
-		this.selectedFilter.set(filter);
+		// Toggle: if same filter clicked again, clear it
+		this.selectedFilter.set(this.selectedFilter() === filter ? '' : filter);
 		this.filterOpen.set(false);
+		this.loadProducts();
 	}
 
 	setViewMode(mode: 'tarjetas' | 'listado'): void {
