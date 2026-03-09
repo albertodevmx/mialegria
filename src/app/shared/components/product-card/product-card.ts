@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { BranchesStore } from '../../../stores/branches.store';
+import { MatDialog } from '@angular/material/dialog';
+import { BranchesDialogComponent } from '../direccion/branches-dialog/branches-dialog.component';
 
 @Component({
   selector: 'app-product-card',
@@ -12,6 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class ProductCard {
   @Input({ required: true }) product: any;
 
+  private store = inject(BranchesStore);
+  private dialog = inject(MatDialog);
+
+  selectedSucursal = this.store.selectedSucursal;
+
   get iconSrc(): string {
     const name = (this.product?.familiaWeb || '')
       .trim()
@@ -22,5 +30,14 @@ export class ProductCard {
       .replace(/[^a-z0-9\s]/g, '')
       .replace(/\s+/g, '_');
     return 'img/iconos/' + name + '.svg';
+  }
+
+  abrirSelectorSucursal(): void {
+    this.dialog.open(BranchesDialogComponent, {
+      width: '420px',
+      height: '80vh',
+      disableClose: true,
+      panelClass: 'custom-dialog',
+    });
   }
 }

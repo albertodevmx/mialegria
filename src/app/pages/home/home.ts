@@ -4,6 +4,8 @@ import { BranchesService } from './../../services/branches.service';
 import { BranchesStore } from './../../stores/branches.store';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductCard } from './../../shared/components/product-card/product-card';
+import { MatDialog } from '@angular/material/dialog';
+import { BranchesDialogComponent } from './../../shared/components/direccion/branches-dialog/branches-dialog.component';
 
 type FamiliaWebItem = {
 	idFamiliaWeb: number;
@@ -27,9 +29,11 @@ export class Home implements OnInit {
 	private branchesService = inject(BranchesService);
 	private branchesStore = inject(BranchesStore);
 	private el = inject(ElementRef);
+	private dialog = inject(MatDialog);
 
 	familias = this.branchesStore.webFamilies;
 	topProducts = this.branchesStore.topProducts;
+	selectedSucursal = this.branchesStore.selectedSucursal;
 
 	constructor() {
 		effect(() => {
@@ -137,6 +141,15 @@ export class Home implements OnInit {
 
 	onFamiliaClick(fam: { idFamiliaWeb: number; familiaWeb: string }) {
 		console.log('Familia clickeada:', fam);
+	}
+
+	abrirSelectorSucursal(): void {
+		this.dialog.open(BranchesDialogComponent, {
+			width: '420px',
+			height: '80vh',
+			disableClose: true,
+			panelClass: 'custom-dialog',
+		});
 	}
 
 	private equalizeCategoryCarouselHeight(): void {

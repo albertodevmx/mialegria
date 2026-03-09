@@ -157,6 +157,15 @@
 
 <div class="container-fluid p-0 pb-5" style="background-color: #F0F0F0;">
     <div class="container pt-3">
+        @if (!selectedSucursal()) {
+        <div class="warning-banner" (click)="abrirSelectorSucursal()" style="cursor: pointer;">
+            <div class="warning-icon">
+                <mat-icon>warning</mat-icon>
+            </div>
+            <span class="warning-text">Para poder cotizar tu estudio es necesario que selecciones una sucursal.</span>
+        </div>
+        }
+
         <div class="row g-3 align-items-center">
             <div class="col-12">
                 <h5 class="mb-0 most-searched-title">Los más buscados</h5>
