@@ -18,12 +18,14 @@
 								<div class="categoria-item"
 									[class.selected]="fam.idFamiliaWeb === selectedFamiliaId()"
 									(click)="selectFamilia(fam)">
-									<div class="categoria-icon-wrapper" [class.selected]="fam.idFamiliaWeb === selectedFamiliaId()">
-										<img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'"
-											[alt]="fam.familiaWeb"
-											class="categoria-icon" />
+									<div class="categoria-active-box">
+										<div class="categoria-icon-wrapper">
+											<img [src]="'img/iconos/' + iconName(fam.familiaWeb) + '.svg'"
+												[alt]="fam.familiaWeb"
+												class="categoria-icon" />
+										</div>
+										<span class="categoria-label">{{ fam.familiaWeb }}</span>
 									</div>
-									<span class="categoria-label">{{ fam.familiaWeb }}</span>
 								</div>
 								}
 							</div>

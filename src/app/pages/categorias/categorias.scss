@@ -66,6 +66,32 @@ $orange: #E68A00;
 	&:hover .categoria-icon-wrapper {
 		background: #E0F2FF;
 	}
+
+	&.selected {
+		.categoria-active-box {
+			background: #DCEEFB;
+			border-radius: 12px;
+		}
+
+		.categoria-icon-wrapper {
+			border: 2.5px solid $blue;
+			background: #F5F5F5;
+		}
+
+		.categoria-label {
+			color: $blue;
+			font-weight: 700;
+		}
+	}
+}
+
+.categoria-active-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 14px;
+	border-radius: 12px;
 }
 
 .categoria-icon-wrapper {
@@ -76,15 +102,8 @@ $orange: #E68A00;
 	align-items: center;
 	justify-content: center;
 	background: #F5F5F5;
-	transition: background-color 0.2s;
-
-	&.selected {
-		background: $blue;
-
-		.categoria-icon {
-			filter: brightness(0) invert(1);
-		}
-	}
+	transition: background-color 0.2s, border-color 0.2s;
+	border: 2.5px solid transparent;
 }
 
 .categoria-icon {
