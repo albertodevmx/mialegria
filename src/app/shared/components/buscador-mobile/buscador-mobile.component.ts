@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,12 +19,13 @@ export class BuscadorMobileComponent implements AfterViewInit {
 
   private branchesService = inject(BranchesService);
 
+  isClosing = false;
   query = '';
   items: Array<{ idProducto: number; producto: string }> = [];
   showAutocomplete = false;
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.searchInput?.nativeElement.focus(), 100);
+    setTimeout(() => this.searchInput?.nativeElement.focus(), 300);
   }
 
   onSearch(value: string): void {
@@ -58,19 +59,24 @@ export class BuscadorMobileComponent implements AfterViewInit {
     this.items = [];
     this.showAutocomplete = false;
     this.searchInput.nativeElement.value = '';
-    this.closed.emit();
+    this.animateClose(() => this.closed.emit());
   }
 
   goBack(): void {
     this.query = '';
     this.items = [];
     this.showAutocomplete = false;
-    this.back.emit();
+    this.animateClose(() => this.back.emit());
   }
 
   selectItem(item: any): void {
     console.log('Estudio seleccionado:', item);
     this.showAutocomplete = false;
-    this.closed.emit();
+    this.animateClose(() => this.closed.emit());
+  }
+
+  private animateClose(callback: () => void): void {
+    this.isClosing = true;
+    setTimeout(() => callback(), 300);
   }
 }
