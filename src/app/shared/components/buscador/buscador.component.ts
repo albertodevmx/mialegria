@@ -2,7 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { Subject, Subscription, switchMap, debounceTime, of } from 'rxjs';
+import { Subject, Subscription, switchMap, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
 
 import { BranchesService } from './../../../services/branches.service';
 import { BranchesStore } from './../../../stores/branches.store';
@@ -51,7 +51,11 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 		}
 
 		this.searchSub = this.search$.pipe(
-			debounceTime(300),
+			debounceTime(200),
+			distinctUntilChanged(),
+			tap(() => {
+				this.isLoading = false;
+			}),
 			switchMap(query => {
 				if (!query) {
 					this.items = [];

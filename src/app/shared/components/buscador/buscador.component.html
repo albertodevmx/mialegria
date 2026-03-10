@@ -19,11 +19,9 @@
 	</button>
 
 	<div class="autocomplete-panel" *ngIf="showAutocomplete && items.length > 0" (scroll)="onScroll($event)">
-		<div class="autocomplete-inner">
-			<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
-				[class.no-border]="last" (click)="selectItem(item)">
-				{{ item.producto }}
-			</button>
-		</div>
+		<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
+			[class.no-border]="last" (click)="selectItem(item)">
+			{{ item.producto }}
+		</button>
 	</div>
 </div>
