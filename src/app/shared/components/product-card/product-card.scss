@@ -38,7 +38,7 @@ $gray-text: #666;
   gap: 4px;
   background: #EBF5FF;
   color: $light-blue;
-  font-size: 10px;
+  font-size: 7px;
   font-weight: 600;
   height: 30px;
   padding: 0 6px;
@@ -48,6 +48,10 @@ $gray-text: #666;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 80%;
+
+  @media (min-width: 1024px) {
+    font-size: 10px;
+  }
 }
 
 .badge-icon {
