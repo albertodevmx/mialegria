@@ -26,6 +26,8 @@ h5 {
 
 /* ===== Mobile products carousel spacing ===== */
 .products-carousel-mobile {
+	margin: 0 -12px;
+
 	.carousel-inner {
 		padding: 0;
 	}
@@ -33,10 +35,11 @@ h5 {
 
 .products-slide-row {
 	gap: 0;
+	padding: 0 10px;
 }
 
 .product-col {
-	padding: 0 15px;
+	padding: 0 10px;
 }
 
 .mobile-cat-arrow-btn {
