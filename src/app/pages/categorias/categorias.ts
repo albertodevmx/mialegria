@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, inject, signal, computed, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,6 +21,9 @@ export class Categorias implements OnInit, OnDestroy {
 	private branchesService = inject(BranchesService);
 	private store = inject(BranchesStore);
 	private dialog = inject(MatDialog);
+	private ngZone = inject(NgZone);
+	private scrollContainer: Element | null = null;
+	private boundScrollHandler = this.onContainerScroll.bind(this);
 
 	familias = this.store.webFamilies;
 	selectedSucursal = this.store.selectedSucursal;
@@ -76,23 +79,33 @@ export class Categorias implements OnInit, OnDestroy {
 		this.selectedSucursal() ? this.filtersWithBranch : this.filtersWithoutBranch
 	);
 
-	@HostListener('window:scroll')
-	onScroll(): void {
-		if (!this.isMobile() || this.allMobileLoaded() || this.loadingProducts()) return;
-		const scrollPos = window.innerHeight + window.scrollY;
-		const docHeight = document.documentElement.scrollHeight;
-		if (scrollPos >= docHeight - 200) {
-			this.mobileVisibleCount.update(v => v + this.MOBILE_PAGE_SIZE);
-		}
-	}
-
 	@HostListener('window:resize')
 	onResize(): void {
 		this.isMobile.set(window.innerWidth < this.MOBILE_BREAKPOINT);
 	}
 
+	private onContainerScroll(): void {
+		if (!this.isMobile() || this.allMobileLoaded() || this.loadingProducts()) return;
+		const el = this.scrollContainer!;
+		const scrollPos = el.scrollTop + el.clientHeight;
+		const scrollHeight = el.scrollHeight;
+		if (scrollPos >= scrollHeight - 200) {
+			this.ngZone.run(() => {
+				this.mobileVisibleCount.update(v => v + this.MOBILE_PAGE_SIZE);
+			});
+		}
+	}
+
 	ngOnInit(): void {
 		this.isMobile.set(window.innerWidth < this.MOBILE_BREAKPOINT);
+
+		// mat-sidenav-content is the actual scroll container
+		this.scrollContainer = document.querySelector('mat-sidenav-content');
+		if (this.scrollContainer) {
+			this.ngZone.runOutsideAngular(() => {
+				this.scrollContainer!.addEventListener('scroll', this.boundScrollHandler, { passive: true });
+			});
+		}
 
 		// Load families if not already loaded
 		if (this.familias().length === 0) {
@@ -108,7 +121,9 @@ export class Categorias implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		// HostListener handles cleanup automatically
+		if (this.scrollContainer) {
+			this.scrollContainer.removeEventListener('scroll', this.boundScrollHandler);
+		}
 	}
 
 	private loadFamilies(): void {
