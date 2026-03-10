@@ -42,7 +42,7 @@ export class BuscadorMobileComponent implements AfterViewInit {
 
     this.items = [];
     this.hasMore = true;
-    this.fetchResults(value.trim(), 0);
+    this.fetchResults(value.trim(), 1);
   }
 
   onScroll(event: Event): void {

@@ -33,7 +33,7 @@ export class BuscadorComponent {
 
 		this.items = [];
 		this.hasMore = true;
-		this.fetchResults(query, 0);
+		this.fetchResults(query, 1);
 	}
 
 	onScroll(event: Event) {
