@@ -33,7 +33,8 @@
   </span>
   }
 
-  <!-- Pricing -->
+  <!-- Pricing (only when branch is selected) -->
+  @if (selectedSucursal()) {
   <div class="pricing">
     <span class="price-label">Precio en línea</span>
     <div class="price-row">
@@ -43,6 +44,7 @@
       <span class="price-current">${{ product.precioVenta | number:'1.2-2' }}</span>
     </div>
   </div>
+  }
 
   <!-- Divider line -->
   <hr class="card-divider" />
@@ -54,12 +56,7 @@
       <span>Comprar</span>
       <mat-icon class="buy-icon">paid</mat-icon>
     </button>
-    } @else {
-    <button class="select-branch-btn" (click)="abrirSelectorSucursal()">
-      <mat-icon class="branch-icon">storefront</mat-icon>
-      <span>Seleccionar sucursal</span>
-    </button>
     }
-    <button class="detail-link">Ver detalle</button>
+    <button class="detail-link">Ver detalles</button>
   </div>
 </div>
