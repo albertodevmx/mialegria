@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,8 +21,10 @@ export class BuscadorMobileComponent implements AfterViewInit {
 
   isClosing = false;
   query = '';
-  items: Array<{ idProducto: number; producto: string }> = [];
+  items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
   showAutocomplete = false;
+  private isLoading = false;
+  private hasMore = true;
 
   ngAfterViewInit(): void {
     setTimeout(() => this.searchInput?.nativeElement.focus(), 300);
@@ -34,22 +36,48 @@ export class BuscadorMobileComponent implements AfterViewInit {
     if (!value.trim()) {
       this.items = [];
       this.showAutocomplete = false;
+      this.hasMore = true;
       return;
     }
 
-    this.branchesService.getServicesInSearcher(value.trim()).subscribe({
+    this.items = [];
+    this.hasMore = true;
+    this.fetchResults(value.trim(), 0);
+  }
+
+  onScroll(event: Event): void {
+    const el = event.target as HTMLElement;
+    const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
+    if (nearBottom && !this.isLoading && this.hasMore && this.items.length > 0) {
+      const lastIdRow = this.items[this.items.length - 1].idRow;
+      this.fetchResults(this.query.trim(), lastIdRow);
+    }
+  }
+
+  private fetchResults(query: string, skip: number): void {
+    this.isLoading = true;
+    this.branchesService.getServicesInSearcher(query, skip).subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         if (String(res?.status) === '200' && Array.isArray(res?.data)) {
-          this.items = res.data.slice(0, 10);
-          this.showAutocomplete = true;
+          if (res.data.length === 0) {
+            this.hasMore = false;
+          } else {
+            this.items = [...this.items, ...res.data];
+            this.showAutocomplete = true;
+          }
         } else {
-          this.items = [];
-          this.showAutocomplete = false;
+          this.hasMore = false;
+          if (this.items.length === 0) {
+            this.showAutocomplete = false;
+          }
         }
       },
       error: () => {
-        this.items = [];
-        this.showAutocomplete = false;
+        this.isLoading = false;
+        if (this.items.length === 0) {
+          this.showAutocomplete = false;
+        }
       }
     });
   }

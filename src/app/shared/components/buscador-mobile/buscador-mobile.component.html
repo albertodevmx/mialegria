@@ -39,7 +39,7 @@
 	</div>
 
 	<!-- Autocomplete resultados -->
-	<div class="mobile-autocomplete" *ngIf="showAutocomplete && items.length > 0">
+	<div class="mobile-autocomplete" *ngIf="showAutocomplete && items.length > 0" (scroll)="onScroll($event)">
 		<button
 			type="button"
 			class="mobile-autocomplete-item"
