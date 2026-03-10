@@ -102,12 +102,16 @@
 			<div class="view-toggle">
 				<button class="view-btn" [class.active]="viewMode() === 'tarjetas'" (click)="setViewMode('tarjetas')"
 					title="Tarjetas">
-					<mat-icon>grid_view</mat-icon>
+					<span class="view-icon-box">
+						<mat-icon>grid_view</mat-icon>
+					</span>
 					<span class="view-label">Tarjetas</span>
 				</button>
 				<button class="view-btn" [class.active]="viewMode() === 'listado'" (click)="setViewMode('listado')"
 					title="Listado" disabled>
-					<mat-icon>view_list</mat-icon>
+					<span class="view-icon-box">
+						<mat-icon>view_list</mat-icon>
+					</span>
 					<span class="view-label">Listado</span>
 				</button>
 			</div>

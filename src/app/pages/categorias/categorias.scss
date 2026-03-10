@@ -212,25 +212,45 @@ $orange: #E68A00;
 .toolbar-center { flex: 1; text-align: center; }
 .category-label-title { font-size: 14px; font-weight: 700; color: #333; }
 
-.view-toggle { display: flex; gap: 4px; flex-shrink: 0; }
+.view-toggle { display: flex; gap: 12px; flex-shrink: 0; }
 
 .view-btn {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 2px;
+	gap: 4px;
 	background: none;
-	border: 1px solid transparent;
-	border-radius: 8px;
-	padding: 6px 10px;
+	border: none;
+	padding: 0;
 	cursor: pointer;
-	color: #999;
-	mat-icon { font-size: 20px; width: 20px; height: 20px; }
-	&.active { color: $blue; border-color: $blue; }
+
+	.view-icon-box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 12px;
+		background: #fff;
+		border: 2px solid transparent;
+		transition: background-color 0.15s, border-color 0.15s;
+		mat-icon { font-size: 24px; width: 24px; height: 24px; color: $blue; }
+	}
+
+	.view-label { color: $blue; }
+
+	&:hover:not(:disabled), &.active {
+		.view-icon-box {
+			background: #DCEEFB;
+			border-color: $blue;
+		}
+		.view-label { color: #333; }
+	}
+
 	&:disabled { opacity: 0.4; cursor: not-allowed; }
 }
 
-.view-label { font-size: 10px; font-weight: 600; }
+.view-label { font-size: 11px; font-weight: 700; }
 
 .no-branch-row {
 	display: flex;
