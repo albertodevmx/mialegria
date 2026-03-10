@@ -1,3 +1,10 @@
+<app-buscador-mobile
+	*ngIf="showMobileSearch"
+	(closed)="closeMobileSearch()"
+	(back)="closeMobileSearch()"
+	class="d-lg-none">
+</app-buscador-mobile>
+
 <div class="container-fluid top-bar">
 	<!-- ===== Mobile header (< lg) ===== -->
 	<div class="d-lg-none">

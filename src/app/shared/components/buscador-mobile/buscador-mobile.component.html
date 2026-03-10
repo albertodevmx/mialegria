@@ -1,0 +1,41 @@
+<div class="mobile-search-overlay">
+	<div class="mobile-search-bar d-flex align-items-center">
+		<button mat-icon-button class="back-btn" aria-label="Volver" (click)="goBack()">
+			<mat-icon>arrow_back</mat-icon>
+		</button>
+
+		<div class="search-input-wrapper d-flex align-items-center">
+			<mat-icon class="search-icon">search</mat-icon>
+			<input
+				#searchInput
+				type="text"
+				class="search-input"
+				placeholder="Encuentra tu estudio"
+				[value]="query"
+				(input)="onSearch($any($event.target).value)"
+				autocomplete="off"
+			/>
+			<button
+				*ngIf="query"
+				mat-icon-button
+				class="clear-btn"
+				aria-label="Cerrar"
+				(click)="clearInput()"
+			>
+				<mat-icon>cancel</mat-icon>
+			</button>
+		</div>
+	</div>
+
+	<div class="mobile-autocomplete" *ngIf="showAutocomplete && items.length > 0">
+		<button
+			type="button"
+			class="mobile-autocomplete-item"
+			*ngFor="let item of items; let last = last"
+			[class.no-border]="last"
+			(click)="selectItem(item)"
+		>
+			{{ item.producto }}
+		</button>
+	</div>
+</div>
