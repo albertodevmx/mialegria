@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Subject, Subscription, switchMap, debounceTime, of } from 'rxjs';
 import { BranchesService } from '../../../services/branches.service';
 
 @Component({
@@ -11,13 +12,15 @@ import { BranchesService } from '../../../services/branches.service';
   templateUrl: './buscador-mobile.component.html',
   styleUrl: './buscador-mobile.component.scss'
 })
-export class BuscadorMobileComponent implements AfterViewInit {
+export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy {
   @Output() closed = new EventEmitter<void>();
   @Output() back = new EventEmitter<void>();
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   private branchesService = inject(BranchesService);
+  private search$ = new Subject<string>();
+  private searchSub!: Subscription;
 
   isClosing = false;
   query = '';
@@ -26,23 +29,50 @@ export class BuscadorMobileComponent implements AfterViewInit {
   private isLoading = false;
   private hasMore = true;
 
+  ngOnInit(): void {
+    this.searchSub = this.search$.pipe(
+      debounceTime(300),
+      switchMap(q => {
+        if (!q) {
+          this.items = [];
+          this.showAutocomplete = false;
+          this.hasMore = true;
+          return of(null);
+        }
+        this.hasMore = true;
+        this.isLoading = true;
+        return this.branchesService.getServicesInSearcher(q, 1);
+      })
+    ).subscribe({
+      next: (res: any) => {
+        if (!res) return;
+        this.isLoading = false;
+        if (String(res?.status) === '200' && Array.isArray(res?.data)) {
+          this.items = res.data;
+          this.showAutocomplete = this.items.length > 0;
+          this.hasMore = res.data.length > 0;
+        } else {
+          this.items = [];
+          this.showAutocomplete = false;
+        }
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.searchSub?.unsubscribe();
+  }
+
   ngAfterViewInit(): void {
     setTimeout(() => this.searchInput?.nativeElement.focus(), 300);
   }
 
   onSearch(value: string): void {
     this.query = value;
-
-    if (!value.trim()) {
-      this.items = [];
-      this.showAutocomplete = false;
-      this.hasMore = true;
-      return;
-    }
-
-    this.items = [];
-    this.hasMore = true;
-    this.fetchResults(value.trim(), 1);
+    this.search$.next(value.trim());
   }
 
   onScroll(event: Event): void {
@@ -50,13 +80,13 @@ export class BuscadorMobileComponent implements AfterViewInit {
     const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
     if (nearBottom && !this.isLoading && this.hasMore && this.items.length > 0) {
       const lastIdRow = this.items[this.items.length - 1].idRow;
-      this.fetchResults(this.query.trim(), lastIdRow);
+      this.loadMore(lastIdRow);
     }
   }
 
-  private fetchResults(query: string, skip: number): void {
+  private loadMore(skip: number): void {
     this.isLoading = true;
-    this.branchesService.getServicesInSearcher(query, skip).subscribe({
+    this.branchesService.getServicesInSearcher(this.query.trim(), skip).subscribe({
       next: (res: any) => {
         this.isLoading = false;
         if (String(res?.status) === '200' && Array.isArray(res?.data)) {
@@ -64,20 +94,13 @@ export class BuscadorMobileComponent implements AfterViewInit {
             this.hasMore = false;
           } else {
             this.items = [...this.items, ...res.data];
-            this.showAutocomplete = true;
           }
         } else {
           this.hasMore = false;
-          if (this.items.length === 0) {
-            this.showAutocomplete = false;
-          }
         }
       },
       error: () => {
         this.isLoading = false;
-        if (this.items.length === 0) {
-          this.showAutocomplete = false;
-        }
       }
     });
   }
