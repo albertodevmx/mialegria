@@ -26,14 +26,16 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
   query = '';
   items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
   showAutocomplete = false;
+  hasSearched = false;
 
   ngOnInit(): void {
     this.searchSub = this.search$.pipe(
       debounceTime(300),
       switchMap(q => {
-        if (q.length < 3) {
+        if (!q) {
           this.items = [];
           this.showAutocomplete = false;
+          this.hasSearched = false;
           return of(null);
         }
         return this.branchesService.getServicesInSearcher(q, 1);
@@ -41,17 +43,18 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
     ).subscribe({
       next: (res: any) => {
         if (!res) return;
+        this.hasSearched = true;
         if (String(res?.status) === '200' && Array.isArray(res?.data)) {
           this.items = res.data;
-          this.showAutocomplete = this.items.length > 0;
         } else {
           this.items = [];
-          this.showAutocomplete = false;
         }
+        this.showAutocomplete = true;
       },
       error: () => {
+        this.hasSearched = true;
         this.items = [];
-        this.showAutocomplete = false;
+        this.showAutocomplete = true;
       }
     });
   }

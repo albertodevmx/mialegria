@@ -25,6 +25,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
 	familias = this.store.webFamilies;
 	items = signal<SearchItem[]>([]);
+	hasSearched = signal(false);
 
 	ngOnInit(): void {
 		if (this.store.webFamiliesAll().length === 0) {
@@ -51,8 +52,9 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 		this.searchSub = this.search$.pipe(
 			debounceTime(300),
 			switchMap(query => {
-				if (query.length < 3) {
+				if (!query) {
 					this.items.set([]);
+					this.hasSearched.set(false);
 					return of(null);
 				}
 				return this.branchesService.getServicesInSearcher(query, 1);
@@ -60,6 +62,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 		).subscribe({
 			next: (res: any) => {
 				if (!res) return;
+				this.hasSearched.set(true);
 				if (String(res?.status) === '200' && Array.isArray(res?.data)) {
 					this.items.set(res.data);
 				} else {
@@ -67,6 +70,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 				}
 			},
 			error: () => {
+				this.hasSearched.set(true);
 				this.items.set([]);
 			}
 		});
@@ -94,5 +98,6 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 	selectItem(item: SearchItem) {
 		console.log('Elemento clickeado:', item);
 		this.items.set([]);
+		this.hasSearched.set(false);
 	}
 }

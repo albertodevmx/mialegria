@@ -39,15 +39,20 @@
 	</div>
 
 	<!-- Autocomplete resultados -->
-	<div class="mobile-autocomplete" *ngIf="showAutocomplete && items.length > 0">
-		<button
-			type="button"
-			class="mobile-autocomplete-item"
-			*ngFor="let item of items; let last = last"
-			[class.no-border]="last"
-			(click)="selectItem(item)"
-		>
-			{{ item.producto }}
-		</button>
+	<div class="mobile-autocomplete" *ngIf="showAutocomplete">
+		<ng-container *ngIf="items.length > 0; else noResults">
+			<button
+				type="button"
+				class="mobile-autocomplete-item"
+				*ngFor="let item of items; let last = last"
+				[class.no-border]="last"
+				(click)="selectItem(item)"
+			>
+				{{ item.producto }}
+			</button>
+		</ng-container>
+		<ng-template #noResults>
+			<div class="no-results" *ngIf="hasSearched">No se encontraron resultados</div>
+		</ng-template>
 	</div>
 </div>
