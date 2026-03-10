@@ -22,11 +22,17 @@ h5 {
 	font-size: 14px !important;
 }
 
-/* ===== Mobile categories carousel ===== */
+/* ===== Mobile overrides (20px edges + 20px gutter) ===== */
+@media (max-width: 767.98px) {
+	:host .container {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
 
 /* ===== Mobile products carousel spacing ===== */
 .products-carousel-mobile {
-	margin: 0 -12px;
+	margin: 0 -20px;
 
 	.carousel-inner {
 		padding: 0;
