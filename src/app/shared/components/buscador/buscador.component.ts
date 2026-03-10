@@ -1,11 +1,13 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { Subject, Subscription, switchMap, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
+import { Subject, Subscription, switchMap, debounceTime, of } from 'rxjs';
 
 import { BranchesService } from './../../../services/branches.service';
 import { BranchesStore } from './../../../stores/branches.store';
+
+type SearchItem = { idRow: number; idProducto: number; producto: string };
 
 @Component({
 	selector: 'app-buscador',
@@ -22,10 +24,9 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 	private searchSub!: Subscription;
 
 	familias = this.store.webFamilies;
-	items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
-	showAutocomplete = false;
+	items = signal<SearchItem[]>([]);
 	private currentQuery = '';
-	private isLoading = false;
+	private isLoadingMore = false;
 	private hasMore = true;
 
 	ngOnInit(): void {
@@ -52,38 +53,30 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
 		this.searchSub = this.search$.pipe(
 			debounceTime(200),
-			distinctUntilChanged(),
-			tap(() => {
-				this.isLoading = false;
-			}),
 			switchMap(query => {
-				if (!query) {
-					this.items = [];
-					this.showAutocomplete = false;
-					this.hasMore = true;
-					return of(null);
-				}
 				this.currentQuery = query;
 				this.hasMore = true;
-				this.isLoading = true;
+				this.isLoadingMore = false;
+
+				if (!query) {
+					this.items.set([]);
+					return of(null);
+				}
 				return this.branchesService.getServicesInSearcher(query, 1);
 			})
 		).subscribe({
 			next: (res: any) => {
 				if (!res) return;
-				this.isLoading = false;
 				if (String(res?.status) === '200' && Array.isArray(res?.data)) {
-					this.items = res.data;
-					this.showAutocomplete = this.items.length > 0;
+					this.items.set(res.data);
 					this.hasMore = res.data.length > 0;
 				} else {
-					this.items = [];
-					this.showAutocomplete = false;
+					this.items.set([]);
 				}
 			},
 			error: (err) => {
 				console.error('Error en buscador:', err);
-				this.isLoading = false;
+				this.items.set([]);
 			}
 		});
 	}
@@ -99,29 +92,30 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 	onScroll(event: Event) {
 		const el = event.target as HTMLElement;
 		const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
-		if (nearBottom && !this.isLoading && this.hasMore && this.items.length > 0) {
-			const lastIdRow = this.items[this.items.length - 1].idRow;
+		const currentItems = this.items();
+		if (nearBottom && !this.isLoadingMore && this.hasMore && currentItems.length > 0) {
+			const lastIdRow = currentItems[currentItems.length - 1].idRow;
 			this.loadMore(lastIdRow);
 		}
 	}
 
 	private loadMore(skip: number) {
-		this.isLoading = true;
+		this.isLoadingMore = true;
 		this.branchesService.getServicesInSearcher(this.currentQuery, skip).subscribe({
 			next: (res: any) => {
-				this.isLoading = false;
+				this.isLoadingMore = false;
 				if (String(res?.status) === '200' && Array.isArray(res?.data)) {
 					if (res.data.length === 0) {
 						this.hasMore = false;
 					} else {
-						this.items = [...this.items, ...res.data];
+						this.items.update(prev => [...prev, ...res.data]);
 					}
 				} else {
 					this.hasMore = false;
 				}
 			},
 			error: () => {
-				this.isLoading = false;
+				this.isLoadingMore = false;
 			}
 		});
 	}
@@ -137,8 +131,8 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 		select.value = '';
 	}
 
-	selectItem(item: any) {
+	selectItem(item: SearchItem) {
 		console.log('Elemento clickeado:', item);
-		this.showAutocomplete = false;
+		this.items.set([]);
 	}
 }

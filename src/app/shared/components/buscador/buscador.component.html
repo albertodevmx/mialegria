@@ -1,6 +1,6 @@
 
 <div class="search-bar d-flex align-items-center search-wrapper position-relative"
-  [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
+  [ngClass]="{ 'search-wrapper-active': items().length != 0 }"
 >
 
 	<select class="form-select border-0 select-custom select-with-arrow" (change)="onFamiliaChange($event)">
@@ -18,10 +18,14 @@
 		<mat-icon>search</mat-icon>
 	</button>
 
-	<div class="autocomplete-panel" *ngIf="showAutocomplete && items.length > 0" (scroll)="onScroll($event)">
-		<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
-			[class.no-border]="last" (click)="selectItem(item)">
-			{{ item.producto }}
-		</button>
-	</div>
+	@if (items().length > 0) {
+		<div class="autocomplete-panel" (scroll)="onScroll($event)">
+			@for (item of items(); track item.idRow; let last = $last) {
+				<button type="button" class="autocomplete-item"
+					[class.no-border]="last" (click)="selectItem(item)">
+					{{ item.producto }}
+				</button>
+			}
+		</div>
+	}
 </div>
