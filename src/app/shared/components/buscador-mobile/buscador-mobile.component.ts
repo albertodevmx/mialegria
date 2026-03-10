@@ -26,38 +26,32 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
   query = '';
   items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
   showAutocomplete = false;
-  private isLoading = false;
-  private hasMore = true;
 
   ngOnInit(): void {
     this.searchSub = this.search$.pipe(
       debounceTime(300),
       switchMap(q => {
-        if (!q) {
+        if (q.length < 3) {
           this.items = [];
           this.showAutocomplete = false;
-          this.hasMore = true;
           return of(null);
         }
-        this.hasMore = true;
-        this.isLoading = true;
         return this.branchesService.getServicesInSearcher(q, 1);
       })
     ).subscribe({
       next: (res: any) => {
         if (!res) return;
-        this.isLoading = false;
         if (String(res?.status) === '200' && Array.isArray(res?.data)) {
           this.items = res.data;
           this.showAutocomplete = this.items.length > 0;
-          this.hasMore = res.data.length > 0;
         } else {
           this.items = [];
           this.showAutocomplete = false;
         }
       },
       error: () => {
-        this.isLoading = false;
+        this.items = [];
+        this.showAutocomplete = false;
       }
     });
   }
@@ -73,36 +67,6 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
   onSearch(value: string): void {
     this.query = value;
     this.search$.next(value.trim());
-  }
-
-  onScroll(event: Event): void {
-    const el = event.target as HTMLElement;
-    const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
-    if (nearBottom && !this.isLoading && this.hasMore && this.items.length > 0) {
-      const lastIdRow = this.items[this.items.length - 1].idRow;
-      this.loadMore(lastIdRow);
-    }
-  }
-
-  private loadMore(skip: number): void {
-    this.isLoading = true;
-    this.branchesService.getServicesInSearcher(this.query.trim(), skip).subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        if (String(res?.status) === '200' && Array.isArray(res?.data)) {
-          if (res.data.length === 0) {
-            this.hasMore = false;
-          } else {
-            this.items = [...this.items, ...res.data];
-          }
-        } else {
-          this.hasMore = false;
-        }
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    });
   }
 
   clearInput(): void {

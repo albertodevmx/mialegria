@@ -19,7 +19,7 @@
 	</button>
 
 	@if (items().length > 0) {
-		<div class="autocomplete-panel" (scroll)="onScroll($event)">
+		<div class="autocomplete-panel">
 			@for (item of items(); track item.idRow; let last = $last) {
 				<button type="button" class="autocomplete-item"
 					[class.no-border]="last" (click)="selectItem(item)">

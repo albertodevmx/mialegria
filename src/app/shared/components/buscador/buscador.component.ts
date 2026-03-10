@@ -25,9 +25,6 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
 	familias = this.store.webFamilies;
 	items = signal<SearchItem[]>([]);
-	private currentQuery = '';
-	private isLoadingMore = false;
-	private hasMore = true;
 
 	ngOnInit(): void {
 		if (this.store.webFamiliesAll().length === 0) {
@@ -52,13 +49,9 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 		}
 
 		this.searchSub = this.search$.pipe(
-			debounceTime(200),
+			debounceTime(300),
 			switchMap(query => {
-				this.currentQuery = query;
-				this.hasMore = true;
-				this.isLoadingMore = false;
-
-				if (!query) {
+				if (query.length < 3) {
 					this.items.set([]);
 					return of(null);
 				}
@@ -69,13 +62,11 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 				if (!res) return;
 				if (String(res?.status) === '200' && Array.isArray(res?.data)) {
 					this.items.set(res.data);
-					this.hasMore = res.data.length > 0;
 				} else {
 					this.items.set([]);
 				}
 			},
-			error: (err) => {
-				console.error('Error en buscador:', err);
+			error: () => {
 				this.items.set([]);
 			}
 		});
@@ -87,37 +78,6 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
 	onSearch(query: string) {
 		this.search$.next((query || '').trim());
-	}
-
-	onScroll(event: Event) {
-		const el = event.target as HTMLElement;
-		const nearBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
-		const currentItems = this.items();
-		if (nearBottom && !this.isLoadingMore && this.hasMore && currentItems.length > 0) {
-			const lastIdRow = currentItems[currentItems.length - 1].idRow;
-			this.loadMore(lastIdRow);
-		}
-	}
-
-	private loadMore(skip: number) {
-		this.isLoadingMore = true;
-		this.branchesService.getServicesInSearcher(this.currentQuery, skip).subscribe({
-			next: (res: any) => {
-				this.isLoadingMore = false;
-				if (String(res?.status) === '200' && Array.isArray(res?.data)) {
-					if (res.data.length === 0) {
-						this.hasMore = false;
-					} else {
-						this.items.update(prev => [...prev, ...res.data]);
-					}
-				} else {
-					this.hasMore = false;
-				}
-			},
-			error: () => {
-				this.isLoadingMore = false;
-			}
-		});
 	}
 
 	onFamiliaChange(event: Event) {
