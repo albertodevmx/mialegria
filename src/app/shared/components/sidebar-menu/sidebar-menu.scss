@@ -182,13 +182,22 @@ $sidebar-width: 320px;
     color: $light-blue;
     font-weight: 600;
   }
+
+  &.submenu-active {
+    background: #E0E0E0;
+    border-top: 2px solid $blue;
+    border-bottom: 2px solid $blue;
+    padding-left: 20px;
+    font-weight: 600;
+    color: $blue;
+  }
 }
 
 .check-icon {
-  color: $light-blue;
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+  color: $blue;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
 }
 
 // ─── FOOTER (fixed gray bottom) ───

@@ -34,7 +34,12 @@
     @if (estudiosOpen() && familiasGrouped().length) {
       <div class="estudios-submenu">
         @for (familia of familiasGrouped(); track familia.idFamiliaWeb) {
-          <button class="submenu-item" (click)="onFamiliaClick(familia)">
+          <button class="submenu-item"
+                  [class.submenu-active]="activeIdFamilia() === familia.idFamiliaWeb"
+                  (click)="onFamiliaClick(familia)">
+            @if (activeIdFamilia() === familia.idFamiliaWeb) {
+              <mat-icon class="check-icon">check_circle</mat-icon>
+            }
             <span>{{ familia.familiaWeb }}</span>
           </button>
         }

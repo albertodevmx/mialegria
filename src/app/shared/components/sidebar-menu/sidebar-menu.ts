@@ -1,9 +1,10 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BranchesStore } from '../../../stores/branches.store';
 import { BranchesService } from '../../../services/branches.service';
+import { Subscription } from 'rxjs';
 
 interface FamiliaGroup {
   idFamiliaWeb: number;
@@ -18,12 +19,30 @@ interface FamiliaGroup {
   templateUrl: './sidebar-menu.html',
   styleUrl: './sidebar-menu.scss',
 })
-export class SidebarMenu {
+export class SidebarMenu implements OnInit, OnDestroy {
   private branchesService = inject(BranchesService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   store = inject(BranchesStore);
 
   estudiosOpen = signal(false);
+  activeIdFamilia = signal<number | null>(null);
+  private queryParamSub?: Subscription;
+
+  ngOnInit(): void {
+    this.queryParamSub = this.router.events.subscribe(() => {
+      const url = this.router.url;
+      const match = url.match(/[?&]idFamilia=(\d+)/);
+      this.activeIdFamilia.set(match ? Number(match[1]) : null);
+    });
+    // Also check on init
+    const match = this.router.url.match(/[?&]idFamilia=(\d+)/);
+    this.activeIdFamilia.set(match ? Number(match[1]) : null);
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamSub?.unsubscribe();
+  }
 
   familiasGrouped = computed<FamiliaGroup[]>(() => {
     const all = this.store.webFamiliesAll();
