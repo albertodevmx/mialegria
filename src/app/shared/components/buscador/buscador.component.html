@@ -3,11 +3,11 @@
   [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
 >
 
-	<select class="form-select border-0 select-custom select-with-arrow">
-		<option selected>Todos los estudios</option>
-		<option value="1">Sangre</option>
-		<option value="2">Orina</option>
-		<option value="3">Rayos X</option>
+	<select class="form-select border-0 select-custom select-with-arrow" (change)="onFamiliaChange($event)">
+		<option value="" selected>Todos los estudios</option>
+		<option *ngFor="let fam of familias()" [value]="fam.idFamiliaWeb">
+			{{ fam.familiaWeb }}
+		</option>
 	</select>
 
 	<input type="text" class="form-control border-0 input-custom"

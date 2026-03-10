@@ -1,9 +1,11 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Subject, Subscription, switchMap, debounceTime, of } from 'rxjs';
 
 import { BranchesService } from './../../../services/branches.service';
+import { BranchesStore } from './../../../stores/branches.store';
 
 @Component({
 	selector: 'app-buscador',
@@ -14,9 +16,12 @@ import { BranchesService } from './../../../services/branches.service';
 })
 export class BuscadorComponent implements OnInit, OnDestroy {
 	private branchesService = inject(BranchesService);
+	private store = inject(BranchesStore);
+	private router = inject(Router);
 	private search$ = new Subject<string>();
 	private searchSub!: Subscription;
 
+	familias = this.store.webFamilies;
 	items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
 	showAutocomplete = false;
 	private currentQuery = '';
@@ -24,6 +29,27 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 	private hasMore = true;
 
 	ngOnInit(): void {
+		if (this.store.webFamiliesAll().length === 0) {
+			this.branchesService.getAllWebFamily().subscribe({
+				next: (res: any) => {
+					if (String(res?.status) === '200' && Array.isArray(res?.data)) {
+						this.store.setWebFamiliesAll(res.data);
+
+						const map = new Map<string, { idFamiliaWeb: number; familiaWeb: string }>();
+						for (const item of res.data) {
+							if (!map.has(item.familiaWeb)) {
+								map.set(item.familiaWeb, {
+									idFamiliaWeb: item.idFamiliaWeb,
+									familiaWeb: item.familiaWeb,
+								});
+							}
+						}
+						this.store.setWebFamilies(Array.from(map.values()));
+					}
+				}
+			});
+		}
+
 		this.searchSub = this.search$.pipe(
 			debounceTime(300),
 			switchMap(query => {
@@ -94,6 +120,17 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 				this.isLoading = false;
 			}
 		});
+	}
+
+	onFamiliaChange(event: Event) {
+		const select = event.target as HTMLSelectElement;
+		const idFamilia = select.value;
+		if (idFamilia) {
+			this.router.navigate(['/categorias'], {
+				queryParams: { idFamilia },
+			});
+		}
+		select.value = '';
 	}
 
 	selectItem(item: any) {
