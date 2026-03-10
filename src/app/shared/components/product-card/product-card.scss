@@ -150,8 +150,8 @@ $gray-text: #666;
 
 .price-label {
   font-size: 11px;
-  color: $light-blue;
-  font-weight: 600;
+  color: $green;
+  font-weight: 400;
 }
 
 .price-prefix {
@@ -188,7 +188,7 @@ $gray-text: #666;
 
 // ─── Actions ───
 .card-actions {
-  margin-top: auto;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,18 +201,18 @@ $gray-text: #666;
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: 8px 0;
-  background: $green;
+  padding: 12px 0;
+  background: $blue;
   color: #fff;
   border: none;
-  border-radius: 20px;
-  font-size: 13px;
+  border-radius: 28px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s;
 
   &:hover {
-    background: #1a8a52;
+    background: #023d82;
   }
 }
 
