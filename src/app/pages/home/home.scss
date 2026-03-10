@@ -88,16 +88,15 @@ h5 {
 }
 
 .mobile-cat-arrow-icon {
-	color: #034EA2;
-	font-size: 20px;
-	width: 20px;
-	height: 20px;
-	background: #fff;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-	padding: 14px;
+	color: #7B7B7B;
+	font-size: 25px;
+	width: 25px;
+	height: 25px;
+	padding: 10px;
+
+	&:hover,
+	&:active {
+		color: #0D7BBF;
+	}
 }
 
