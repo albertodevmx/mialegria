@@ -23,10 +23,10 @@
       Precio especial
     </span>
     }
-    @if (product.ofertaDelDia) {
-    <span class="promo-badge promo-oferta">
-      <mat-icon class="promo-icon">local_offer</mat-icon>
-      Oferta del día
+    @if (ofertaDiaLabel) {
+    <span class="promo-badge promo-dia">
+      <mat-icon class="promo-icon">percent</mat-icon>
+      {{ ofertaDiaLabel }}
     </span>
     }
     @if (product.eskit) {

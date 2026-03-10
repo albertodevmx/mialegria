@@ -20,6 +20,20 @@ export class ProductCard {
 
   selectedSucursal = this.store.selectedSucursal;
 
+  get ofertaDiaLabel(): string | null {
+    if (!this.product?.ofertaDelDia || !this.product?.diaEnCurso) return null;
+    const dayMap: Record<string, string> = {
+      Monday: 'Lunes de perfiles',
+      Tuesday: 'Martes de perfiles',
+      Wednesday: 'Miércoles de perfiles',
+      Thursday: 'Jueves de corazón',
+      Friday: 'Viernes de perfiles',
+      Saturday: 'Sábado de perfiles',
+      Sunday: 'Domingo de perfiles',
+    };
+    return dayMap[this.product.diaEnCurso] ?? null;
+  }
+
   get iconSrc(): string {
     const name = (this.product?.familiaWeb || '')
       .trim()
