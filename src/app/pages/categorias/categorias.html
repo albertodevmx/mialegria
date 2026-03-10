@@ -146,12 +146,18 @@
 		}
 
 		<div class="products-grid">
-			@for (p of products(); track p.idProducto) {
+			@for (p of displayedProducts(); track p.idProducto) {
 			<div class="product-col">
 				<app-product-card [product]="p"></app-product-card>
 			</div>
 			}
 		</div>
+
+		@if (allMobileLoaded()) {
+		<div class="all-loaded-label d-md-none">
+			<span>Ya se han cargado todos los estudios.</span>
+		</div>
+		}
 
 	</div>
 </div>

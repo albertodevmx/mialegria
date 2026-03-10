@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,7 @@ import { BranchesDialogComponent } from '../../shared/components/direccion/branc
 	templateUrl: './categorias.html',
 	styleUrls: ['./categorias.scss'],
 })
-export class Categorias implements OnInit {
+export class Categorias implements OnInit, OnDestroy {
 	private route = inject(ActivatedRoute);
 	private router = inject(Router);
 	private branchesService = inject(BranchesService);
@@ -31,6 +31,24 @@ export class Categorias implements OnInit {
 	viewMode = signal<'tarjetas' | 'listado'>('tarjetas');
 	filterOpen = signal(false);
 	selectedFilter = signal<string>('');
+
+	// Mobile infinite scroll
+	private readonly MOBILE_PAGE_SIZE = 10;
+	private readonly MOBILE_BREAKPOINT = 768;
+	mobileVisibleCount = signal(10);
+	isMobile = signal(false);
+
+	displayedProducts = computed(() => {
+		const all = this.products();
+		if (!this.isMobile()) return all;
+		return all.slice(0, this.mobileVisibleCount());
+	});
+
+	allMobileLoaded = computed(() => {
+		if (!this.isMobile()) return false;
+		return this.products().length > 0
+			&& this.mobileVisibleCount() >= this.products().length;
+	});
 
 	selectedFamiliaName = computed(() => {
 		const id = this.selectedFamiliaId();
@@ -58,7 +76,24 @@ export class Categorias implements OnInit {
 		this.selectedSucursal() ? this.filtersWithBranch : this.filtersWithoutBranch
 	);
 
+	@HostListener('window:scroll')
+	onScroll(): void {
+		if (!this.isMobile() || this.allMobileLoaded() || this.loadingProducts()) return;
+		const scrollPos = window.innerHeight + window.scrollY;
+		const docHeight = document.documentElement.scrollHeight;
+		if (scrollPos >= docHeight - 200) {
+			this.mobileVisibleCount.update(v => v + this.MOBILE_PAGE_SIZE);
+		}
+	}
+
+	@HostListener('window:resize')
+	onResize(): void {
+		this.isMobile.set(window.innerWidth < this.MOBILE_BREAKPOINT);
+	}
+
 	ngOnInit(): void {
+		this.isMobile.set(window.innerWidth < this.MOBILE_BREAKPOINT);
+
 		// Load families if not already loaded
 		if (this.familias().length === 0) {
 			this.loadFamilies();
@@ -70,6 +105,10 @@ export class Categorias implements OnInit {
 			this.selectedFamiliaId.set(id);
 			this.loadProducts();
 		});
+	}
+
+	ngOnDestroy(): void {
+		// HostListener handles cleanup automatically
 	}
 
 	private loadFamilies(): void {
@@ -124,6 +163,7 @@ export class Categorias implements OnInit {
 				const statusOk = String(res?.status) === '200';
 				const list = statusOk && Array.isArray(res?.data) ? res.data : [];
 				this.products.set(list);
+				this.mobileVisibleCount.set(this.MOBILE_PAGE_SIZE);
 				this.loadingProducts.set(false);
 			},
 			error: () => {
