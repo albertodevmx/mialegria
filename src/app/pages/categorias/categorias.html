@@ -11,13 +11,17 @@
 			<!-- Mobile: título + select -->
 			<div class="mobile-select-section d-md-none">
 				<h2 class="mobile-select-title">Selecciona tu estudio</h2>
-				<select class="mobile-category-select"
-					[value]="selectedFamiliaId()"
-					(change)="onMobileSelectChange($event)">
-					@for (fam of familias(); track fam.idFamiliaWeb) {
-					<option [value]="fam.idFamiliaWeb">{{ fam.familiaWeb }}</option>
-					}
-				</select>
+				<div class="mobile-select-wrapper">
+					<select class="mobile-category-select"
+						[value]="selectedFamiliaId()"
+						(change)="onMobileSelectChange($event)">
+						<option [value]="''">Todos</option>
+						@for (fam of familias(); track fam.idFamiliaWeb) {
+						<option [value]="fam.idFamiliaWeb">{{ fam.familiaWeb }}</option>
+						}
+					</select>
+					<mat-icon class="mobile-select-arrow">expand_more</mat-icon>
+				</div>
 			</div>
 
 			<!-- ===== Categorías slider (carousel) — solo desktop ===== -->
