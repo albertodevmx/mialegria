@@ -13,14 +13,26 @@ $gray-text: #666;
 }
 
 .card-content {
-  padding: 0 20px;
+  padding: 0 7px;
 
   &:first-child {
-    padding-top: 20px;
+    padding-top: 7px;
   }
 
   &:last-child {
-    padding-bottom: 20px;
+    padding-bottom: 7px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 20px;
+
+    &:first-child {
+      padding-top: 20px;
+    }
+
+    &:last-child {
+      padding-bottom: 20px;
+    }
   }
 }
 
