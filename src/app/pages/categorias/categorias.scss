@@ -302,7 +302,14 @@ $orange: #E68A00;
 	flex-direction: column;
 	align-items: center;
 }
-.mobile-select-title { font-size: 16px; font-weight: 700; color: #333; margin: 0 0 10px; }
+.mobile-select-title {
+	font-size: 12px;
+	font-weight: 700;
+	color: #333;
+	margin: 0 0 10px;
+	width: 240px;
+	text-align: left;
+}
 
 .mobile-select-wrapper {
 	position: relative;
@@ -345,9 +352,21 @@ $orange: #E68A00;
 
 @media (max-width: 767px) {
 	.categorias-banner {
-		&::before { height: 130px; background-position: -50px center; }
-		.banner-overlay { height: 130px; }
+		&::before {
+			position: relative;
+			display: block;
+			height: 130px;
+			background-position: -50px center;
+		}
+		.banner-overlay {
+			height: 130px;
+		}
 	}
+	.categorias-overlay {
+		position: relative;
+		margin-top: -130px;
+	}
+	.categorias-content { padding-top: 20px; }
 	.products-grid { grid-template-columns: repeat(2, 1fr); }
 	.toolbar-row { flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
 	.toolbar-center { display: none; }
@@ -356,5 +375,4 @@ $orange: #E68A00;
 	.no-branch-row { flex-direction: column; align-items: center; }
 	.warning-banner { width: 100%; }
 	.select-branch-btn { width: auto; align-self: center; }
-	.categorias-content { padding-top: 16px; }
 }
