@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterVi
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Subject, Subscription, switchMap, debounceTime, of } from 'rxjs';
+import { Subject, Subscription, switchMap, debounceTime, of, catchError } from 'rxjs';
 import { BranchesService } from '../../../services/branches.service';
 
 @Component({
@@ -38,7 +38,9 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
           this.hasSearched = false;
           return of(null);
         }
-        return this.branchesService.getServicesInSearcher(q, 1);
+        return this.branchesService.getServicesInSearcher(q, 1).pipe(
+          catchError(() => of({ status: '404', data: [] }))
+        );
       })
     ).subscribe({
       next: (res: any) => {
@@ -49,11 +51,6 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
         } else {
           this.items = [];
         }
-        this.showAutocomplete = true;
-      },
-      error: () => {
-        this.hasSearched = true;
-        this.items = [];
         this.showAutocomplete = true;
       }
     });
