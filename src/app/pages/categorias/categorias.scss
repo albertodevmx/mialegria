@@ -373,11 +373,10 @@ $orange: #E68A00;
 
 @media (max-width: 767px) {
 	.categorias-banner {
-		min-height: 150px;
-		margin-top: -20px;
-		padding-top: 20px;
-		&::before { height: 150px; background-position: -50px center; }
-		.banner-overlay { height: 150px; }
+		min-height: 130px;
+		overflow: hidden;
+		&::before { height: 150px; top: -20px; background-position: -50px center; }
+		.banner-overlay { height: 150px; top: -20px; }
 	}
 	.mobile-select-section { padding-bottom: 20px; }
 	.categorias-content { padding-top: 20px; }
