@@ -147,7 +147,7 @@
 
 
                 @if (!sucursalesCargadas && topBranches) {
-                <div style="overflow-y: scroll; max-height: 240px;">
+                <div>
                     @for (item of topBranches; track $index) {
                     <div class="alert alert-primary p-2 m-0 mb-1" role="button" tabindex="0"
                         (click)="onSucursalClick(item, $index)" (keydown.enter)="onSucursalClick(item, $index)"
