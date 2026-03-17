@@ -13,11 +13,10 @@
 				<h2 class="mobile-select-title">Selecciona tu estudio</h2>
 				<div class="mobile-select-wrapper">
 					<select class="mobile-category-select"
-						[value]="selectedFamiliaId()"
 						(change)="onMobileSelectChange($event)">
-						<option [value]="''">Todos</option>
+						<option value="">Todos</option>
 						@for (fam of familias(); track fam.idFamiliaWeb) {
-						<option [value]="fam.idFamiliaWeb">{{ fam.familiaWeb }}</option>
+						<option [value]="fam.idFamiliaWeb" [selected]="fam.idFamiliaWeb === selectedFamiliaId()">{{ fam.familiaWeb }}</option>
 						}
 					</select>
 					<mat-icon class="mobile-select-arrow">expand_more</mat-icon>
