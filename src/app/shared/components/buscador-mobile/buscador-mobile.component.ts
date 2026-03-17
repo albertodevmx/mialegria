@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Output, inject, ElementRef, ViewChild, AfterViewInit, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, Subscription, switchMap, debounceTime, of, catchError } from 'rxjs';
 import { BranchesService } from '../../../services/branches.service';
+
+type SearchItem = { idRow: number; idProducto: number; producto: string };
 
 @Component({
   selector: 'app-buscador-mobile',
@@ -24,34 +26,31 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
 
   isClosing = false;
   query = '';
-  items: Array<{ idRow: number; idProducto: number; producto: string }> = [];
-  showAutocomplete = false;
-  hasSearched = false;
+  items = signal<SearchItem[]>([]);
+  hasSearched = signal(false);
 
   ngOnInit(): void {
     this.searchSub = this.search$.pipe(
       debounceTime(300),
       switchMap(q => {
         if (!q) {
-          this.items = [];
-          this.showAutocomplete = false;
-          this.hasSearched = false;
+          this.items.set([]);
+          this.hasSearched.set(false);
           return of(null);
         }
-        return this.branchesService.getServicesInSearcher(q, 1).pipe(
+        return this.branchesService.getServicesInSearcher(q, 0).pipe(
           catchError(() => of({ status: '404', data: [] }))
         );
       })
     ).subscribe({
       next: (res: any) => {
         if (!res) return;
-        this.hasSearched = true;
+        this.hasSearched.set(true);
         if (String(res?.status) === '200' && Array.isArray(res?.data)) {
-          this.items = res.data;
+          this.items.set(res.data);
         } else {
-          this.items = [];
+          this.items.set([]);
         }
-        this.showAutocomplete = true;
       }
     });
   }
@@ -71,22 +70,23 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
 
   clearInput(): void {
     this.query = '';
-    this.items = [];
-    this.showAutocomplete = false;
+    this.items.set([]);
+    this.hasSearched.set(false);
     this.searchInput.nativeElement.value = '';
     this.animateClose(() => this.closed.emit());
   }
 
   goBack(): void {
     this.query = '';
-    this.items = [];
-    this.showAutocomplete = false;
+    this.items.set([]);
+    this.hasSearched.set(false);
     this.animateClose(() => this.back.emit());
   }
 
-  selectItem(item: any): void {
+  selectItem(item: SearchItem): void {
     console.log('Estudio seleccionado:', item);
-    this.showAutocomplete = false;
+    this.items.set([]);
+    this.hasSearched.set(false);
     this.animateClose(() => this.closed.emit());
   }
 
