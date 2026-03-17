@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, Subscription, switchMap, debounceTime, of, catchError } from 'rxjs';
 import { BranchesService } from '../../../services/branches.service';
+import { BranchesStore } from '../../../stores/branches.store';
 
 type SearchItem = { idRow: number; idProducto: number; producto: string };
 
@@ -21,6 +22,7 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   private branchesService = inject(BranchesService);
+  private store = inject(BranchesStore);
   private search$ = new Subject<string>();
   private searchSub!: Subscription;
 
@@ -38,7 +40,7 @@ export class BuscadorMobileComponent implements AfterViewInit, OnInit, OnDestroy
           this.hasSearched.set(false);
           return of(null);
         }
-        return this.branchesService.getServicesInSearcher(q, 0).pipe(
+        return this.branchesService.getServicesInSearcher(q, 0, this.store.selectedSucursal()?.idSucursal).pipe(
           catchError(() => of({ status: '404', data: [] }))
         );
       })

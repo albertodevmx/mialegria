@@ -27,8 +27,8 @@ export class BranchesService {
 		return this.http.get(`${this.baseUrl}/api/Branches/topBranches?Max=3`);
 	}
 
-	getServicesInSearcher(query: string, skip: number = 1, idSucursal?: number, max: number = 10): Observable<any> {
-		let url = `${this.baseUrl}/api/Products/searchProducts?Producto=${query}&Skip=${skip}&Max=${max}`;
+	getServicesInSearcher(query: string, skip: number = 0, idSucursal?: number): Observable<any> {
+		let url = `${this.baseUrl}/api/Products/searchProducts?Producto=${query}&Skip=${skip}`;
 		if (idSucursal != null) {
 			url += `&IDSucursal=${idSucursal}`;
 		}

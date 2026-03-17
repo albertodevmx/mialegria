@@ -57,7 +57,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 					this.hasSearched.set(false);
 					return of(null);
 				}
-				return this.branchesService.getServicesInSearcher(query, 0).pipe(
+				return this.branchesService.getServicesInSearcher(query, 0, this.store.selectedSucursal()?.idSucursal).pipe(
 					catchError(() => of({ status: '404', data: [] }))
 				);
 			})
