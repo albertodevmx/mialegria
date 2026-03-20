@@ -202,6 +202,7 @@ export class Categorias implements OnInit, OnDestroy {
 		});
 	}
 
+
 	iconName(familiaWeb: string): string {
 		return (familiaWeb || '')
 			.trim()
