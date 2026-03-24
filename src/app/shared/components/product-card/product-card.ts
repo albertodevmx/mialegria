@@ -14,6 +14,7 @@ import { BranchesDialogComponent } from '../direccion/branches-dialog/branches-d
 })
 export class ProductCard {
   @Input({ required: true }) product: any;
+  @Input() viewMode: 'tarjetas' | 'listado' = 'tarjetas';
 
   private store = inject(BranchesStore);
   private dialog = inject(MatDialog);

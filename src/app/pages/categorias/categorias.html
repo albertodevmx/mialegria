@@ -107,7 +107,7 @@
 					<span class="view-label">Tarjetas</span>
 				</button>
 				<button class="view-btn" [class.active]="viewMode() === 'listado'" (click)="setViewMode('listado')"
-					title="Listado" disabled>
+					title="Listado">
 					<span class="view-icon-box">
 						<mat-icon>view_list</mat-icon>
 					</span>
@@ -152,6 +152,7 @@
 		</div>
 		}
 
+		@if (viewMode() === 'tarjetas') {
 		<div class="products-grid">
 			@for (p of displayedProducts(); track p.idProducto) {
 			<div class="product-col">
@@ -159,6 +160,16 @@
 			</div>
 			}
 		</div>
+		} @else {
+		<div class="products-list">
+			@for (p of displayedProducts(); track p.idProducto; let last = $last) {
+			<app-product-card [product]="p" viewMode="listado"></app-product-card>
+			@if (!last) {
+			<hr class="list-divider" />
+			}
+			}
+		</div>
+		}
 
 		@if (allMobileLoaded()) {
 		<div class="all-loaded-label d-md-none">
