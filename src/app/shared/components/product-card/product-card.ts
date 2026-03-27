@@ -1,5 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BranchesStore } from '../../../stores/branches.store';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +19,7 @@ export class ProductCard {
 
   private store = inject(BranchesStore);
   private dialog = inject(MatDialog);
+  private router = inject(Router);
 
   selectedSucursal = this.store.selectedSucursal;
 
@@ -45,6 +47,10 @@ export class ProductCard {
       .replace(/[^a-z0-9\s]/g, '')
       .replace(/\s+/g, '_');
     return 'img/iconos/' + name + '.svg';
+  }
+
+  verDetalle(): void {
+    this.router.navigate(['/estudio-detalle', this.product.idProducto]);
   }
 
   abrirSelectorSucursal(): void {

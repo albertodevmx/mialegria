@@ -50,6 +50,12 @@ export class BranchesService {
 		);
 	}
 
+	getProductDetail(idProduct: number, idSucursal?: number): Observable<any> {
+		const params: any = { IDProduct: idProduct };
+		if (idSucursal != null) params.IDSucursal = idSucursal;
+		return this.http.get(`${this.baseUrl}/api/Products/ProductDetailes`, { params });
+	}
+
 	getProductsByFamily(params: {
 		IDFamiliaWeb: number;
 		IDSucursal?: number;

@@ -1,0 +1,105 @@
+@if (loading()) {
+<div class="detalle-loading">
+  <mat-icon class="spin">sync</mat-icon>
+  <span>Cargando estudio...</span>
+</div>
+}
+
+@if (!loading() && producto()) {
+<div class="detalle-wrapper">
+
+  <!-- Category header -->
+  <div class="detalle-category-header">
+    <img [src]="iconSrc" [alt]="categoryName" class="category-icon" />
+    <span class="category-name">{{ categoryName }}</span>
+  </div>
+
+  <!-- Top bar: Volver + product name + Compartir -->
+  <div class="detalle-topbar">
+    <button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Volver</span>
+    </button>
+    <div class="topbar-right">
+      <button class="fav-btn" aria-label="Favorito">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <h1 class="detalle-product-name">{{ producto()!.producto }}</h1>
+
+  <!-- Main content: 3 columns -->
+  <div class="detalle-body">
+
+    <!-- Column 1: Image -->
+    <div class="detalle-image-col">
+      <img src="img/estudio-detalle-placeholder.jpg" alt="Imagen del estudio" class="detalle-image" />
+    </div>
+
+    <!-- Column 2: Info -->
+    <div class="detalle-info-col">
+      @if (producto()!.descripcionServicio) {
+      <h3 class="info-title">Informaci&oacute;n del estudio</h3>
+      <p class="info-text">{{ producto()!.descripcionServicio }}</p>
+      }
+
+      @if (producto()!.condiciones) {
+      <h3 class="info-title">Indicaciones</h3>
+      <p class="info-text">{{ producto()!.condiciones }}</p>
+      }
+    </div>
+
+    <!-- Column 3: Sidebar (price / sucursal) -->
+    <div class="detalle-sidebar-col">
+
+      @if (selectedSucursal()) {
+      <!-- Price card -->
+      <div class="price-card">
+        <div class="price-card-body">
+          <span class="price-label">Precio en l&iacute;nea</span>
+          <span class="price-prefix">A solo</span>
+          <span class="price-current">${{ producto()!.precioVenta | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn-comprar">
+        <span>Comprar</span>
+        <mat-icon>paid</mat-icon>
+      </button>
+      <button class="btn-agregar-carrito">
+        <span>Agregar al carrito</span>
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+
+      <!-- Sucursal info -->
+      <div class="sucursal-card">
+        <div class="sucursal-card-header">
+          <mat-icon>apartment</mat-icon>
+          <span>Sucursal seleccionada</span>
+        </div>
+        <div class="sucursal-card-body">
+          <p class="sucursal-name">{{ selectedSucursal()?.nombre || selectedSucursal()?.name }}</p>
+          <p class="sucursal-address">{{ selectedSucursal()?.direccion || selectedSucursal()?.address }}</p>
+        </div>
+      </div>
+
+      } @else {
+
+      <!-- No sucursal alert -->
+      <div class="alert-no-sucursal">
+        <mat-icon class="alert-icon">warning</mat-icon>
+        <span>Para poder cotizar tu estudio es necesario que selecciones una unidad.</span>
+      </div>
+
+      <button class="btn-seleccionar-sucursal" (click)="abrirSelectorSucursal()">
+        <span>Seleccionar sucursal</span>
+        <mat-icon>apartment</mat-icon>
+      </button>
+
+      }
+    </div>
+  </div>
+</div>
+}
