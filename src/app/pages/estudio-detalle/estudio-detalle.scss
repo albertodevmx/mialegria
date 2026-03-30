@@ -94,11 +94,12 @@ $orange: #E68A00;
 
 // ── Product name ──
 .detalle-product-name {
-	font-size: 22px;
+	font-size: 16px;
 	font-weight: 700;
 	color: #222;
 	margin: 0 0 20px;
 	padding: 0 24px;
+	text-align: center;
 }
 
 // ── Body 3 columns ──
@@ -135,7 +136,7 @@ $orange: #E68A00;
 }
 
 .info-text {
-	font-size: 14px;
+	font-size: 16px;
 	color: #555;
 	line-height: 1.6;
 	margin: 0 0 20px;
