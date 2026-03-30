@@ -56,7 +56,6 @@ $orange: #E68A00;
 	justify-content: space-between;
 	padding: 0 24px 8px;
 
-	// 3 items: Volver (left) – Compartir (center) – Favorito (right)
 	> *:first-child { flex: 1; }
 	> *:nth-child(2) { flex: 0 0 auto; }
 	> *:last-child  { flex: 1; display: flex; justify-content: flex-end; }
