@@ -36,7 +36,7 @@
 
     <!-- Column 1: Image -->
     <div class="detalle-image-col">
-      <img src="img/estudio-detalle-placeholder.jpg" alt="Imagen del estudio" class="detalle-image" />
+      <img [src]="imageSrc" [alt]="categoryName" class="detalle-image" />
     </div>
 
     <!-- Column 2: Info -->
@@ -49,6 +49,18 @@
       @if (producto()!.condiciones) {
       <h3 class="info-title">Indicaciones</h3>
       <p class="info-text">{{ producto()!.condiciones }}</p>
+      }
+
+      <!-- Estudios incluidos -->
+      @if (producto()!.estudiosIncluidos?.length) {
+      <div class="estudios-incluidos-card">
+        <h3 class="estudios-incluidos-title">Estudios incluidos en este paquete</h3>
+        <ul class="estudios-incluidos-list">
+          @for (estudio of producto()!.estudiosIncluidos; track estudio) {
+          <li>{{ estudio }}</li>
+          }
+        </ul>
+      </div>
       }
     </div>
 
@@ -77,13 +89,21 @@
 
       <!-- Sucursal info -->
       <div class="sucursal-card">
-        <div class="sucursal-card-header">
-          <mat-icon>apartment</mat-icon>
+        <div class="sucursal-badge">
+          <mat-icon>storefront</mat-icon>
           <span>Sucursal seleccionada</span>
         </div>
         <div class="sucursal-card-body">
-          <p class="sucursal-name">{{ selectedSucursal()?.nombre || selectedSucursal()?.name }}</p>
-          <p class="sucursal-address">{{ selectedSucursal()?.direccion || selectedSucursal()?.address }}</p>
+          <p class="sucursal-name">{{ selectedSucursal()?.sucursal || selectedSucursal()?.nombre || selectedSucursal()?.name }}</p>
+          <p class="sucursal-address">{{ sucursalDireccion }}</p>
+
+          <p class="sucursal-section-title">Horarios</p>
+          <p class="sucursal-horario">{{ selectedSucursal()?.horarioDeServicio }}</p>
+
+          <p class="sucursal-section-title">Tel&eacute;fono</p>
+          <p class="sucursal-telefono">{{ selectedSucursal()?.telefono }}</p>
+
+          <a href="javascript:void(0)" class="sucursal-link">&iquest;C&oacute;mo llegar?</a>
         </div>
       </div>
 

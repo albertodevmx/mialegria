@@ -39,8 +39,39 @@ export class EstudioDetalle implements OnInit {
     return 'img/iconos/' + name + '.svg';
   }
 
+  get imageSrc(): string {
+    const name = (this.producto()?.familiaWeb || this.producto()?.subFamiliaWeb || '')
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[''`]/g, '')
+      .replace(/[^a-z0-9\s]/g, '')
+      .replace(/\s+/g, '_');
+    return 'img/estudios/' + name + '.png';
+  }
+
   get categoryName(): string {
     return this.producto()?.familiaWeb || this.producto()?.subFamiliaWeb || '';
+  }
+
+  get sucursalDireccion(): string {
+    const s = this.selectedSucursal();
+    if (!s) return '';
+    // Si viene de nerestsBranches (campos desglosados)
+    if (s.calle) {
+      const parts = [
+        [s.calle, s.exterior].filter(Boolean).join(' '),
+        s.interior ? 'Int. ' + s.interior : '',
+        s.colonia,
+        s.ciudad,
+        s.cp,
+        s.estado,
+      ].filter(Boolean);
+      return parts.join(', ');
+    }
+    // Si viene de topBranches (campo unificado)
+    return s.direccion || s.address || '';
   }
 
   ngOnInit(): void {
