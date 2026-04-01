@@ -6,6 +6,8 @@
 }
 
 @if (!loading() && producto()) {
+<div class="detalle-outer">
+<div class="detalle-inner">
 <div class="detalle-wrapper">
 
   <!-- Category header -->
@@ -52,12 +54,12 @@
       }
 
       <!-- Estudios incluidos -->
-      @if (producto()!.estudiosIncluidos?.length) {
+      @if (estudiosIncluidosList.length) {
       <div class="estudios-incluidos-card">
-        <h3 class="estudios-incluidos-title">Estudios incluidos en este paquete</h3>
+        <h3 class="estudios-incluidos-title">Paquetes y perfiles sugeridos</h3>
         <ul class="estudios-incluidos-list">
-          @for (estudio of producto()!.estudiosIncluidos; track estudio) {
-          <li>{{ estudio }}</li>
+          @for (estudio of estudiosIncluidosList; track estudio) {
+          <li><a href="javascript:void(0)" class="estudio-incluido-link">{{ estudio }}</a></li>
           }
         </ul>
       </div>
@@ -68,24 +70,41 @@
     <div class="detalle-sidebar-col">
 
       @if (selectedSucursal()) {
+
+      @if (producto()!.precioVenta) {
       <!-- Price card -->
       <div class="price-card">
-        <div class="price-card-body">
-          <span class="price-label">Precio en l&iacute;nea</span>
-          <span class="price-prefix">A solo</span>
-          <span class="price-current">${{ producto()!.precioVenta | number:'1.2-2' }}</span>
+        <div class="price-card-top">
+          @if (ofertaDiaLabel) {
+          <div class="oferta-dia-badge">
+            <mat-icon>percent</mat-icon>
+            <span>{{ ofertaDiaLabel }}</span>
+          </div>
+          }
+          <div class="price-card-body">
+            <span class="price-label">Precio en l&iacute;nea</span>
+            <span class="price-prefix">A solo</span>
+            <span class="price-current" [class.price-offer]="ofertaDiaLabel">${{ producto()!.precioVenta | number:'1.2-2' }}</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Buttons -->
-      <button class="btn-comprar">
-        <span>Comprar</span>
-        <mat-icon>paid</mat-icon>
-      </button>
-      <button class="btn-agregar-carrito">
-        <span>Agregar al carrito</span>
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
+        <!-- Buttons -->
+        <button class="btn-comprar">
+          <span>Comprar</span>
+          <mat-icon>paid</mat-icon>
+        </button>
+        <button class="btn-agregar-carrito">
+          <span>Agregar al carrito</span>
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </div>
+      } @else {
+      <!-- Estudio no disponible en unidad -->
+      <div class="alert-no-disponible">
+        <mat-icon class="alert-icon">warning</mat-icon>
+        <span>Lamentablemente, este estudio no est&aacute; disponible en la unidad seleccionada.</span>
+      </div>
+      }
 
       <!-- Sucursal info -->
       <div class="sucursal-card">
@@ -107,6 +126,26 @@
         </div>
       </div>
 
+      <!-- Sucursales sugeridas (cuando el estudio no está disponible en la unidad) -->
+      @if (suggestedBranches().length) {
+      <div class="suggested-branches-card">
+        <h3 class="suggested-title">Queremos que realices tu estudio sin contratiempos.</h3>
+        <p class="suggested-subtitle">Puedes cambiar a una sucursal donde s&iacute; se realiza. Te sugerimos las siguientes:</p>
+        <div class="suggested-list">
+          @for (branch of suggestedBranches(); track branch.idSucursal) {
+          <div class="suggested-branch-item">
+            <p class="suggested-branch-name">{{ branch.sucursal }}</p>
+            <p class="suggested-branch-address">{{ branch.direccion }}</p>
+          </div>
+          }
+        </div>
+        <a href="javascript:void(0)" class="suggested-search-link" (click)="abrirSelectorSucursal()">
+          <mat-icon>search</mat-icon>
+          <span>Buscar m&aacute;s sucursales</span>
+        </a>
+      </div>
+      }
+
       } @else {
 
       <!-- No sucursal alert -->
@@ -124,4 +163,22 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+
+<!-- Recomendados -->
+@if (recommendedProducts().length) {
+<div class="recomendados-section">
+  <div class="recomendados-container">
+    <h2 class="recomendados-title">Recomendados</h2>
+    <div class="recomendados-grid">
+      @for (p of displayedRecommended(); track p.idProducto) {
+      <div class="recomendados-col">
+        <app-product-card [product]="p"></app-product-card>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}
 }

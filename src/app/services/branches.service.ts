@@ -75,4 +75,10 @@ export class BranchesService {
 		return this.http.get(`${this.baseUrl}/api/Products/ProductByWebFamily`, { params: query });
 	}
 
+	getAssociatedBranches(idSucursal: number, idProducto: number): Observable<any> {
+		return this.http.get(`${this.baseUrl}/api/Branch/AssociatedBranches`, {
+			params: { IDSucursal: idSucursal, IDProducto: idProducto }
+		});
+	}
+
 }

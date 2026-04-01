@@ -171,8 +171,15 @@
 		</div>
 		}
 
-		@if (allMobileLoaded()) {
-		<div class="all-loaded-label d-md-none">
+		@if (loadingMore()) {
+		<div class="loading-more-container">
+			<mat-icon class="spin">sync</mat-icon>
+			<span>Cargando m&aacute;s estudios...</span>
+		</div>
+		}
+
+		@if (allLoaded()) {
+		<div class="all-loaded-label">
 			<span>Ya se han cargado todos los estudios.</span>
 		</div>
 		}

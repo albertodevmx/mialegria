@@ -3,12 +3,22 @@ $light-blue: #0091DA;
 $green: #1FA060;
 $orange: #E68A00;
 
-.detalle-wrapper {
-	background: #F0F0F0;
-	min-height: 60vh;
-	padding: 24px 0 40px;
+.detalle-outer {
+	background: #fff;
+}
+
+.detalle-inner {
 	max-width: 1256px;
 	margin: 0 auto;
+	padding: 20px;
+}
+
+.detalle-wrapper {
+	background: #F7F7F7;
+	min-height: 60vh;
+	padding: 20px;
+	border-radius: 20px;
+	margin: 0;
 }
 
 .detalle-loading {
@@ -30,7 +40,7 @@ $orange: #E68A00;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 10px;
+	gap: 12px;
 	padding-bottom: 16px;
 }
 
@@ -54,7 +64,7 @@ $orange: #E68A00;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 24px 8px;
+	padding: 0 0 8px;
 }
 
 .back-btn {
@@ -98,16 +108,16 @@ $orange: #E68A00;
 	font-weight: 700;
 	color: #222;
 	margin: 0 0 20px;
-	padding: 0 24px;
+	padding: 0;
 	text-align: center;
 }
 
 // ── Body 3 columns ──
 .detalle-body {
 	display: grid;
-	grid-template-columns: 1fr 1fr 380px;
+	grid-template-columns: 6fr 3fr 3fr;
 	gap: 24px;
-	padding: 0 24px;
+	padding-bottom: 20px;
 }
 
 // ── Image column ──
@@ -144,7 +154,7 @@ $orange: #E68A00;
 
 // ── Estudios incluidos card ──
 .estudios-incluidos-card {
-	border: 2px solid $green;
+	border: 2px solid $blue;
 	border-radius: 12px;
 	padding: 20px 24px;
 	margin-top: 8px;
@@ -153,7 +163,7 @@ $orange: #E68A00;
 .estudios-incluidos-title {
 	font-size: 18px;
 	font-weight: 700;
-	color: $green;
+	color: $blue;
 	margin: 0 0 12px;
 }
 
@@ -163,9 +173,15 @@ $orange: #E68A00;
 
 	li {
 		font-size: 16px;
-		color: #222;
 		line-height: 1.8;
 	}
+}
+
+.estudio-incluido-link {
+	color: $blue;
+	text-decoration: none;
+	font-weight: 600;
+	&:hover { text-decoration: underline; }
 }
 
 // ── Sidebar column ──
@@ -180,7 +196,32 @@ $orange: #E68A00;
 	background: #fff;
 	border: 1.5px solid #E0E0E0;
 	border-radius: 12px;
-	padding: 16px 20px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.price-card-top {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.oferta-dia-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #E8F5E9;
+	color: $green;
+	font-size: 13px;
+	font-weight: 700;
+	border: 1.5px solid $green;
+	border-radius: 8px;
+	padding: 8px 12px;
+	white-space: nowrap;
+	mat-icon { font-size: 18px; width: 18px; height: 18px; }
 }
 
 .price-card-body {
@@ -192,7 +233,7 @@ $orange: #E68A00;
 .price-label {
 	font-size: 13px;
 	font-weight: 600;
-	color: $light-blue;
+	color: $green;
 }
 
 .price-prefix {
@@ -203,7 +244,11 @@ $orange: #E68A00;
 .price-current {
 	font-size: 28px;
 	font-weight: 800;
-	color: $green;
+	color: #222;
+
+	&.price-offer {
+		color: #C62828;
+	}
 }
 
 // Buttons
@@ -312,6 +357,99 @@ $orange: #E68A00;
 	&:hover { text-decoration: underline; }
 }
 
+// ── Suggested branches card ──
+.suggested-branches-card {
+	background: #fff;
+	border: 1.5px solid #E0E0E0;
+	border-radius: 12px;
+	padding: 20px;
+}
+
+.suggested-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #222;
+	margin: 0 0 8px;
+}
+
+.suggested-subtitle {
+	font-size: 14px;
+	color: #555;
+	line-height: 1.5;
+	margin: 0 0 16px;
+}
+
+.suggested-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.suggested-branch-item {
+	background: #EBF5FF;
+	border: 2px solid $blue;
+	border-radius: 10px;
+	padding: 14px 16px;
+	cursor: pointer;
+	transition: background 0.2s;
+	&:hover { background: #D6ECFF; }
+}
+
+.suggested-branch-name {
+	font-size: 15px;
+	font-weight: 700;
+	color: #222;
+	margin: 0 0 4px;
+}
+
+.suggested-branch-address {
+	font-size: 13px;
+	color: #555;
+	line-height: 1.4;
+	margin: 0;
+}
+
+.suggested-search-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	font-size: 15px;
+	font-weight: 600;
+	color: $blue;
+	text-decoration: none;
+	padding-top: 4px;
+	mat-icon { font-size: 20px; width: 20px; height: 20px; }
+	&:hover { text-decoration: underline; }
+}
+
+// Estudio no disponible alert
+.alert-no-disponible {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	background: #FFF3E0;
+	border: 2px solid $orange;
+	border-radius: 12px;
+	padding: 14px 16px;
+
+	.alert-icon {
+		flex-shrink: 0;
+		color: $orange;
+		font-size: 22px;
+		width: 22px;
+		height: 22px;
+	}
+
+	span {
+		font-size: 13px;
+		font-weight: 600;
+		color: $orange;
+		line-height: 1.4;
+	}
+}
+
 // No sucursal alert
 .alert-no-sucursal {
 	display: flex;
@@ -357,6 +495,36 @@ $orange: #E68A00;
 }
 
 // ── Responsive ──
+// ── Recomendados section ──
+.recomendados-section {
+	background: #E5F6FF;
+	padding: 40px 0;
+	margin: 0;
+}
+
+.recomendados-container {
+	max-width: 1256px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.recomendados-title {
+	font-size: 20px;
+	font-weight: 700;
+	color: #222;
+	margin: 0 0 24px;
+}
+
+.recomendados-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 16px;
+}
+
+.recomendados-col {
+	min-width: 0;
+}
+
 @media (max-width: 991px) {
 	.detalle-body {
 		grid-template-columns: 1fr 1fr;
@@ -364,20 +532,64 @@ $orange: #E68A00;
 	.detalle-sidebar-col {
 		grid-column: 1 / -1;
 	}
+	.recomendados-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 @media (max-width: 767px) {
+	.detalle-inner {
+		padding: 10px;
+	}
 	.detalle-wrapper {
-		padding: 16px 0 32px;
+		padding: 10px 20px 10px 20px;
+		border-radius: 16px;
+		margin: 0;
+		overflow-x: hidden;
+	}
+	.detalle-category-header {
+		padding: 0 0 12px;
+	}
+	.detalle-topbar {
+		padding: 0 0 8px;
+	}
+	.detalle-product-name {
+		font-size: 16px;
+		padding: 0;
 	}
 	.detalle-body {
 		grid-template-columns: 1fr;
 		gap: 16px;
+		padding: 0;
 	}
-	.detalle-product-name {
-		font-size: 18px;
+	.detalle-image {
+		max-height: none;
+		border-radius: 8px;
 	}
 	.detalle-sidebar-col {
 		grid-column: auto;
+	}
+	.btn-comprar,
+	.btn-agregar-carrito,
+	.btn-seleccionar-sucursal {
+		min-height: 44px;
+	}
+	.back-btn, .share-btn, .fav-btn {
+		min-height: 44px;
+		min-width: 44px;
+	}
+	.recomendados-section {
+		padding: 24px 0;
+	}
+	.recomendados-container {
+		padding: 0 16px;
+	}
+	.recomendados-title {
+		font-size: 14px;
+		margin-bottom: 16px;
+	}
+	.recomendados-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 12px;
 	}
 }

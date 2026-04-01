@@ -25,6 +25,17 @@ export class ProductCard {
 
   get ofertaDiaLabel(): string | null {
     if (!this.product?.ofertaDelDia || !this.product?.diaEnCurso) return null;
+    return this.getDayLabel(this.product.diaEnCurso);
+  }
+
+  get precioEspecialLabel(): string | null {
+    if (!this.product?.ofertaDelDia) return null;
+    const dayEn = this.product?.diaEnCurso
+      || ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()];
+    return this.getDayLabel(dayEn);
+  }
+
+  private getDayLabel(dayEn: string): string | null {
     const dayMap: Record<string, string> = {
       Monday: 'Lunes de perfiles',
       Tuesday: 'Martes de perfiles',
@@ -34,7 +45,7 @@ export class ProductCard {
       Saturday: 'Sábado de perfiles',
       Sunday: 'Domingo de perfiles',
     };
-    return dayMap[this.product.diaEnCurso] ?? null;
+    return dayMap[dayEn] ?? null;
   }
 
   get iconSrc(): string {

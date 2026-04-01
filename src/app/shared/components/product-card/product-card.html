@@ -16,6 +16,15 @@
     <!-- Product name -->
     <p class="product-name">{{ product.producto }}</p>
 
+    @if (precioEspecialLabel) {
+    <div class="precio-especial-row">
+      <span class="precio-especial-badge">
+        <mat-icon>percent</mat-icon>
+        {{ precioEspecialLabel }}
+      </span>
+    </div>
+    }
+
     <!-- Promo badges (only when branch is selected) -->
     @if (selectedSucursal()) {
     @if (ofertaDiaLabel) {
@@ -24,19 +33,19 @@
       {{ ofertaDiaLabel }}
     </span>
     }
-    @if (product.eskit) {
+    <!-- @if (product.eskit) {
     <span class="promo-badge promo-kit">
       <mat-icon class="promo-icon">inventory_2</mat-icon>
       Kit
     </span>
-    }
+    } -->
 
     <!-- Pricing -->
     <div class="pricing">
       <div class="pricing-inner">
         <span class="price-label">Precio en línea</span>
         <span class="price-prefix">A solo</span>
-        <span class="price-current">${{ product.precioVenta | number:'1.2-2' }}</span>
+        <span class="price-current" [class.price-offer]="precioEspecialLabel">${{ product.precioVenta | number:'1.2-2' }}</span>
       </div>
     </div>
     }
@@ -75,6 +84,12 @@
       <img [src]="iconSrc" [alt]="product.familiaWeb" class="badge-icon" />
       {{ product.familiaWeb }}
     </span>
+    @if (precioEspecialLabel) {
+    <span class="precio-especial-badge">
+      <mat-icon>percent</mat-icon>
+      {{ precioEspecialLabel }}
+    </span>
+    }
     @if (selectedSucursal() && ofertaDiaLabel) {
     <span class="promo-badge promo-dia">
       <mat-icon class="promo-icon">percent</mat-icon>
@@ -84,8 +99,8 @@
   </div>
 
   <!-- Row 3: Pricing + Actions -->
-  @if (selectedSucursal()) {
   <div class="list-bottom">
+    @if (selectedSucursal()) {
     <div class="list-pricing">
       <span class="price-label">Precio en línea</span>
       <div class="list-price-row">
@@ -93,17 +108,19 @@
         @if (product.precioOriginal && product.precioOriginal > product.precioVenta) {
         <span class="price-old">${{ product.precioOriginal | number:'1.2-2' }}</span>
         }
-        <span class="price-current" [class.price-offer]="product.precioOriginal && product.precioOriginal > product.precioVenta">${{ product.precioVenta | number:'1.2-2' }}</span>
+        <span class="price-current" [class.price-offer]="precioEspecialLabel || (product.precioOriginal && product.precioOriginal > product.precioVenta)">${{ product.precioVenta | number:'1.2-2' }}</span>
       </div>
     </div>
+    }
     <div class="list-actions">
+      @if (selectedSucursal()) {
       <button class="buy-btn">
         <span>Comprar</span>
         <mat-icon class="buy-icon">paid</mat-icon>
       </button>
+      }
       <button class="detail-link" (click)="verDetalle()">Ver detalle</button>
     </div>
   </div>
-  }
 </div>
 }

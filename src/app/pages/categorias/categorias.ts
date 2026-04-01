@@ -35,22 +35,27 @@ export class Categorias implements OnInit, OnDestroy {
 	filterOpen = signal(false);
 	selectedFilter = signal<string>('');
 
-	// Mobile infinite scroll
-	private readonly MOBILE_PAGE_SIZE = 10;
+	// Infinite scroll
+	private readonly MOBILE_PAGE_SIZE = 4;
+	private readonly DESKTOP_PAGE_SIZE = 5;
 	private readonly MOBILE_BREAKPOINT = 768;
-	mobileVisibleCount = signal(10);
+	private readonly LOAD_MORE_DELAY = 1500;
+	visibleCount = signal(4);
 	isMobile = signal(false);
+	loadingMore = signal(false);
+
+	private get pageSize(): number {
+		return this.isMobile() ? this.MOBILE_PAGE_SIZE : this.DESKTOP_PAGE_SIZE;
+	}
 
 	displayedProducts = computed(() => {
 		const all = this.products();
-		if (!this.isMobile()) return all;
-		return all.slice(0, this.mobileVisibleCount());
+		return all.slice(0, this.visibleCount());
 	});
 
-	allMobileLoaded = computed(() => {
-		if (!this.isMobile()) return false;
+	allLoaded = computed(() => {
 		return this.products().length > 0
-			&& this.mobileVisibleCount() >= this.products().length;
+			&& this.visibleCount() >= this.products().length;
 	});
 
 	selectedFamiliaName = computed(() => {
@@ -85,14 +90,20 @@ export class Categorias implements OnInit, OnDestroy {
 	}
 
 	private onContainerScroll(): void {
-		if (!this.isMobile() || this.allMobileLoaded() || this.loadingProducts()) return;
+		if (this.allLoaded() || this.loadingProducts() || this.loadingMore()) return;
 		const el = this.scrollContainer!;
 		const scrollPos = el.scrollTop + el.clientHeight;
 		const scrollHeight = el.scrollHeight;
 		if (scrollPos >= scrollHeight - 200) {
 			this.ngZone.run(() => {
-				this.mobileVisibleCount.update(v => v + this.MOBILE_PAGE_SIZE);
+				this.loadingMore.set(true);
 			});
+			setTimeout(() => {
+				this.ngZone.run(() => {
+					this.visibleCount.update(v => v + this.pageSize);
+					this.loadingMore.set(false);
+				});
+			}, this.LOAD_MORE_DELAY);
 		}
 	}
 
@@ -178,7 +189,7 @@ export class Categorias implements OnInit, OnDestroy {
 				const statusOk = String(res?.status) === '200';
 				const list = statusOk && Array.isArray(res?.data) ? res.data : [];
 				this.products.set(list);
-				this.mobileVisibleCount.set(this.MOBILE_PAGE_SIZE);
+				this.visibleCount.set(this.pageSize);
 				this.loadingProducts.set(false);
 			},
 			error: () => {
