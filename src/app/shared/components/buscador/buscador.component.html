@@ -1,13 +1,13 @@
 
 <div class="search-bar d-flex align-items-center search-wrapper position-relative"
-  [ngClass]="{ 'search-wrapper-active': items.length != 0 }"
+  [ngClass]="{ 'search-wrapper-active': hasSearched() }"
 >
 
-	<select class="form-select border-0 select-custom select-with-arrow">
-		<option selected>Todos los estudios</option>
-		<option value="1">Sangre</option>
-		<option value="2">Orina</option>
-		<option value="3">Rayos X</option>
+	<select class="form-select border-0 select-custom select-with-arrow" (change)="onFamiliaChange($event)">
+		<option value="" selected>Todos los estudios</option>
+		<option *ngFor="let fam of familias()" [value]="fam.idFamiliaWeb">
+			{{ fam.familiaWeb }}
+		</option>
 	</select>
 
 	<input type="text" class="form-control border-0 input-custom"
@@ -18,12 +18,18 @@
 		<mat-icon>search</mat-icon>
 	</button>
 
-	<div class="autocomplete-panel" *ngIf="showAutocomplete && items.length > 0">
-		<div class="autocomplete-inner">
-			<button type="button" class="autocomplete-item" *ngFor="let item of items; let last = last"
-				[class.no-border]="last" (click)="selectItem(item)">
-				{{ item.producto }}
-			</button>
+	@if (hasSearched()) {
+		<div class="autocomplete-panel">
+			@if (items().length > 0) {
+				@for (item of items(); track item.idRow; let last = $last) {
+					<button type="button" class="autocomplete-item"
+						[class.no-border]="last" (click)="selectItem(item)">
+						{{ item.producto }}
+					</button>
+				}
+			} @else {
+				<div class="no-results">No se encontraron resultados</div>
+			}
 		</div>
-	</div>
+	}
 </div>

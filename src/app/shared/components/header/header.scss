@@ -20,6 +20,12 @@
   & .icon {
     color: #fff;
   }
+
+  @media (max-width: 991px) {
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    z-index: 10;
+  }
 }
 
 
@@ -29,7 +35,7 @@
 
 
 .menu-btn {
-  display: none; 
+  display: none;
   margin-right: 10px;
 
   mat-icon {
@@ -39,11 +45,6 @@
 
 .login-btn {
   color: #fff !important;
-
-  & mat-icon {
-    font-size: 30px;
-    width: 30px;
-  }
 }
 
 
@@ -61,4 +62,53 @@
 .header-sidenav {
     background: #FFF;
     height: 100vh;
+}
+
+/* ===== Mobile header (< lg) ===== */
+.mobile-menu-btn {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 6px !important;
+  line-height: 36px !important;
+
+  mat-icon {
+    color: #fff;
+  }
+}
+
+.top-bar-mobile {
+  padding: 4px 0;
+
+  /* tighten right-side icon buttons */
+  .mat-mdc-icon-button {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+}
+
+.mobile-logo-img {
+  max-width: 116px;
+  max-height: 36px;
+  height: auto;
+}
+
+.top-bar-mobile-row2 {
+  padding: 2px 0 4px;
+}
+
+/* Badge rojo del carrito */
+:host ::ng-deep .cart-btn .mat-badge-content {
+  background-color: #e53935 !important;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+  padding: 0 5px;
+  left: 70% !important;
+  bottom: 70% !important;
+  z-index: 1;
 }

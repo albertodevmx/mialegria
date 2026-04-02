@@ -28,7 +28,7 @@
 }
 
 .card-container {
-    margin-top: -15px;
+    margin-top: -20px;
 }
 
 h2 {
@@ -86,7 +86,8 @@ mat-form-field {
 
 .sucursales-container {
     background-color: #FEFEFE;
-    height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .my-input-search {

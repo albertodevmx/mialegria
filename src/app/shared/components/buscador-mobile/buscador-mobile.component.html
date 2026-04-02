@@ -1,0 +1,60 @@
+<!-- Backdrop oscuro + blur -->
+<div
+	class="mobile-search-backdrop"
+	[class.closing]="isClosing"
+	(click)="goBack()">
+</div>
+
+<!-- Barra de búsqueda -->
+<div class="mobile-search-panel" [class.closing]="isClosing">
+	<div class="mobile-search-bar">
+		<!-- Flecha volver -->
+		<button class="back-btn" aria-label="Volver" (click)="goBack()">
+			<mat-icon>arrow_back</mat-icon>
+		</button>
+
+		<!-- Input + botón lupa -->
+		<div class="search-field d-flex align-items-center">
+			<input
+				#searchInput
+				type="text"
+				class="search-input"
+				placeholder="¿Qué estudio deseas realizar?"
+				[value]="query"
+				(input)="onSearch($any($event.target).value)"
+				autocomplete="off"
+			/>
+			<button
+				*ngIf="query"
+				class="clear-btn"
+				aria-label="Limpiar"
+				(click)="clearInput()"
+			>
+				<mat-icon>cancel</mat-icon>
+			</button>
+			<button class="search-btn" aria-label="Buscar">
+				<mat-icon>search</mat-icon>
+			</button>
+		</div>
+	</div>
+
+	<!-- Autocomplete resultados -->
+	@if (hasSearched()) {
+		<div class="mobile-autocomplete">
+			@if (items().length > 0) {
+				@for (item of items(); track item.idRow; let last = $last) {
+					<button
+						type="button"
+						class="mobile-autocomplete-item"
+						[class.no-border]="last"
+						(click)="selectItem(item)"
+					>
+						{{ item.producto }}
+					</button>
+				}
+			} @else {
+				<div class="no-results">No se encontraron resultados</div>
+			}
+		</div>
+	}
+</div>

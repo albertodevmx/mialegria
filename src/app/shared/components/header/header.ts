@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DireccionComponent } from '../direccion/direccion.component';
 import { BuscadorComponent } from '../buscador/buscador.component';
+import { BuscadorMobileComponent } from '../buscador-mobile/buscador-mobile.component';
 import { NavBar } from './../nav-bar/nav-bar';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +20,7 @@ import { BranchesStore } from '../../../stores/branches.store';
     CommonModule,
     DireccionComponent,
     BuscadorComponent,
+    BuscadorMobileComponent,
     NavBar,
 
     MatIconModule,
@@ -33,10 +35,19 @@ import { BranchesStore } from '../../../stores/branches.store';
 export class Header implements OnInit {
   private store = inject(BranchesStore);
 
-  cartCount: any;
+  cartCount = 0;
+  showMobileSearch = false;
 
   onCartClick() {
     throw new Error('Method not implemented.');
+  }
+
+  onSearchClick(): void {
+    this.showMobileSearch = true;
+  }
+
+  closeMobileSearch(): void {
+    this.showMobileSearch = false;
   }
 
   onLoginClick() {

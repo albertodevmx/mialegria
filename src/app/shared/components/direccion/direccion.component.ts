@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 import { BranchesDialogComponent } from './branches-dialog/branches-dialog.component';
 import { BranchesStore } from './../../../stores/branches.store'; // <-- Ajusta la ruta si cambia
 
@@ -19,10 +20,14 @@ import { BranchesStore } from './../../../stores/branches.store'; // <-- Ajusta 
 })
 export class DireccionComponent implements OnInit {
 	private dialog = inject(MatDialog);
+	private router = inject(Router);
 	public store = inject(BranchesStore);
 
 	ngOnInit(): void {
-		this.abrirSelector();
+		const isHome = this.router.url === '/' || this.router.url.startsWith('/?');
+		if (isHome && !this.dialog.openDialogs.length) {
+			this.abrirSelector();
+		}
 	}
 
 	// === Getters para la plantilla ===

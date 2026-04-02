@@ -2,30 +2,20 @@
   Bloque clickeable completo. El padre puede escucharlo con:
   <app-select-location-tile (action)="abrirSelector()"></app-select-location-tile>
 -->
-<a class="tile d-flex align-items-center" (click)="abrirSelector()" role="button" aria-label="Selecciona tu ubicación">
+<a class="tile d-flex align-items-center" (click)="abrirSelector()" role="button" aria-label="Selecciona tu sucursal">
 
 	<div class="p-2">
-		<mat-icon class="icon-left" aria-hidden="true">location_on</mat-icon>
+		<mat-icon class="icon-left" aria-hidden="true">storefront</mat-icon>
 	</div>
 
-
 	<div class="text">
-		<div class="title">
-			@if (!selectedSucursal){
-			Selecciona
-			}
+		@if (!selectedSucursal){
+		Selecciona tu sucursal
+		}
 
-			@if(selectedSucursal) {
-			{{ selectedSucursal.sucursal }}
-			}
-		</div>
-
-
-		<div class="subtitle">
-			@if (!selectedSucursal){
-			Tu ubicación
-			}
-		</div>
+		@if(selectedSucursal) {
+		{{ selectedSucursal.sucursal }}
+		}
 	</div>
 
 	<!-- Chevron a la derecha -->
@@ -33,31 +23,3 @@
 		<mat-icon class="icon-right" aria-hidden="true">expand_more</mat-icon>
 	</div>
 </a>
-
-<!-- Escenario 1: Sin ubicación seleccionada -->
-<!-- <ng-container>
-  <button
-    type="button"
-    class="link seleccionar-ubicacion"
-    (click)="abrirSelector()"
-    aria-label="Selecciona tu ubicación"
-  >
-    Selecciona tu ubicación
-  </button>
-</ng-container> -->
-
-<!-- Escenario 2: Con ubicación (placeholder para futuro) -->
-<!-- <ng-template #conUbicacion>
-  <div class="ubicacion-actual" aria-live="polite">
-    <span class="label">Ubicación:</span>
-    <span class="valor">{{ etiquetaUbicacion }}</span>
-    <button
-      type="button"
-      class="link cambiar-ubicacion"
-      (click)="abrirSelector()"
-      aria-label="Cambiar ubicación"
-    >
-      Cambiar
-    </button>
-  </div>
-</ng-template> -->

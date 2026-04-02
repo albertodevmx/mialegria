@@ -1,0 +1,111 @@
+<div class="sidebar-container">
+  <!-- ═══ TOP BAR: gradient header (100vw, mobile only) ═══ -->
+  <div class="sidebar-topbar">
+    <button class="close-btn" (click)="closeSidebar()" aria-label="Cerrar menú">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="topbar-right">
+      <button class="login-btn">
+        Iniciar sesión
+      </button>
+      <button class="avatar-btn" aria-label="Cuenta">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Spacer for fixed topbar -->
+  <div class="sidebar-topbar-spacer"></div>
+
+  <!-- ═══ SCROLLABLE CONTENT ═══ -->
+  <div class="sidebar-content" [class.scrollable]="estudiosOpen()">
+
+    <!-- Estudios (accordion trigger) -->
+    <button class="menu-item estudios-item" (click)="toggleEstudios()">
+      <span class="menu-item-left">
+        <mat-icon class="menu-icon">science</mat-icon>
+        <span>Estudios</span>
+      </span>
+      <mat-icon class="chevron" [class.rotated]="estudiosOpen()">expand_more</mat-icon>
+    </button>
+
+    <!-- Estudios sub-items (from API) -->
+    @if (estudiosOpen() && familiasGrouped().length) {
+      <div class="estudios-submenu">
+        @for (familia of familiasGrouped(); track familia.idFamiliaWeb) {
+          <button class="submenu-item"
+                  [class.submenu-active]="activeIdFamilia() === familia.idFamiliaWeb"
+                  (click)="onFamiliaClick(familia)">
+            @if (activeIdFamilia() === familia.idFamiliaWeb) {
+              <mat-icon class="check-icon">check_circle</mat-icon>
+            }
+            <span>{{ familia.familiaWeb }}</span>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Other menu items -->
+    <a routerLink="/sucursales" class="menu-item" (click)="onMenuItemClick()">
+      <span class="menu-item-left">
+        <mat-icon class="menu-icon">domain</mat-icon>
+        <span>Sucursales</span>
+      </span>
+    </a>
+
+    <a routerLink="/facturacion" class="menu-item" (click)="onMenuItemClick()">
+      <span class="menu-item-left">
+        <mat-icon class="menu-icon">description</mat-icon>
+        <span>Facturación</span>
+      </span>
+    </a>
+
+    <a routerLink="/resultados" class="menu-item" (click)="onMenuItemClick()">
+      <span class="menu-item-left">
+        <mat-icon class="menu-icon">assignment</mat-icon>
+        <span>Resultados</span>
+      </span>
+    </a>
+
+    <a routerLink="/medicos" class="menu-item" (click)="onMenuItemClick()">
+      <span class="menu-item-left">
+        <mat-icon class="menu-icon">medical_services</mat-icon>
+        <span>Médicos</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- ═══ FOOTER: fixed gray bottom ═══ -->
+  <div class="sidebar-footer">
+    <span class="footer-label">Síguenos:</span>
+
+    <div class="social-icons">
+      <a href="https://www.facebook.com/SSDRSIMI/" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://twitter.com/ssdrsimi" target="_blank" rel="noopener" aria-label="X (Twitter)">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="https://www.tiktok.com/@ssdrsimi" target="_blank" rel="noopener" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.instagram.com/laboratorio.drsimi/" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+
+    <div class="simi-face">
+      <!-- Dr. Simi circular face - replace with dedicated asset if available -->
+      <img src="img/logo-simi-circulo.png" alt="Dr. Simi" />
+    </div>
+
+    <a routerLink="/terminos-y-condiciones" class="footer-link primary" (click)="onMenuItemClick()">
+      Términos y condiciones
+    </a>
+    <a routerLink="/aviso-de-privacidad" class="footer-link" (click)="onMenuItemClick()">
+      Aviso de privacidad
+    </a>
+    <span class="version-label">Versión 2.62</span>
+  </div>
+</div>

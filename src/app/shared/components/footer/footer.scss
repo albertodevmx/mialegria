@@ -1,6 +1,6 @@
 .footer {
-    background-color: #0a315b;
-    font-size: 14px;
+    background-color: #034EA2;
+    font-size: 12px;
     color: #FFF;
 
     & li {
@@ -11,6 +11,7 @@
         color: #ffffff;
         text-decoration: none;
         cursor: pointer;
+        font-size: 12px;
 
         &:hover {
             text-decoration: underline;
@@ -18,28 +19,42 @@
     }
 
     & .redes {
-       font-size: 20px; 
+       font-size: 16px;
     }
 }
 
 .footer-bar {
-    background-color: #283b52;
-    color: #a49ea2;
+    background-color: #1FA060;
+    color: #FFF;
 
     & a {
-        color: #a49ea2;
+        color: #FFF;
         text-decoration: none;
         cursor: pointer;
 
         &:hover {
-            color: #FFF;
+            opacity: 0.85;
             text-decoration: underline;
         }
+    }
+
+    & small {
+        font-size: 11px;
+    }
+
+    & .copyright {
+        line-height: 1em;
     }
 }
 
 .container-footer {
     width: 80%;
-    margin: 0px auto;
-    padding: 20px;
+    margin: 0 auto;
+    padding: 8px 0;
+}
+
+@media (max-width: 767.98px) {
+    .footer-logo {
+        max-width: 84px !important;
+    }
 }

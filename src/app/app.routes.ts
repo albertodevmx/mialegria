@@ -37,6 +37,18 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./pages/resultados/resultados.component').then(c => c.ResultadosComponent),
             },
+            // Categorías (Estudios por categoría)
+            {
+                path: 'categorias',
+                loadComponent: () =>
+                    import('./pages/categorias/categorias').then(c => c.Categorias),
+            },
+            // Detalle de estudio
+            {
+                path: 'estudio-detalle/:id',
+                loadComponent: () =>
+                    import('./pages/estudio-detalle/estudio-detalle').then(c => c.EstudioDetalle),
+            },
             // Médicos
             {
                 path: 'medicos',

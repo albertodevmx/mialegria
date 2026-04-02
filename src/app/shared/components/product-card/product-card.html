@@ -1,0 +1,109 @@
+@if (viewMode === 'tarjetas') {
+<div class="product-card">
+  <!-- Top content -->
+  <div class="card-content">
+    <!-- Header: category badge + favorite -->
+    <div class="card-header-row">
+      <span class="category-badge">
+        <img [src]="iconSrc" [alt]="product.familiaWeb" class="badge-icon" />
+        {{ product.familiaWeb }}
+      </span>
+      <button class="fav-btn" aria-label="Favorito">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+    </div>
+
+    <!-- Product name -->
+    <p class="product-name">{{ product.producto }}</p>
+
+    <!-- Promo badges (only when branch is selected) -->
+    @if (selectedSucursal()) {
+    @if (ofertaDiaLabel) {
+    <span class="promo-badge promo-dia">
+      <mat-icon class="promo-icon">percent</mat-icon>
+      {{ ofertaDiaLabel }}
+    </span>
+    }
+    @if (product.eskit) {
+    <span class="promo-badge promo-kit">
+      <mat-icon class="promo-icon">inventory_2</mat-icon>
+      Kit
+    </span>
+    }
+
+    <!-- Pricing -->
+    <div class="pricing">
+      <div class="pricing-inner">
+        <span class="price-label">Precio en línea</span>
+        <span class="price-prefix">A solo</span>
+        <span class="price-current">${{ product.precioVenta | number:'1.2-2' }}</span>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Divider line (full width, no padding) -->
+  <hr class="card-divider" />
+
+  <!-- Bottom content -->
+  <div class="card-content">
+    <div class="card-actions">
+      @if (selectedSucursal()) {
+      <button class="buy-btn">
+        <span>Comprar</span>
+        <mat-icon class="buy-icon">paid</mat-icon>
+      </button>
+      }
+      <button class="detail-link" (click)="verDetalle()">Ver detalles</button>
+    </div>
+  </div>
+</div>
+} @else {
+<!-- ===== LISTADO VIEW ===== -->
+<div class="product-list-item">
+  <!-- Row 1: Fav icon + Product name -->
+  <div class="list-header">
+    <button class="fav-btn" aria-label="Favorito">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <p class="list-product-name">{{ product.producto }}</p>
+  </div>
+
+  <!-- Row 2: Badges -->
+  <div class="list-badges">
+    <span class="category-badge">
+      <img [src]="iconSrc" [alt]="product.familiaWeb" class="badge-icon" />
+      {{ product.familiaWeb }}
+    </span>
+    @if (selectedSucursal() && ofertaDiaLabel) {
+    <span class="promo-badge promo-dia">
+      <mat-icon class="promo-icon">percent</mat-icon>
+      {{ ofertaDiaLabel }}
+    </span>
+    }
+  </div>
+
+  <!-- Row 3: Pricing + Actions -->
+  @if (selectedSucursal()) {
+  <div class="list-bottom">
+    <div class="list-pricing">
+      <span class="price-label">Precio en línea</span>
+      <div class="list-price-row">
+        <span class="price-prefix">A solo</span>
+        @if (product.precioOriginal && product.precioOriginal > product.precioVenta) {
+        <span class="price-old">${{ product.precioOriginal | number:'1.2-2' }}</span>
+        }
+        <span class="price-current" [class.price-offer]="product.precioOriginal && product.precioOriginal > product.precioVenta">${{ product.precioVenta | number:'1.2-2' }}</span>
+      </div>
+    </div>
+    <div class="list-actions">
+      <button class="buy-btn">
+        <span>Comprar</span>
+        <mat-icon class="buy-icon">paid</mat-icon>
+      </button>
+      <button class="detail-link" (click)="verDetalle()">Ver detalle</button>
+    </div>
+  </div>
+  }
+</div>
+}
