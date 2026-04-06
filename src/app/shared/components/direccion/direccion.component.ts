@@ -25,7 +25,7 @@ export class DireccionComponent implements OnInit {
 
 	ngOnInit(): void {
 		const isHome = this.router.url === '/' || this.router.url.startsWith('/?');
-		if (isHome && !this.dialog.openDialogs.length) {
+		if (isHome && !this.store.selectedSucursal() && !this.dialog.openDialogs.length) {
 			this.abrirSelector();
 		}
 	}

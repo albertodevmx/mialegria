@@ -39,7 +39,7 @@ export class Categorias implements OnInit, OnDestroy {
 	private readonly MOBILE_PAGE_SIZE = 4;
 	private readonly DESKTOP_PAGE_SIZE = 5;
 	private readonly MOBILE_BREAKPOINT = 768;
-	private readonly LOAD_MORE_DELAY = 1500;
+	private readonly LOAD_MORE_DELAY = 300;
 	visibleCount = signal(4);
 	isMobile = signal(false);
 	loadingMore = signal(false);

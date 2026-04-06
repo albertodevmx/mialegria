@@ -59,6 +59,14 @@ h5 {
 }
 
 // ─── Warning banner (no branch selected) ───
+.no-branch-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
 .warning-banner {
 	display: flex;
 	align-items: center;
@@ -66,8 +74,32 @@ h5 {
 	background: #FFF3E0;
 	border: 2px solid #E68A00;
 	border-radius: 12px;
-	padding: 14px 18px;
-	margin-bottom: 16px;
+	padding: 12px 16px;
+	width: 25%;
+	flex: none;
+}
+
+.select-branch-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	background: #034EA2;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: background-color 0.15s;
+	width: 25%;
+	mat-icon { font-size: 20px; width: 20px; height: 20px; }
+
+	&:hover {
+		background: #023d82;
+	}
 }
 
 .warning-icon {
@@ -75,15 +107,15 @@ h5 {
 
 	mat-icon {
 		color: #E68A00;
-		font-size: 32px;
-		width: 32px;
-		height: 32px;
+		font-size: 28px;
+		width: 28px;
+		height: 28px;
 	}
 }
 
 .warning-text {
 	color: #E68A00;
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: 600;
 	line-height: 1.3;
 }
@@ -100,6 +132,18 @@ h5 {
 	&:hover,
 	&:active {
 		color: #0D7BBF;
+	}
+}
+
+@media (max-width: 767px) {
+	.no-branch-row {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.select-branch-btn {
+		width: 250px;
+		align-self: center;
 	}
 }
 

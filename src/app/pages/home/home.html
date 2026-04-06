@@ -160,11 +160,17 @@
 <div class="container-fluid p-0 pb-5" style="background-color: #F0F0F0;">
     <div class="container pt-3">
         @if (!selectedSucursal()) {
-        <div class="warning-banner" (click)="abrirSelectorSucursal()" style="cursor: pointer;">
-            <div class="warning-icon">
-                <mat-icon>warning</mat-icon>
+        <div class="no-branch-row">
+            <div class="warning-banner" (click)="abrirSelectorSucursal()" style="cursor: pointer;">
+                <div class="warning-icon">
+                    <mat-icon>warning</mat-icon>
+                </div>
+                <span class="warning-text">Para poder cotizar tu estudio es necesario que selecciones una sucursal.</span>
             </div>
-            <span class="warning-text">Para poder cotizar tu estudio es necesario que selecciones una sucursal.</span>
+            <button class="select-branch-btn" (click)="abrirSelectorSucursal()">
+                <span>Seleccionar sucursal</span>
+                <mat-icon>storefront</mat-icon>
+            </button>
         </div>
         }
 

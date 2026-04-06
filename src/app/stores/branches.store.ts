@@ -49,8 +49,8 @@ export class BranchesStore {
   private _expandedMunicipios = signal<Set<number>>(new Set());
 
   // NUEVO: selección de sucursal y municipio
-  selectedSucursal = signal<any | null>(null);        // guardamos OBJETO completo (recomendado)
-  lastClickedMunicipio = signal<any | null>(null);    // municipio (objeto t)
+  selectedSucursal = signal<any | null>(this._hydrate('similab_sucursal'));
+  lastClickedMunicipio = signal<any | null>(this._hydrate('similab_municipio'));
 
   // --- Métodos de acordeón ---
   isMunicipioExpanded(index: number): boolean {
@@ -67,14 +67,33 @@ export class BranchesStore {
 
   // --- Selección ---
   setSelectedSucursal(sucursal: any, municipio: any): void {
-    this.selectedSucursal.set(sucursal);        // OBJETO completo de la sucursal seleccionada
-    this.lastClickedMunicipio.set(municipio);   // OBJETO completo del municipio
+    this.selectedSucursal.set(sucursal);
+    this.lastClickedMunicipio.set(municipio);
+    this._persist('similab_sucursal', sucursal);
+    this._persist('similab_municipio', municipio);
   }
 
   // Si quieres limpiar selección:
   clearSelection(): void {
     this.selectedSucursal.set(null);
     this.lastClickedMunicipio.set(null);
+    sessionStorage.removeItem('similab_sucursal');
+    sessionStorage.removeItem('similab_municipio');
+  }
+
+  // --- Persistencia en sessionStorage ---
+  private _persist(key: string, value: any): void {
+    if (value != null) {
+      sessionStorage.setItem(key, JSON.stringify(value));
+    } else {
+      sessionStorage.removeItem(key);
+    }
+  }
+
+  private _hydrate(key: string): any | null {
+    const raw = sessionStorage.getItem(key);
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
   }
 
 
